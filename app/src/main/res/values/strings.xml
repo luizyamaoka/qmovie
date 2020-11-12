@@ -2,4 +2,7 @@
     <string name="app_name">qmovie</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="botao_adivinhar">Adivinhar</string>
+    <string name="digite_a_resposta">Digite a resposta</string>
+    <string name="botao_abrir_dica">Abrir dica: -10s</string>
 </resources>
