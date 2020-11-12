@@ -10,4 +10,5 @@
     <color name="azul">#B2CEF3</color>
     <color name="branco">#FFFFFF</color>
     <color name="cinza">#EEEEEE</color>
+    <color name="cinza_botao">#979797</color>
 </resources>
