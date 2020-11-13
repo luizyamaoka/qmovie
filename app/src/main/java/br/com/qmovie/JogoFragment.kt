@@ -54,11 +54,6 @@ class JogoFragment : Fragment() {
         return view
     }
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        _context = context
-//    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of

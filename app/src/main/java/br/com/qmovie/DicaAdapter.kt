@@ -49,10 +49,6 @@ class DicaAdapter(
                 holder.tvInterrogacao.visibility = View.VISIBLE
                 holder.tvDicaConteudo.visibility = View.INVISIBLE
                 holder.ivDicaImagem.visibility = View.INVISIBLE
-//                holder.btnAbrirDica.visibility = View.INVISIBLE
-//                holder.tvInterrogacao.visibility = View.INVISIBLE
-//                holder.tvDicaConteudo.visibility = View.VISIBLE
-//                holder.ivDicaImagem.visibility = View.INVISIBLE
             }
             true -> {
                 holder.btnAbrirDica.visibility = View.INVISIBLE
