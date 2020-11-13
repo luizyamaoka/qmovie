@@ -2,6 +2,7 @@ package br.com.qmovie
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,15 +17,12 @@ import kotlinx.android.synthetic.main.fragment_jogo.view.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [JogoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class JogoFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var countdownTimer : CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +30,29 @@ class JogoFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        countdownTimer = object : CountDownTimer(180000L, 1000L) {
+            override fun onFinish() {
+                // TODO: Vai para tela de fim de jogo
+            }
+
+            override fun onTick(tempoRestante: Long) {
+                atualizaTempoRestante(tempoRestante)
+            }
+        }
+
+        countdownTimer.start()
+
+    }
+
+    private fun atualizaTempoRestante(tempoRestante: Long) {
+        val minutos = (tempoRestante / 1000) / 60
+        val segundos = (tempoRestante / 1000) % 60
+
+        tvTempoRestante.text = "$minutos:$segundos"
     }
 
     private var dicas = getDicas()
-    lateinit var _context : Context
 
     private fun getDicas() = arrayListOf(
         Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
