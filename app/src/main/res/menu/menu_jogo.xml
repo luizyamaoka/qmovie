@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:icon="@drawable/ic_seta_esquerda_preta"
+        android:icon="@drawable/new_tip"
         android:visible="true"
         android:title="abrir dica"
         app:showAsAction="always" />

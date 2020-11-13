@@ -13,9 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/ic_seta_esquerda_preta"
-        app:title="Tempo restante"
+        app:title=""
         android:background="@color/amarelo"
-        app:menu="@menu/menu_jogo" />
+        app:menu="@menu/menu_jogo">
+        <TextView
+            android:id="@+id/tvTempoRestante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tempo restante"
+            android:textColor="@color/preto"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/tvPergunta"
