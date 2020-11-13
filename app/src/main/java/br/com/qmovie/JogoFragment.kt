@@ -1,10 +1,15 @@
 package br.com.qmovie
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import br.com.qmovie.domain.Dica
+import br.com.qmovie.domain.TipoDica
+import kotlinx.android.synthetic.main.fragment_jogo.*
+import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,13 +34,30 @@ class JogoFragment : Fragment() {
         }
     }
 
+    private var dicas = getDicas()
+    lateinit var _context : Context
+
+    private fun getDicas() = arrayListOf(
+        Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
+        Dica(2, TipoDica.TEXTO, "Miranda e Andy são os nomes dos protagonistas do filme", false),
+        Dica(3, TipoDica.TEXTO, "Lançado em 2006 Direção de David Frankel", false),
+        Dica(4, TipoDica.TEXTO, "Outra dica", false)
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_jogo, container, false)
+        val view = inflater.inflate(R.layout.fragment_jogo, container, false)
+        view.rvDicas.adapter = DicaAdapter(dicas)
+        return view
     }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        _context = context
+//    }
 
     companion object {
         /**
