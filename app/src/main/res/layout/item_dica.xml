@@ -48,6 +48,7 @@
                     android:drawableLeft="@drawable/ic_seta_esquerda_branca" />
 
                 <TextView
+                    android:id="@+id/tvDicaNumero"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
