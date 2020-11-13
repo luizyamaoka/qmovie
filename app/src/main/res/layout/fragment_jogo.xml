@@ -52,7 +52,7 @@
         android:layout_margin="20dp"
         android:padding="10dp"
         android:background="@drawable/background_input_cinza"
-        android:text="@string/digite_a_resposta"
+        android:hint="@string/digite_a_resposta"
         android:textAlignment="center"
         android:gravity="center_horizontal" />
 
