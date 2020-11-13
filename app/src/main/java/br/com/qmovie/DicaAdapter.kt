@@ -1,7 +1,5 @@
 package br.com.qmovie
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,8 +36,6 @@ class DicaAdapter(
 
     override fun onBindViewHolder(holder: DicaViewHolder, position: Int) {
         val dica = dicas.get(position)
-
-        Log.e("DicaAdapter", dica.toString())
 
         holder.tvDicaNumero.text = "Dica #${position + 1}"
         holder.tvDicaConteudo.text = dica.conteudo
