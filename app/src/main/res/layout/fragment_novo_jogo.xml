@@ -49,7 +49,7 @@
                     android:textSize="35dp"
                     android:text="@string/filme"/>
 
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/newGameFilme"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/card_filme"
@@ -93,7 +93,7 @@
                     android:textSize="35dp"
                     android:text="@string/serie"/>
 
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/newGameSerie"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/card_filme"
@@ -138,7 +138,7 @@
                     android:textSize="35dp"
                     android:text="@string/ator"/>
 
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/newGameAtor"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/card_filme"
@@ -153,102 +153,50 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:background="@drawable/card_diretor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:background="@drawable/card_diretor"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:padding="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/diretor"
-                android:adjustViewBounds="true"
-                android:maxWidth="110dp"
-                android:scaleType="fitCenter"/>
+<!--            <ImageView-->
+<!--                android:padding="15dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/diretor"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:maxWidth="110dp"-->
+<!--                android:scaleType="fitCenter"/>-->
 
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:gravity="center"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/branco"
-                    android:textSize="35dp"
-                    android:text="@string/diretor"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/branco"-->
+<!--                    android:textSize="35dp"-->
+<!--                    android:text="@string/diretor"/>-->
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/newGameDiretor"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/card_filme"
-                    android:backgroundTint="@color/preto"
-                    android:textColor="@color/branco"
-                    android:textSize="12dp"
-                    android:layout_width="120dp"
-                    android:layout_height="30dp"
-                    android:text="@string/play"/>
+<!--                <Button-->
+<!--                    android:id="@+id/newGameDiretor"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:background="@drawable/card_filme"-->
+<!--                    android:backgroundTint="@color/preto"-->
+<!--                    android:textColor="@color/branco"-->
+<!--                    android:textSize="12dp"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:text="@string/play"/>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:background="@drawable/bar_round"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_marginRight="50dp"
-            android:background="@color/amarelo"
-            android:layout_height="30dp"
-            android:src="@drawable/conf"
-            android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:scaleType="fitCenter"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_marginRight="50dp"
-            android:background="@color/amarelo"
-            android:layout_height="30dp"
-            android:src="@drawable/jogo"
-            android:adjustViewBounds="true"
-            android:maxWidth="110dp"
-            android:scaleType="fitCenter"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_marginRight="50dp"
-            android:background="@color/amarelo"
-            android:layout_height="30dp"
-            android:src="@drawable/lancamento"
-            android:adjustViewBounds="true"
-            android:maxWidth="110dp"
-            android:scaleType="fitCenter"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:background="@color/amarelo"
-            android:layout_height="30dp"
-            android:src="@drawable/ranking"
-            android:adjustViewBounds="true"
-            android:maxWidth="110dp"
-            android:scaleType="fitCenter"/>
-
+<!--        </LinearLayout>-->
 
     </LinearLayout>
-
 
 </FrameLayout>

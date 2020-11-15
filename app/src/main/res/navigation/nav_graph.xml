@@ -12,12 +12,22 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_jogoFragment"
-            app:destination="@id/jogoFragment" />
+            android:id="@+id/action_splashFragment_to_mainActivity2"
+            app:destination="@id/mainActivity2" />
     </fragment>
     <fragment
         android:id="@+id/jogoFragment"
         android:name="br.com.qmovie.JogoFragment"
         android:label="fragment_jogo"
         tools:layout="@layout/fragment_jogo" />
+    <fragment
+        android:id="@+id/novoJogoFragment"
+        android:name="br.com.qmovie.NovoJogoFragment"
+        android:label="fragment_novo_jogo"
+        tools:layout="@layout/fragment_novo_jogo" />
+    <activity
+        android:id="@+id/mainActivity2"
+        android:name="br.com.qmovie.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
