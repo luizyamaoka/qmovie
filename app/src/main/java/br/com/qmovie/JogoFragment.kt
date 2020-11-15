@@ -46,7 +46,6 @@ class JogoFragment : Fragment() {
             when (it.itemId) {
                 R.id.btnAbrirDicaExtra -> {
 //                    Toast.makeText(_context, "Dica extra", Toast.LENGTH_SHORT).show()
-//                    abreDicaExtra()
                     findNavController().navigate(R.id.action_jogoFragment_to_confirmationMessageFragment)
                 }
             }
@@ -96,19 +95,5 @@ class JogoFragment : Fragment() {
         criaTimer(_tempoRestante)
         atualizaTempoRestante(_tempoRestante)
 
-    }
-
-    fun abreDicaExtra() {
-
-        MaterialAlertDialogBuilder(_context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
-            .setTitle("DICA EXTRA!!")
-            .setMessage("Deseja gastar 10seg para abrir 2 letras?")
-            .setNegativeButton("Nao") { dialog, which ->
-                // Respond to negative button press
-            }
-            .setPositiveButton("Sim") { dialog, which ->
-                // Respond to positive button press
-            }
-            .show()
     }
 }
