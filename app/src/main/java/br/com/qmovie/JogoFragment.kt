@@ -1,14 +1,16 @@
 package br.com.qmovie
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
@@ -16,6 +18,7 @@ class JogoFragment : Fragment() {
 
     lateinit var countdownTimer : CountDownTimer
     var _tempoRestante: Long = 180000
+    lateinit var _context : Context
 
     private var dicas = arrayListOf(
         Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
@@ -36,15 +39,32 @@ class JogoFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
         view.rvDicas.adapter = DicaAdapter(this, dicas)
+        view.toolbar.setNavigationOnClickListener {
+            Toast.makeText(_context, "back", Toast.LENGTH_SHORT).show()
+        }
+        view.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.btnAbrirDicaExtra -> {
+//                    Toast.makeText(_context, "Dica extra", Toast.LENGTH_SHORT).show()
+                    abreDicaExtra()
+                }
+            }
+            true
+        }
         return view
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        _context = context
     }
 
     fun criaTimer(tempoMillis: Long) {
         countdownTimer = object : CountDownTimer(tempoMillis, 1000L) {
 
             override fun onFinish() {
-//                Navigation.findNavController().navigate(R.id.GameOverFragment)
                 // TODO: Vai para tela de fim de jogo
+//                findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
             }
 
             override fun onTick(tempoRestante: Long) {
@@ -75,5 +95,19 @@ class JogoFragment : Fragment() {
         criaTimer(_tempoRestante)
         atualizaTempoRestante(_tempoRestante)
 
+    }
+
+    fun abreDicaExtra() {
+
+        MaterialAlertDialogBuilder(_context, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog)
+            .setTitle("DICA EXTRA!!")
+            .setMessage("Deseja gastar 10seg para abrir 2 letras?")
+            .setNegativeButton("Nao") { dialog, which ->
+                // Respond to negative button press
+            }
+            .setPositiveButton("Sim") { dialog, which ->
+                // Respond to positive button press
+            }
+            .show()
     }
 }
