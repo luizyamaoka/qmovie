@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.*
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -40,13 +41,20 @@ class JogoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
         view.rvDicas.adapter = DicaAdapter(this, dicas)
         view.toolbar.setNavigationOnClickListener {
-            Toast.makeText(_context, "back", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(_context, "back", Toast.LENGTH_SHORT).show()
+            val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
+            findNavController().navigate(
+                R.id.action_jogoFragment_to_confirmationMessageFragment,
+                bundle)
         }
         view.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnAbrirDicaExtra -> {
 //                    Toast.makeText(_context, "Dica extra", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_jogoFragment_to_confirmationMessageFragment)
+                    val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
+                    findNavController().navigate(
+                        R.id.action_jogoFragment_to_confirmationMessageFragment,
+                        bundle)
                 }
             }
             true

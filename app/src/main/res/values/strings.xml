@@ -6,6 +6,8 @@
     <string name="digite_a_resposta">Digite a resposta</string>
     <string name="botao_abrir_dica">Abrir dica: -10s</string>
     <string name="dialog_confirmacao_botao_sim">Sim</string>
-    <string name="dialog_confirmacao_dica_extra_titulo">DICA EXTRA!!</string>
+    <string name="dialog_confirmacao_dica_extra_titulo">DICA EXTRA!</string>
     <string name="dialog_confirmacao_dica_extra_mensagem">Deseja gastar 10 segundos para abrir 2 letras?</string>
+    <string name="dialog_confirmacao_desistir_titulo">Sair</string>
+    <string name="dialog_confirmacao_desistir_mensagem">Tem certeza que deseja sair?</string>
 </resources>
