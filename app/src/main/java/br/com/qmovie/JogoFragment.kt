@@ -80,10 +80,10 @@ class JogoFragment : Fragment() {
         val minutos = (tempoRestante / 1000) / 60
         val segundos = (tempoRestante / 1000) % 60
 
-        when {
-            segundos < 10 -> tvTempoRestante.text = "$minutos:0$segundos"
-            segundos >= 10 -> tvTempoRestante.text = "$minutos:$segundos"
-        }
+        val segundos_fill_zero = if (segundos < 10) "0" else ""
+        val minutos_fill_zero = if (minutos < 10) "0" else ""
+
+        tvTempoRestante.text = "$minutos_fill_zero$minutos:$segundos_fill_zero$segundos"
     }
 
     fun adicionaTempo(tempoParaAdicionar: Long) {
