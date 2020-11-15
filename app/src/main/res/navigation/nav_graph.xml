@@ -19,5 +19,13 @@
         android:id="@+id/jogoFragment"
         android:name="br.com.qmovie.JogoFragment"
         android:label="fragment_jogo"
-        tools:layout="@layout/fragment_jogo" />
+        tools:layout="@layout/fragment_jogo" >
+        <action
+            android:id="@+id/action_jogoFragment_to_confirmationMessageFragment"
+            app:destination="@id/confirmationMessageFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/confirmationMessageFragment"
+        android:name="br.com.qmovie.ConfirmationMessageFragment"
+        android:label="ConfirmationMessageFragment" />
 </navigation>

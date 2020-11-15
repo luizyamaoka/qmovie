@@ -46,7 +46,8 @@ class JogoFragment : Fragment() {
             when (it.itemId) {
                 R.id.btnAbrirDicaExtra -> {
 //                    Toast.makeText(_context, "Dica extra", Toast.LENGTH_SHORT).show()
-                    abreDicaExtra()
+//                    abreDicaExtra()
+                    findNavController().navigate(R.id.action_jogoFragment_to_confirmationMessageFragment)
                 }
             }
             true
