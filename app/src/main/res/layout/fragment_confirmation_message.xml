@@ -1,0 +1,84 @@
+<!-- fragment_edit_name.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvConfirmacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/branco"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvConfirmacaoTitulo"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/cinza_titulo_dialog"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/dialog_confirmacao_dica_extra_titulo"
+                    android:textColor="@color/preto"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvConfirmacaoMensagem"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/branco"
+                    android:gravity="center"
+                    android:paddingTop="30dp"
+                    android:paddingBottom="30dp"
+                    android:text="@string/dialog_confirmacao_dica_extra_mensagem"
+                    android:textColor="@color/preto" />
+
+                <Button
+                    android:id="@+id/btnConfirmacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/background_botao_amarelo"
+                    android:text="@string/dialog_confirmacao_botao_sim"
+                    android:textColor="@color/branco" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnFecharConfirmacao"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/background_circulo"
+            android:text="x"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
