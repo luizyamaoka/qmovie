@@ -1,5 +1,6 @@
 package br.com.qmovie
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,9 @@ import br.com.qmovie.domain.TipoDica
 import kotlinx.android.synthetic.main.item_dica.view.*
 
 class DicaAdapter(
+    private val jogoFragment: JogoFragment,
     private val dicas: ArrayList<Dica>
-) : RecyclerView.Adapter<DicaAdapter.DicaViewHolder>(){
+) : RecyclerView.Adapter<DicaAdapter.DicaViewHolder>() {
 
     class DicaViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
         val tvDicaNumero : TextView = view.tvDicaNumero
@@ -69,8 +71,7 @@ class DicaAdapter(
         holder.btnAbrirDica.setOnClickListener {
             dica.esta_aberta = true
             notifyItemChanged(position)
-
-            // TODO: reduzir 10 segundos do tempo
+            jogoFragment.adicionaTempo(-10000L)
         }
     }
 }
