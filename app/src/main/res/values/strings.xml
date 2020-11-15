@@ -5,4 +5,9 @@
     <string name="botao_adivinhar">Adivinhar</string>
     <string name="digite_a_resposta">Digite a resposta</string>
     <string name="botao_abrir_dica">Abrir dica: -10s</string>
+    <string name="play">Vamos jogar !</string>
+    <string name="filme">| Filme</string>
+    <string name="serie">| Série</string>
+    <string name="ator">| Ator</string>
+    <string name="diretor">| Diretor</string>
 </resources>
