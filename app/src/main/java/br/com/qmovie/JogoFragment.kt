@@ -7,6 +7,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import br.com.qmovie.domain.Dica
@@ -20,6 +25,7 @@ class JogoFragment : Fragment() {
     lateinit var countdownTimer : CountDownTimer
     var _tempoRestante: Long = 180000
     lateinit var _context : Context
+    private lateinit var viewModel : JogoViewModel
 
     private var dicas = arrayListOf(
         Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
@@ -31,6 +37,7 @@ class JogoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         criaTimer(_tempoRestante)
+
     }
 
     override fun onCreateView(
@@ -39,9 +46,9 @@ class JogoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
+        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
         view.rvDicas.adapter = DicaAdapter(this, dicas)
         view.toolbar.setNavigationOnClickListener {
-//            Toast.makeText(_context, "back", Toast.LENGTH_SHORT).show()
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
             findNavController().navigate(
                 R.id.action_jogoFragment_to_confirmationMessageFragment,
@@ -50,7 +57,6 @@ class JogoFragment : Fragment() {
         view.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnAbrirDicaExtra -> {
-//                    Toast.makeText(_context, "Dica extra", Toast.LENGTH_SHORT).show()
                     val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
                     findNavController().navigate(
                         R.id.action_jogoFragment_to_confirmationMessageFragment,
@@ -59,6 +65,11 @@ class JogoFragment : Fragment() {
             }
             true
         }
+        viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
+//            Toast.makeText(_context, "dica extra utilziada ${it}", Toast.LENGTH_SHORT).show()
+            // TODO: Abrir 2 letras
+            adicionaTempo(-10000L)
+        })
         return view
     }
 
