@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.*
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
@@ -19,6 +20,7 @@ class JogoFragment : Fragment() {
     lateinit var countdownTimer : CountDownTimer
     var _tempoRestante: Long = 180000
     lateinit var _context : Context
+    private lateinit var viewModel : JogoViewModel
 
     private var dicas = arrayListOf(
         Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
@@ -30,6 +32,9 @@ class JogoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         criaTimer(_tempoRestante)
+        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+        viewModel.esconderNome()
+        viewModel.abrirLetras(1)
     }
 
     override fun onCreateView(
@@ -38,19 +43,39 @@ class JogoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
+
         view.rvDicas.adapter = DicaAdapter(this, dicas)
         view.toolbar.setNavigationOnClickListener {
-            Toast.makeText(_context, "back", Toast.LENGTH_SHORT).show()
+            val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
+            findNavController().navigate(
+                R.id.action_jogoFragment_to_confirmationMessageFragment,
+                bundle)
         }
         view.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnAbrirDicaExtra -> {
-//                    Toast.makeText(_context, "Dica extra", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_jogoFragment_to_confirmationMessageFragment)
+                    when (viewModel.temDicaExtraDisponivel()) {
+                        true -> {
+                            val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
+                            findNavController().navigate(
+                                R.id.action_jogoFragment_to_confirmationMessageFragment,
+                                bundle)
+                        }
+                        false -> Toast.makeText(_context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
             true
         }
+        viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
+            if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
+                viewModel.abrirLetras(2)
+                adicionaTempo(-10000L)
+            }
+        })
+        viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
+            view.tvDicaLetras.text = it
+        })
         return view
     }
 

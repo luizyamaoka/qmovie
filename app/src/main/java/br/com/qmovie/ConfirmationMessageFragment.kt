@@ -3,22 +3,18 @@ package br.com.qmovie
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_confirmation_message.view.*
 
 class ConfirmationMessageFragment : DialogFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+    private lateinit var viewModel: JogoViewModel
+    private lateinit var tipoMensagem: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +22,31 @@ class ConfirmationMessageFragment : DialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_confirmation_message, container, false)
+        
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+        tipoMensagem = arguments?.getString("tipoMensagem")!!
+
+        when (tipoMensagem) {
+            "CONFIRMACAO_DICA_EXTRA" -> {
+                view.tvConfirmacaoTitulo.text = getString(R.string.dialog_confirmacao_dica_extra_titulo)
+                view.tvConfirmacaoMensagem.text = getString(R.string.dialog_confirmacao_dica_extra_mensagem)
+                view.btnConfirmacao.setOnClickListener {
+                    viewModel.usarDicaExtra()
+                    this.dismiss()
+                }
+            }
+            "CONFIRMACAO_DESISTIR" -> {
+                view.tvConfirmacaoTitulo.text = getString(R.string.dialog_confirmacao_desistir_titulo)
+                view.tvConfirmacaoMensagem.text = getString(R.string.dialog_confirmacao_desistir_mensagem)
+            }
+        }
+
+        view.btnFecharConfirmacao.setOnClickListener { this.dismiss() }
+
+
+
+
         return view
     }
 
