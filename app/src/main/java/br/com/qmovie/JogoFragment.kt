@@ -7,16 +7,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
@@ -37,7 +32,9 @@ class JogoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         criaTimer(_tempoRestante)
-
+        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+        viewModel.esconderNome()
+        viewModel.abrirLetras(1)
     }
 
     override fun onCreateView(
@@ -46,7 +43,7 @@ class JogoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+
         view.rvDicas.adapter = DicaAdapter(this, dicas)
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
@@ -57,18 +54,27 @@ class JogoFragment : Fragment() {
         view.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.btnAbrirDicaExtra -> {
-                    val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
-                    findNavController().navigate(
-                        R.id.action_jogoFragment_to_confirmationMessageFragment,
-                        bundle)
+                    when (viewModel.temDicaExtraDisponivel()) {
+                        true -> {
+                            val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
+                            findNavController().navigate(
+                                R.id.action_jogoFragment_to_confirmationMessageFragment,
+                                bundle)
+                        }
+                        false -> Toast.makeText(_context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
             true
         }
         viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
-//            Toast.makeText(_context, "dica extra utilziada ${it}", Toast.LENGTH_SHORT).show()
-            // TODO: Abrir 2 letras
-            adicionaTempo(-10000L)
+            if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
+                viewModel.abrirLetras(2)
+                adicionaTempo(-10000L)
+            }
+        })
+        viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
+            view.tvDicaLetras.text = it
         })
         return view
     }
