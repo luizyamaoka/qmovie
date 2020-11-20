@@ -3,24 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/preto"
     tools:context=".NovoJogoFragment">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imgLogo"
+        app:layout_constraintTop_toTopOf="@id/clNovoJogo"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNovoJogo"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="15dp"
-        android:layout_gravity="">
-
-        <ImageView
-            android:id="@+id/imgLogo"
-            android:layout_marginTop="35dp"
-            android:src="@drawable/logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:layout_marginHorizontal="15dp">
 
         <LinearLayout
+            android:id="@+id/cardFilme"
+            app:layout_constraintTop_toTopOf="@id/clNovoJogo"
             android:layout_marginTop="30dp"
             android:background="@drawable/card_filme"
             android:layout_width="match_parent"
@@ -65,6 +70,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cardSerie"
+            app:layout_constraintTop_toBottomOf="@id/cardFilme"
             android:layout_marginTop="25dp"
             android:background="@drawable/card_serie"
             android:layout_width="match_parent"
@@ -110,6 +117,8 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cardAtor"
+            app:layout_constraintTop_toBottomOf="@id/cardSerie"
             android:layout_marginTop="25dp"
             android:background="@drawable/card_ator"
             android:layout_width="match_parent"
@@ -197,6 +206,6 @@
 
 <!--        </LinearLayout>-->
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

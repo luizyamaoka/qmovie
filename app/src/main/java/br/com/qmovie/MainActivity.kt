@@ -16,8 +16,19 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.novoJogoFragment)
 
         menuJogo.setOnClickListener {
-            var intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            var fragNovoJogo = NovoJogoFragment.newInstance()
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.nav_host_fragment, fragNovoJogo)
+                commit()
+            }
+        }
+
+        menuRank.setOnClickListener {
+            var fragRank = RankingFragment.newInstance()
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.nav_host_fragment, fragRank)
+                commit()
+            }
         }
 
     }
