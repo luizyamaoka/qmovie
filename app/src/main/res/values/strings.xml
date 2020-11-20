@@ -16,4 +16,15 @@
     <string name="compartilhar">Compartilhar</string>
     <string name="menu_inicial">Menu Inicial</string>
 
+    <string name="pontuação_rodada">Pontuação da rodada</string>
+    <string name="dicas_utilizadas">Dicas utilizadas</string>
+    <string name="tempo_utilizado">Tempo utilizado</string>
+    <string name="proxima_rodada">Proxima rodada</string>
+    <string name="tempo_total">Tempo Total</string>
+    <string name="ponto"> ponto</string>
+    <string name="pontuação_total">Pontuação Total</string>
+    <string name="proxima_pergunta">Próxima pergunta</string>
+    <string name="cansei">Cansei</string>
+
+
 </resources>
