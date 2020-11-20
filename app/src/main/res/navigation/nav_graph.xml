@@ -21,7 +21,16 @@
         android:label="fragment_jogo"
         tools:layout="@layout/fragment_jogo" >
         <action
-            android:id="@+id/action_jogoFragment_to_confirmationMessageFragment"
+            android:id="@+id/action_jogoFragment_to_action_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lancamentosFragment"
+        android:name="br.com.qmovie.LancamentosFragment"
+        android:label="fragment_lancamentos"
+        tools:layout="@layout/fragment_lancamentos" >
+        <action
+            android:id="@+id/action_lancamentosFragment_to_confirmationMessageFragment"
             app:destination="@id/confirmationMessageFragment" />
     </fragment>
     <dialog

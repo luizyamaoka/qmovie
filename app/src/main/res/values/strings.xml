@@ -10,4 +10,7 @@
     <string name="dialog_confirmacao_dica_extra_mensagem">Deseja gastar 10 segundos para abrir 2 letras?</string>
     <string name="dialog_confirmacao_desistir_titulo">Sair</string>
     <string name="dialog_confirmacao_desistir_mensagem">Tem certeza que deseja sair?</string>
+    <!-- STRINGS LacamentosFragment-->
+    <string name="novidades_1">Novi</string>
+    <string name="novidades_2">dades</string>
 </resources>

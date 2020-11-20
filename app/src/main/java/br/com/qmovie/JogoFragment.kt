@@ -48,7 +48,7 @@ class JogoFragment : Fragment() {
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
             findNavController().navigate(
-                R.id.action_jogoFragment_to_confirmationMessageFragment,
+                R.id.action_jogoFragment_to_action_lancamentosFragment,
                 bundle)
         }
         view.toolbar.setOnMenuItemClickListener {
@@ -58,7 +58,7 @@ class JogoFragment : Fragment() {
                         true -> {
                             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
                             findNavController().navigate(
-                                R.id.action_jogoFragment_to_confirmationMessageFragment,
+                                R.id.action_jogoFragment_to_action_lancamentosFragment,
                                 bundle)
                         }
                         false -> Toast.makeText(_context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
