@@ -10,4 +10,9 @@
     <string name="dialog_confirmacao_dica_extra_mensagem">Deseja gastar 10 segundos para abrir 2 letras?</string>
     <string name="dialog_confirmacao_desistir_titulo">Sair</string>
     <string name="dialog_confirmacao_desistir_mensagem">Tem certeza que deseja sair?</string>
+    <string name="play">Vamos jogar !</string>
+    <string name="filme">| Filme</string>
+    <string name="serie">| Série</string>
+    <string name="ator">| Ator</string>
+    <string name="diretor">| Diretor</string>
 </resources>
