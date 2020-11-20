@@ -6,11 +6,6 @@ import java.util.*
 class Lancamento(
     val id: Int,
     var titulo : String,
-    var dtLancamento : Date
-) : Serializable {
-
-    override fun toString(): String {
-        return "Lancamento(id=$id, titulo=$titulo, Data de Lançamento='$dtLancamento')"
-    }
-
-}
+    var dtLancamento : Date,
+    var favorito: Boolean = false
+) : Serializable

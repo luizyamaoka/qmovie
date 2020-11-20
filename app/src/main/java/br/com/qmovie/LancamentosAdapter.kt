@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.domain.Lancamento
 import kotlinx.android.synthetic.main.item_lancamentos.view.*
+import java.text.SimpleDateFormat
 
 
 class LancamentosAdapter(
@@ -32,12 +33,20 @@ class LancamentosAdapter(
         val lancamento = lancamentos.get(position)
 
         holder.tvTituloLancamento.text = lancamento.titulo
-        holder.tvDataLancamento.text = lancamento.dtLancamento.toString()
+        holder.tvDataLancamento.text = SimpleDateFormat("dd/MM/YY").format(lancamento.dtLancamento)
 
-        // TODO: 19/11/20 ADICIONAR FUNCAO AO BOTAO FAVORITAR
-        /*
         holder.btnFavoritarLancamento.setOnClickListener {
+            when (lancamento.favorito) {
+                true -> {
+                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
+                    lancamento.favorito = !lancamento.favorito
+                }
+                else -> {
+                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
+                    lancamento.favorito = !lancamento.favorito
+                }
+            }
         }
-        */
+
     }
 }
