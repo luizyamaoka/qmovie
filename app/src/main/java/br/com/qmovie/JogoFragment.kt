@@ -1,6 +1,5 @@
 package br.com.qmovie
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -18,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
 class JogoFragment : Fragment() {
 
-    lateinit var _context : Context
     private lateinit var viewModel : JogoViewModel
 
     private var dicas = arrayListOf(
@@ -60,7 +58,7 @@ class JogoFragment : Fragment() {
                                 R.id.action_jogoFragment_to_confirmationMessageFragment,
                                 bundle)
                         }
-                        false -> Toast.makeText(_context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
+                        false -> Toast.makeText(context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -97,11 +95,6 @@ class JogoFragment : Fragment() {
         })
 
         return view
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        _context = context
     }
 
     private fun formataTempo(tempoRestante: Long) : String {
