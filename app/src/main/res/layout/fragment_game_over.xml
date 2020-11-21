@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvFimJogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fim_de_jogo"
@@ -26,7 +26,7 @@
             app:layout_constraintVertical_bias="0.033" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/ivImagemOscar"
             android:layout_width="137dp"
             android:layout_height="167dp"
             android:src="@drawable/oscar"
@@ -38,7 +38,7 @@
             app:layout_constraintVertical_bias="0.178" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvPontuacaoFinal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pontuacao_final"
@@ -51,7 +51,7 @@
             app:layout_constraintVertical_bias="0.43" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tvPontos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" pontos"
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvResultadoPontos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000"
@@ -78,8 +78,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="409dp"
-            android:layout_height="320dp"
-            android:background="@drawable/round"
+            android:layout_height="290dp"
+            android:background="@drawable/round_game_over"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +90,7 @@
 
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btnCompatilhar"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_botao_cinza"
@@ -104,7 +104,7 @@
                 app:layout_constraintVertical_bias="0.226" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/btnRanking"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_botao_cinza"
@@ -117,7 +117,7 @@
                 app:layout_constraintVertical_bias="0.464" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnMenuInicial"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_botao_cinza"
