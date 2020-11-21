@@ -42,6 +42,8 @@ class JogoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
 
         view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
+
+        // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
             findNavController().navigate(
@@ -78,6 +80,7 @@ class JogoFragment : Fragment() {
             }
         }
 
+        // observa variaveis do mutable live data
         viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
             if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
                 viewModel.abrirLetras(2)
