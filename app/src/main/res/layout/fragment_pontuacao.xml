@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GameOverFragment">
+    tools:context=".PontuacaoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,8 +41,8 @@
             app:layout_constraintVertical_bias="0.024" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="409dp"
-            android:layout_height="620dp"
+            android:layout_width="410dp"
+            android:layout_height="560dp"
             android:background="@drawable/round_game_over"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -165,8 +165,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.476" />
 
+
             <TextView
-                android:id="@tvResultadoTempoTotal"
+                android:id="@+id/tvTempoTotalResultado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3:00"
@@ -178,7 +179,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.476" />
-
 
             <View
                 android:id="@+id/vwlinha"
