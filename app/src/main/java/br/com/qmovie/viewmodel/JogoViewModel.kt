@@ -1,7 +1,12 @@
 package br.com.qmovie.viewmodel
 
+import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
+import br.com.qmovie.R
+import kotlinx.android.synthetic.main.fragment_jogo.*
 
 class JogoViewModel: ViewModel() {
 
@@ -10,6 +15,10 @@ class JogoViewModel: ViewModel() {
     val dicasExtrasUtilizadas = MutableLiveData<Int>(0)
     val nomeFilme : String = "O Diabo veste Prada"
     val nomeFilmeEscondido = MutableLiveData<String>("")
+    val _tempoRestante = MutableLiveData<Long>(180000L)
+    val tempoAcabou = MutableLiveData<Boolean>(false)
+
+    private lateinit var countdownTimer : CountDownTimer
 
     fun usarDicaExtra() {
         if (temDicaExtraDisponivel())
@@ -40,6 +49,36 @@ class JogoViewModel: ViewModel() {
         }
 
         nomeFilmeEscondido.value =  nomeArray.joinToString(separator="")
+
+        adicionaTempo(-10000L)
+    }
+
+    fun validaResposta(resposta: String) : Boolean {
+        return resposta.toLowerCase() == this.nomeFilme.toLowerCase()
+    }
+
+    fun criaTimer(tempoMillis: Long = 180000L) {
+        countdownTimer = object : CountDownTimer(tempoMillis, 1000L) {
+
+            override fun onFinish() {
+                tempoAcabou.value = true
+            }
+
+            override fun onTick(tempoRestante: Long) {
+                _tempoRestante.value = tempoRestante
+            }
+
+        }
+        countdownTimer.start()
+    }
+
+    fun adicionaTempo(tempoParaAdicionar: Long) {
+        countdownTimer.cancel()
+
+        _tempoRestante.value = _tempoRestante.value!! + tempoParaAdicionar
+        if (_tempoRestante.value!! <= 0L) _tempoRestante.value = 0
+
+        criaTimer(_tempoRestante.value!!)
     }
 
 }

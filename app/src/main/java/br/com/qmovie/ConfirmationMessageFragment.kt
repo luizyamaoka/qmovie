@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.fragment_confirmation_message.view.*
 
@@ -39,6 +40,9 @@ class ConfirmationMessageFragment : DialogFragment() {
             "CONFIRMACAO_DESISTIR" -> {
                 view.tvConfirmacaoTitulo.text = getString(R.string.dialog_confirmacao_desistir_titulo)
                 view.tvConfirmacaoMensagem.text = getString(R.string.dialog_confirmacao_desistir_mensagem)
+                view.btnConfirmacao.setOnClickListener {
+                    findNavController().navigate(R.id.action_confirmationMessageFragment_to_gameOverFragment)
+                }
             }
         }
 
