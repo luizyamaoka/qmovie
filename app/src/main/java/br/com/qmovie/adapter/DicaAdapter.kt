@@ -11,10 +11,11 @@ import br.com.qmovie.JogoFragment
 import br.com.qmovie.R
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
+import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.item_dica.view.*
 
 class DicaAdapter(
-    private val jogoFragment: JogoFragment,
+    private val viewModel: JogoViewModel,
     private val dicas: ArrayList<Dica>
 ) : RecyclerView.Adapter<DicaAdapter.DicaViewHolder>() {
 
@@ -72,7 +73,7 @@ class DicaAdapter(
         holder.btnAbrirDica.setOnClickListener {
             dica.esta_aberta = true
             notifyItemChanged(position)
-            jogoFragment.adicionaTempo(-10000L)
+            viewModel.adicionaTempo(-10000L)
         }
     }
 }
