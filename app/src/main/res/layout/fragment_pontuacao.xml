@@ -43,7 +43,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="410dp"
             android:layout_height="560dp"
-            android:background="@drawable/round_game_over"
+            android:background="@drawable/round_pontuacao"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -242,11 +242,11 @@
                 android:text="@string/compartilhar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintHorizontal_bias="0.516"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
-                app:layout_constraintVertical_bias="0.847" />
+                app:layout_constraintVertical_bias="0.851" />
 
             <Button
                 android:id="@+id/btnCansei"
@@ -256,10 +256,9 @@
                 android:text="@string/cansei"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.951" />
+                app:layout_constraintVertical_bias="0.968" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
