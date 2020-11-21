@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_novoJogoFragment"
-            app:destination="@id/novoJogoFragment" />
+            app:destination="@id/jogoFragment" />
     </fragment>
     <fragment
         android:id="@+id/jogoFragment"
