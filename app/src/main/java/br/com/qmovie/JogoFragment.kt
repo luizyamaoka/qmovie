@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
+import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 

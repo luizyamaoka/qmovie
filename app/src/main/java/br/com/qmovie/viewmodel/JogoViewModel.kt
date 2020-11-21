@@ -1,7 +1,5 @@
-package br.com.qmovie
+package br.com.qmovie.viewmodel
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
