@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/preto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Nova Toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24"/>
+
+    <TextView
+        android:id="@+id/tvOla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Olá"
+        android:textColor="@color/branco"
+        android:textSize="65dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"/>
+
+    <TextView
+        android:id="@+id/tvMsgCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seja muito bem-vindo!"
+        android:textColor="@color/branco"
+        android:textSize="26dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="40dp"/>
+
+    <EditText
+        android:id="@+id/etNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="10dp"
+        android:background="@drawable/background_input_cinza_escuro"
+        android:hint="Nome"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:id="@+id/etSobreNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="10dp"
+        android:background="@drawable/background_input_cinza_escuro"
+        android:hint="Sobrenome"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="10dp"
+        android:background="@drawable/background_input_cinza_escuro"
+        android:hint="Email"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:id="@+id/etNovaSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="10dp"
+        android:background="@drawable/background_input_cinza_escuro"
+        android:hint="Senha" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_botao_amarelo"
+        android:text="Vamos nessa!"
+        android:textSize="17dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:paddingHorizontal="20dp"
+        android:textColor="@color/branco"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/tvRedes1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deseja usar as suas redes sociais"
+        android:textColor="@color/branco"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        />
+    <TextView
+        android:id="@+id/tvRedes2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="para criar a sua conta?"
+        android:textColor="@color/branco"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="20dp"
+        />
+    <include layout="@layout/login_redes"/>
+
+</LinearLayout>
