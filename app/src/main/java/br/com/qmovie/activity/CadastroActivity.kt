@@ -18,7 +18,7 @@ class CadastroActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         btnLogin.setOnClickListener(){
-            val intent = Intent(this@CadastroActivity, JogoActivity::class.java)
+            val intent = Intent(this@CadastroActivity, MainActivity::class.java)
             startActivity(intent)
         }
 
