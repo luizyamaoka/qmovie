@@ -13,10 +13,56 @@
         <action
             android:id="@+id/action_novoJogoFragment_to_rankingFragment"
             app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_novoJogoFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_novoJogoFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
     </fragment>
     <fragment
         android:id="@+id/rankingFragment"
         android:name="br.com.qmovie.RankingFragment"
         android:label="fragment_ranking"
-        tools:layout="@layout/fragment_ranking" />
+        tools:layout="@layout/fragment_ranking" >
+        <action
+            android:id="@+id/action_rankingFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
+        <action
+            android:id="@+id/action_rankingFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_rankingFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lancamentosFragment"
+        android:name="br.com.qmovie.LancamentosFragment"
+        android:label="fragment_lancamentos"
+        tools:layout="@layout/fragment_lancamentos" >
+        <action
+            android:id="@+id/action_lancamentosFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_lancamentosFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
+        <action
+            android:id="@+id/action_lancamentosFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/configuracoesFragment"
+        android:name="br.com.qmovie.ConfiguracoesFragment"
+        android:label="fragment_configuracoes"
+        tools:layout="@layout/fragment_configuracoes" >
+        <action
+            android:id="@+id/action_configuracoesFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_configuracoesFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_configuracoesFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
+    </fragment>
 </navigation>
