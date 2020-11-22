@@ -3,12 +3,209 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/preto"
     tools:context=".NovoJogoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/imgLogo"
+        app:layout_constraintTop_toTopOf="@id/clNovoJogo"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/logo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNovoJogo"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="15dp">
+
+        <LinearLayout
+            android:id="@+id/cardFilme"
+            app:layout_constraintTop_toTopOf="@id/clNovoJogo"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/card_filme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:padding="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/filme"
+                android:adjustViewBounds="true"
+                android:maxWidth="110dp"
+                android:scaleType="fitCenter"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/branco"
+                    android:textSize="35dp"
+                    android:text="@string/filme"/>
+
+                <Button
+                    android:id="@+id/newGameFilme"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/card_filme"
+                    android:backgroundTint="@color/preto"
+                    android:textColor="@color/branco"
+                    android:textSize="12dp"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="@string/play"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cardSerie"
+            app:layout_constraintTop_toBottomOf="@id/cardFilme"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/card_serie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:padding="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/diretor"
+                android:adjustViewBounds="true"
+                android:maxWidth="110dp"
+                android:scaleType="fitCenter"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/branco"
+                    android:textSize="35dp"
+                    android:text="@string/serie"/>
+
+                <Button
+                    android:id="@+id/newGameSerie"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/card_filme"
+                    android:backgroundTint="@color/preto"
+                    android:textColor="@color/branco"
+                    android:textSize="12dp"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="@string/play"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cardAtor"
+            app:layout_constraintTop_toBottomOf="@id/cardSerie"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/card_ator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:padding="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ator"
+                android:adjustViewBounds="true"
+                android:maxWidth="110dp"
+                android:scaleType="fitCenter"/>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/branco"
+                    android:textSize="35dp"
+                    android:text="@string/ator"/>
+
+                <Button
+                    android:id="@+id/newGameAtor"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/card_filme"
+                    android:backgroundTint="@color/preto"
+                    android:textColor="@color/branco"
+                    android:textSize="12dp"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="@string/play"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:background="@drawable/card_diretor"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <ImageView-->
+<!--                android:padding="15dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/diretor"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:maxWidth="110dp"-->
+<!--                android:scaleType="fitCenter"/>-->
+
+<!--            <LinearLayout-->
+<!--                android:gravity="center"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/branco"-->
+<!--                    android:textSize="35dp"-->
+<!--                    android:text="@string/diretor"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/newGameDiretor"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:background="@drawable/card_filme"-->
+<!--                    android:backgroundTint="@color/preto"-->
+<!--                    android:textColor="@color/branco"-->
+<!--                    android:textSize="12dp"-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:text="@string/play"/>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

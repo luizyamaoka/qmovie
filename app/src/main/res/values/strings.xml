@@ -10,6 +10,7 @@
     <string name="dialog_confirmacao_dica_extra_mensagem">Deseja gastar 10 segundos para abrir 2 letras?</string>
     <string name="dialog_confirmacao_desistir_titulo">Sair</string>
     <string name="dialog_confirmacao_desistir_mensagem">Tem certeza que deseja sair?</string>
+<<<<<<< HEAD
 
     <string name="fim_de_jogo">Fim de Jogo</string>
     <string name="pontuacao_final">Pontuação Final</string>
@@ -27,4 +28,11 @@
     <string name="cansei">Cansei</string>
 
 
+=======
+    <string name="play">Vamos jogar !</string>
+    <string name="filme">| Filme</string>
+    <string name="serie">| Série</string>
+    <string name="ator">| Ator</string>
+    <string name="diretor">| Diretor</string>
+>>>>>>> e731637afd2d19b688c9a41db1762b548baaffee
 </resources>
