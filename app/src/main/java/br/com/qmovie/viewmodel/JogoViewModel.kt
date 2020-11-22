@@ -3,10 +3,6 @@ package br.com.qmovie.viewmodel
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
-import br.com.qmovie.R
-import kotlinx.android.synthetic.main.fragment_jogo.*
 
 class JogoViewModel: ViewModel() {
 
