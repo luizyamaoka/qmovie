@@ -83,7 +83,7 @@ class JogoFragment : Fragment() {
         // observa variaveis do mutable live data
         viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
             if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
-                viewModel.abrirLetras(2)
+                viewModel.abrirLetras(2, true)
             }
         })
         viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {

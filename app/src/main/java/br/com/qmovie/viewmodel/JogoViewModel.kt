@@ -32,7 +32,7 @@ class JogoViewModel: ViewModel() {
         nomeFilmeEscondido.value = nomeEscondido
     }
 
-    fun abrirLetras(quantidadeDesejada: Int) {
+    fun abrirLetras(quantidadeDesejada: Int, reduzirTempo: Boolean = false) {
         var quantidade = 0
         var nomeArray = nomeFilmeEscondido.value!!.toMutableList()
         while (quantidade < quantidadeDesejada) {
@@ -45,7 +45,7 @@ class JogoViewModel: ViewModel() {
 
         nomeFilmeEscondido.value =  nomeArray.joinToString(separator="")
 
-        adicionaTempo(-10000L)
+        if (reduzirTempo) adicionaTempo(-10000L)
     }
 
     fun validaResposta(resposta: String) = resposta.toLowerCase() == this.nomeFilme.toLowerCase()
