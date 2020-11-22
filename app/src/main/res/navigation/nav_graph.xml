@@ -4,11 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
-
+    app:startDestination="@id/novoJogoFragment">
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="br.com.qmovie.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
+        android:id="@+id/novoJogoFragment"
+        android:name="br.com.qmovie.NovoJogoFragment"
+        android:label="fragment_novo_jogo"
+        tools:layout="@layout/fragment_novo_jogo" >
+        <action
+            android:id="@+id/action_novoJogoFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="br.com.qmovie.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" />
 </navigation>

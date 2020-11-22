@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         btnLogin.setOnClickListener(){
-            val intent = Intent(this@LoginActivity, JogoActivity::class.java)
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
         }
 
