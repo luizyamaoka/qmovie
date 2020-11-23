@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:text="Notificações"
+                        android:text="@string/notificacoes"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:text="Sons"
+                        android:text="@string/sons"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:text="Volume"
+                        android:text="@string/volume"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
-                        android:text="Vibração"
+                        android:text="@string/vibracao"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -206,8 +206,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp"
-                android:clickable="true">
+                app:cardCornerRadius="100dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -218,7 +217,7 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Excluir Conta"
+                        android:text="@string/excluir_conta"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:textAllCaps="false"
@@ -246,7 +245,7 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Contato"
+                        android:text="@string/contato"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:textAllCaps="false"
