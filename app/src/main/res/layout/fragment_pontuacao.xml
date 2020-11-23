@@ -1,14 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PontuacaoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tvAcertou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ace"
+            android:textColor="@color/amarelo"
+            android:textSize="50dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tvAcertou2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rtou!"
+            android:textColor="@color/preto"
+            android:textSize="50dp"
+            android:layout_gravity="center" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_pontuacao"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/tvPontuacaoRodada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pontuação_rodada"
+                android:textColor="@color/branco"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.087" />
+
+            <TextView
+                android:id="@+id/tvDicaUtilizada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dicas_utilizadas"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.127"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.234" />
+
+            <TextView
+                android:id="@+id/tvResultadoDicaUtilizada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.924"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.234" />
+
+
+            <TextView
+                android:id="@+id/tvTempoUtilizado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tempo_utilizado"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.129"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.314" />
+
+            <TextView
+                android:id="@+id/tvResultadoTempoUtilizado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1:30"
+                android:textColor="@color/vermelho_fonte"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.314" />
+
+            <TextView
+                android:id="@+id/tvProximaRodada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/proxima_rodada"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.127"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.396" />
+
+            <TextView
+                android:id="@+id/tvResultadoProximaRodada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ 1:00"
+                android:textColor="@color/verde_fonte"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.914"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.396" />
+
+
+            <TextView
+                android:id="@+id/tvTempoTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tempo_total"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.476" />
+
+
+            <TextView
+                android:id="@+id/tvTempoTotalResultado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3:00"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.919"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.476" />
+
+            <View
+                android:id="@+id/vwlinha"
+                android:layout_width="350dp"
+                android:layout_height="3dp"
+                android:background="@drawable/background_botao_cinza"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.554" />
+
+            <TextView
+                android:id="@+id/tvPontuacaoTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pontuação_total"
+                android:textColor="@color/branco"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.62" />
+
+            <TextView
+                android:id="@+id/tvResultadoPontos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.000"
+                android:textColor="@color/amarelo"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.33"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.733" />
+
+            <TextView
+                android:id="@+id/tvPonto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ponto"
+                android:textColor="@color/amarelo"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.689"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.733" />
+
+
+            <Button
+                android:id="@+id/btnCompartilhar"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_botao_amarelo"
+                android:text="@string/compartilhar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.516"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintVertical_bias="0.851" />
+
+            <Button
+                android:id="@+id/btnCansei"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_botao_branco"
+                android:text="@string/cansei"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.968" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
 
 </FrameLayout>

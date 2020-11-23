@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/preto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+        <ImageButton
+            android:id="@+id/ibGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/preto"
+            android:src="@drawable/google"
+            android:layout_marginRight="30dp"/>
+
+        <ImageButton
+            android:id="@+id/ibOutlook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/preto"
+            android:src="@drawable/outlook"
+            android:layout_marginRight="30dp"/>
+
+        <ImageButton
+            android:id="@+id/ibFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/preto"
+            android:src="@drawable/face"
+            android:layout_marginRight="30dp"/>
+
+        <ImageButton
+            android:id="@+id/ibApple"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/preto"
+            android:src="@drawable/apple" />
+    </LinearLayout>
+</LinearLayout>

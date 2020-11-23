@@ -13,4 +13,7 @@
     <color name="cinza_botao">#979797</color>
     <color name="cinza_titulo_dialog">#EDEDED</color>
     <color name="cinza_fechar_dialog">#C4C4C4</color>
+    <color name="vermelho_fonte">#FF0000</color>
+    <color name="verde_fonte">#05FF00</color>
+    <color name="cinza_card">#4d4d4d</color>
 </resources>

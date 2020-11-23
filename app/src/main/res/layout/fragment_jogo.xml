@@ -1,77 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".JogoFragment"
-    android:orientation="vertical">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_seta_esquerda_preta"
-        app:title=""
-        android:background="@color/amarelo"
-        app:menu="@menu/menu_jogo">
-        <TextView
-            android:id="@+id/tvTempoRestante"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Tempo restante"
+            app:navigationIcon="@drawable/ic_seta_esquerda_preta"
+            app:title=""
+            android:background="@color/amarelo"
+            app:menu="@menu/menu_jogo">
+            <TextView
+                android:id="@+id/tvTempoRestante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tempo restante"
+                android:textColor="@color/preto"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tvPergunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Qual é o nome do filme?"
+            android:background="@color/amarelo"
+            android:gravity="center"
+            android:padding="20dp"
+            android:textSize="16dp"
+            android:textColor="@color/preto" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDicas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_dica"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/tvDicaLetras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dica: * D**** ***** *****"
             android:textColor="@color/preto"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
+            android:gravity="center"
+            android:layout_marginTop="50dp" />
 
-    <TextView
-        android:id="@+id/tvPergunta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Qual é o nome do filme?"
-        android:background="@color/amarelo"
-        android:gravity="center"
-        android:padding="20dp"
-        android:textSize="16dp"
-        android:textColor="@color/preto" />
+        <EditText
+            android:id="@+id/etResposta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:background="@drawable/background_input_cinza"
+            android:hint="@string/digite_a_resposta"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDicas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_dica"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal" />
+        <Button
+            android:id="@+id/btnAdivinhar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_botao_amarelo"
+            android:text="@string/botao_adivinhar"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:id="@+id/tvDicaLetras"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dica: * D**** ***** *****"
-        android:textColor="@color/preto"
-        android:gravity="center"
-        android:layout_marginTop="50dp" />
-
-    <EditText
-        android:id="@+id/etResposta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:padding="10dp"
-        android:background="@drawable/background_input_cinza"
-        android:hint="@string/digite_a_resposta"
-        android:textAlignment="center"
-        android:gravity="center_horizontal" />
-
-    <Button
-        android:id="@+id/btnAdivinhar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_botao_amarelo"
-        android:text="@string/botao_adivinhar"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

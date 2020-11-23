@@ -10,7 +10,35 @@
     <string name="dialog_confirmacao_dica_extra_mensagem">Deseja gastar 10 segundos para abrir 2 letras?</string>
     <string name="dialog_confirmacao_desistir_titulo">Sair</string>
     <string name="dialog_confirmacao_desistir_mensagem">Tem certeza que deseja sair?</string>
-    <!-- STRINGS LacamentosFragment-->
+
+
+    <string name="fim_de_jogo">Fim de Jogo</string>
+    <string name="pontuacao_final">Pontuação Final</string>
+    <string name="compartilhar">Compartilhar</string>
+    <string name="menu_inicial">Menu Inicial</string>
+
+    <string name="pontuação_rodada">Pontuação da rodada</string>
+    <string name="dicas_utilizadas">Dicas utilizadas</string>
+    <string name="tempo_utilizado">Tempo utilizado</string>
+    <string name="proxima_rodada">Proxima rodada</string>
+    <string name="tempo_total">Tempo Total</string>
+    <string name="ponto"> ponto</string>
+    <string name="pontuação_total">Pontuação Total</string>
+    <string name="proxima_pergunta">Próxima pergunta</string>
+    <string name="cansei">Cansei</string>
+
+
+
+    <string name="play">Vamos jogar !</string>
+    <string name="filme">| Filme</string>
+    <string name="serie">| Série</string>
+    <string name="ator">| Ator</string>
+    <string name="diretor">| Diretor</string>
+
+    <string name="configuracoes_1">Confi</string>
+    <string name="configuracoes_2">gurações</string>
+
     <string name="novidades_1">Novi</string>
     <string name="novidades_2">dades</string>
+
 </resources>

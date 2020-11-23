@@ -4,25 +4,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
-
+    app:startDestination="@id/novoJogoFragment">
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="br.com.qmovie.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        android:id="@+id/novoJogoFragment"
+        android:name="br.com.qmovie.NovoJogoFragment"
+        android:label="fragment_novo_jogo"
+        tools:layout="@layout/fragment_novo_jogo" >
         <action
-            android:id="@+id/action_splashFragment_to_jogoFragment"
-            app:destination="@id/jogoFragment" />
+            android:id="@+id/action_novoJogoFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_novoJogoFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_novoJogoFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/jogoFragment"
-        android:name="br.com.qmovie.JogoFragment"
-        android:label="fragment_jogo"
-        tools:layout="@layout/fragment_jogo" >
+        android:id="@+id/rankingFragment"
+        android:name="br.com.qmovie.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" >
         <action
-            android:id="@+id/action_jogoFragment_to_action_lancamentosFragment"
+            android:id="@+id/action_rankingFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
+        <action
+            android:id="@+id/action_rankingFragment_to_lancamentosFragment"
             app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_rankingFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
     </fragment>
     <fragment
         android:id="@+id/lancamentosFragment"
@@ -30,11 +41,28 @@
         android:label="fragment_lancamentos"
         tools:layout="@layout/fragment_lancamentos" >
         <action
-            android:id="@+id/action_lancamentosFragment_to_confirmationMessageFragment"
-            app:destination="@id/confirmationMessageFragment" />
+            android:id="@+id/action_lancamentosFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_lancamentosFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
+        <action
+            android:id="@+id/action_lancamentosFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/confirmationMessageFragment"
-        android:name="br.com.qmovie.ConfirmationMessageFragment"
-        android:label="ConfirmationMessageFragment" />
+    <fragment
+        android:id="@+id/configuracoesFragment"
+        android:name="br.com.qmovie.ConfiguracoesFragment"
+        android:label="fragment_configuracoes"
+        tools:layout="@layout/fragment_configuracoes" >
+        <action
+            android:id="@+id/action_configuracoesFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_configuracoesFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_configuracoesFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
+    </fragment>
 </navigation>

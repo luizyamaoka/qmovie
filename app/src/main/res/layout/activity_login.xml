@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/preto">
+
+    <TextView
+        android:id="@+id/tvOla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Olá"
+        android:textColor="@color/branco"
+        android:textSize="70dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"/>
+
+    <TextView
+        android:id="@+id/tvMsgLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Faça login na sua conta!"
+        android:textColor="@color/branco"
+        android:textSize="26dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="40dp"/>
+
+    <EditText
+        android:id="@+id/etLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="10dp"
+        android:background="@drawable/background_input_cinza_escuro"
+        android:hint="Login"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:id="@+id/etSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:padding="10dp"
+        android:background="@drawable/background_input_cinza_escuro"
+        android:hint="Senha" />
+
+    <TextView
+        android:id="@+id/tvEsqSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esqueceu sua senha?"
+        android:textColor="@color/branco"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="50dp"
+        />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_botao_amarelo"
+        android:text="Vamos nessa!"
+        android:textSize="17dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="20dp"
+        android:textColor="@color/branco"
+        android:textAllCaps="false"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp" >
+
+        <View
+            android:layout_width="170dp"
+            android:layout_height="1dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/amarelo"
+            android:focusable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OU"
+            android:textColor="@color/amarelo"
+            android:textSize="20dp"/>
+
+        <View
+            android:layout_width="170dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/amarelo"
+            android:focusable="false"/>
+    </LinearLayout>
+
+    <include layout="@layout/login_redes"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tvNaoTemConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Não tem conta?"
+            android:textColor="@color/branco"
+            android:textSize="15dp"
+            android:layout_gravity="right"
+            />
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Bora fazer uma!"
+            android:textColor="@color/amarelo"
+            android:textSize="15dp"
+            android:layout_gravity="right"
+            />
+    </LinearLayout>
+</LinearLayout>

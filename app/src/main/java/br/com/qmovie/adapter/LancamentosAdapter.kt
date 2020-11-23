@@ -1,4 +1,4 @@
-package br.com.qmovie
+package br.com.qmovie.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import br.com.qmovie.LancamentosFragment
+import br.com.qmovie.R
 import br.com.qmovie.domain.Lancamento
 import kotlinx.android.synthetic.main.item_lancamentos.view.*
 import java.text.SimpleDateFormat
@@ -47,6 +49,5 @@ class LancamentosAdapter(
                 }
             }
         }
-
     }
 }

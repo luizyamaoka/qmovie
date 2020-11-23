@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_pontuacao.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +28,7 @@ class PontuacaoFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -33,8 +36,14 @@ class PontuacaoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pontuacao, container, false)
+        val view: View = inflater!!.inflate(R.layout.fragment_pontuacao, container,false)
+        view.btnCansei.setOnClickListener{
+
+            findNavController().navigate(R.id.action_pontuacaoFragment_to_gameOverFragment)
+        }
+        return view
     }
 
     companion object {

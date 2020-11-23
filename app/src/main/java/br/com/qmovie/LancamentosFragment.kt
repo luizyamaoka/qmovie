@@ -6,11 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import br.com.qmovie.adapter.LancamentosAdapter
 import br.com.qmovie.domain.Lancamento
-import kotlinx.android.synthetic.main.fragment_jogo.view.*
 import kotlinx.android.synthetic.main.fragment_lancamentos.view.*
 import java.util.*
 

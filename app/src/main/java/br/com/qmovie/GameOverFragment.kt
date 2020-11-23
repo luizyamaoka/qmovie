@@ -1,10 +1,13 @@
 package br.com.qmovie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import br.com.qmovie.activity.MainActivity
+import kotlinx.android.synthetic.main.fragment_game_over.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +37,21 @@ class GameOverFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_over, container, false)
+        val view = inflater.inflate(R.layout.fragment_game_over, container, false)
+
+        view.btnRanking.setOnClickListener {
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.putExtra("destinationFragment", "RankingFragment")
+            startActivity(intent)
+        }
+
+        view.btnMenuInicial.setOnClickListener {
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.putExtra("destinationFragment", "NovoJogoFragment")
+            startActivity(intent)
+        }
+
+        return view
     }
 
     companion object {

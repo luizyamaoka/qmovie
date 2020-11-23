@@ -1,8 +1,6 @@
 package br.com.qmovie
 
-import android.content.Context
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -10,16 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
+import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
 class JogoFragment : Fragment() {
 
-    lateinit var countdownTimer : CountDownTimer
-    var _tempoRestante: Long = 180000
-    lateinit var _context : Context
     private lateinit var viewModel : JogoViewModel
 
     private var dicas = arrayListOf(
@@ -31,8 +28,8 @@ class JogoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        criaTimer(_tempoRestante)
         viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+        viewModel.criaTimer()
         viewModel.esconderNome()
         viewModel.abrirLetras(1)
     }
@@ -44,11 +41,13 @@ class JogoFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
 
-        view.rvDicas.adapter = DicaAdapter(this, dicas)
+        view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
+
+        // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
             findNavController().navigate(
-                R.id.action_jogoFragment_to_action_lancamentosFragment,
+                R.id.action_jogoFragment_to_confirmationMessageFragment,
                 bundle)
         }
         view.toolbar.setOnMenuItemClickListener {
@@ -58,67 +57,57 @@ class JogoFragment : Fragment() {
                         true -> {
                             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
                             findNavController().navigate(
-                                R.id.action_jogoFragment_to_action_lancamentosFragment,
+                                R.id.action_jogoFragment_to_confirmationMessageFragment,
                                 bundle)
                         }
-                        false -> Toast.makeText(_context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
+                        false -> Toast.makeText(context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             true
         }
+
+        view.btnAdivinhar.setOnClickListener {
+            val resposta = etResposta.text.toString()
+            when (viewModel.validaResposta(resposta)) {
+                true -> {
+                    findNavController().navigate(R.id.action_jogoFragment_to_pontuacaoFragment)
+                }
+                false -> {
+                    view.etResposta.text = null
+                    Toast.makeText(context, "Resposta incorreta", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // observa variaveis do mutable live data
         viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
             if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
-                viewModel.abrirLetras(2)
-                adicionaTempo(-10000L)
+                viewModel.abrirLetras(2, true)
             }
         })
         viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
             view.tvDicaLetras.text = it
         })
+
+        viewModel._tempoRestante.observe(viewLifecycleOwner, Observer {
+            view.tvTempoRestante.text = formataTempo(it).toString()
+        })
+        viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
+            if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
+        })
+
         return view
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        _context = context
-    }
-
-    fun criaTimer(tempoMillis: Long) {
-        countdownTimer = object : CountDownTimer(tempoMillis, 1000L) {
-
-            override fun onFinish() {
-                // TODO: Vai para tela de fim de jogo
-//                findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
-            }
-
-            override fun onTick(tempoRestante: Long) {
-                atualizaTempoRestante(tempoRestante)
-                _tempoRestante = tempoRestante
-            }
-
-        }
-        countdownTimer.start()
-    }
-
-    private fun atualizaTempoRestante(tempoRestante: Long) {
+    private fun formataTempo(tempoRestante: Long) : String {
         val minutos = (tempoRestante / 1000) / 60
         val segundos = (tempoRestante / 1000) % 60
 
         val segundos_fill_zero = if (segundos < 10) "0" else ""
         val minutos_fill_zero = if (minutos < 10) "0" else ""
 
-        tvTempoRestante.text = "$minutos_fill_zero$minutos:$segundos_fill_zero$segundos"
+        return "$minutos_fill_zero$minutos:$segundos_fill_zero$segundos"
     }
 
-    fun adicionaTempo(tempoParaAdicionar: Long) {
-        countdownTimer.cancel()
-
-        _tempoRestante += tempoParaAdicionar
-        if (_tempoRestante <= 0) _tempoRestante = 0
-
-        criaTimer(_tempoRestante)
-        atualizaTempoRestante(_tempoRestante)
-
-    }
 }
