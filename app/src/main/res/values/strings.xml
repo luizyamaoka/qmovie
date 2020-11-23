@@ -37,6 +37,12 @@
 
     <string name="configuracoes_1">Confi</string>
     <string name="configuracoes_2">gurações</string>
+    <string name="notificacoes">Notificações</string>
+    <string name="sons">Sons</string>
+    <string name="volume">Volume</string>
+    <string name="vibracao">Vibração</string>
+    <string name="excluir_conta">Excluir Conta</string>
+    <string name="contato">Contato</string>
 
     <string name="novidades_1">Novi</string>
     <string name="novidades_2">dades</string>
