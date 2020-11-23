@@ -7,11 +7,16 @@
     android:orientation="vertical"
     tools:context=".PontuacaoFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
         <TextView
             android:id="@+id/tvAcertou"
             android:layout_width="wrap_content"
@@ -19,12 +24,7 @@
             android:text="Ace"
             android:textColor="@color/amarelo"
             android:textSize="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.346"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.024" />
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/tvAcertou2"
@@ -33,16 +33,12 @@
             android:text="rtou!"
             android:textColor="@color/preto"
             android:textSize="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.650"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.024" />
+            android:layout_gravity="center" />
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="410dp"
-            android:layout_height="560dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/round_pontuacao"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -264,7 +260,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </FrameLayout>
