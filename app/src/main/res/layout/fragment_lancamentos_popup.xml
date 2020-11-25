@@ -18,6 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/branco"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +41,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:text="TITULO DO FILME"
+                    android:textSize="22sp"
                     android:textColor="@color/preto"
                     android:textStyle="bold" />
 
@@ -171,10 +174,12 @@
                             android:id="@+id/fbCompartilhar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:scaleType="fitCenter"
                             app:elevation="0dp"
                             app:fabSize="normal"
-                            android:scaleType="fitCenter"
-                            android:clickable="true"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/ic_compartilhar" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -190,7 +195,9 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:clickable="true"
-                            android:src="@drawable/ic_btn_local_cinema" />
+                            android:src="@drawable/ic_btn_local_cinema"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/rvCinema"

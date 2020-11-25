@@ -65,7 +65,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="290dp"
+            android:layout_height="match_parent"
             android:background="@drawable/round_game_over"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -81,13 +81,15 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_botao_cinza"
+                android:backgroundTint="@color/cinza_card"
                 android:text="@string/compartilhar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
+                android:textColor="@color/amarelo"
+                android:textSize="20dp"
                 app:layout_constraintVertical_bias="0.226" />
 
             <Button
@@ -95,12 +97,15 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_botao_cinza"
+                android:backgroundTint="@color/cinza_card"
                 android:text="Ranking"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/amarelo"
+                android:textSize="20dp"
                 app:layout_constraintVertical_bias="0.464" />
 
             <Button
@@ -108,12 +113,15 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_botao_cinza"
+                android:backgroundTint="@color/cinza_card"
                 android:text="@string/menu_inicial"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/amarelo"
+                android:textSize="20dp"
                 app:layout_constraintVertical_bias="0.71" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
