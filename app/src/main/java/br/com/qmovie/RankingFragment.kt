@@ -5,6 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.qmovie.adapter.DicaAdapter
+import br.com.qmovie.adapter.RankingAdapter
+import br.com.qmovie.viewmodel.JogoViewModel
+import br.com.qmovie.viewmodel.RankingViewModel
+import kotlinx.android.synthetic.main.fragment_jogo.view.*
+import kotlinx.android.synthetic.main.fragment_ranking.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,16 +28,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RankingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+//    private val viewModel : RankingViewModel by viewModels()
+    private lateinit var viewModel : RankingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        viewModel = ViewModelProvider(requireActivity()).get(RankingViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -34,7 +42,13 @@ class RankingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ranking, container, false)
+        val view =  inflater.inflate(R.layout.fragment_ranking, container, false)
+        val listRanking = viewModel.getRanking()
+
+        view.rvRanking.adapter = RankingAdapter(viewModel, listRanking)
+
+        return view
+
     }
 
     companion object {
