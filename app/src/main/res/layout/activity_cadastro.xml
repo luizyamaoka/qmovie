@@ -78,7 +78,8 @@
         android:layout_marginRight="40dp"
         android:padding="10dp"
         android:background="@drawable/background_input_cinza_escuro"
-        android:hint="Senha" />
+        android:hint="Senha"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnLogin"
