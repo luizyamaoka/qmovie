@@ -46,5 +46,7 @@
 
     <string name="novidades_1">Novi</string>
     <string name="novidades_2">dades</string>
+    <string name="favoritar">Favoritar</string>
+    <string name="cinemas">Cinemas</string>
 
 </resources>

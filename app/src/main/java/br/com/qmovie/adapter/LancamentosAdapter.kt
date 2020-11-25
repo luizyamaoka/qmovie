@@ -1,10 +1,12 @@
 package br.com.qmovie.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.LancamentosFragment
 import br.com.qmovie.R
@@ -33,7 +35,7 @@ class LancamentosAdapter(
 
     override fun onBindViewHolder(holder: LancamentoViewHolder, position: Int) {
         val lancamento = lancamentos.get(position)
-
+        lancamento.dtLancamento = SimpleDateFormat("dd/MM/YY").parse(SimpleDateFormat("dd/MM/YY").format(lancamento.dtLancamento))
         holder.tvTituloLancamento.text = lancamento.titulo
         holder.tvDataLancamento.text = SimpleDateFormat("dd/MM/YY").format(lancamento.dtLancamento)
 
@@ -48,6 +50,13 @@ class LancamentosAdapter(
                     lancamento.favorito = !lancamento.favorito
                 }
             }
+        }
+
+        holder.tvTituloLancamento.setOnClickListener {
+            val bundle =  Bundle()
+            bundle.putSerializable("lancamento", lancamento)
+            findNavController(lancamentosFragment).navigate(
+                R.id.action_lancamentosFragment_to_lancamentosPopupFragment, bundle)
         }
     }
 }
