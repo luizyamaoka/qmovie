@@ -39,7 +39,7 @@ class LancamentosAdapter(
         val lancamento = lancamentos.get(position)
         lancamento.dtLancamento = SimpleDateFormat("dd/MM/YY").parse(SimpleDateFormat("dd/MM/YY").format(lancamento.dtLancamento))
         holder.tvTituloLancamento.text = lancamento.titulo
-        holder.tvDataLancamento.text = SimpleDateFormat("dd/MM/YY").format(lancamento.dtLancamento)
+        holder.tvDataLancamento.text = SimpleDateFormat("dd/MM").format(lancamento.dtLancamento)
 
         holder.btnFavoritarLancamento.setOnClickListener {
             when (lancamento.favorito) {

@@ -38,7 +38,8 @@
                 android:fontFamily="@font/roboto"
                 android:textSize="20sp"
                 android:textAlignment="center"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:text="Nome do filme"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -48,7 +49,7 @@
 
                 <TextView
                     android:id="@+id/tvDataLancamento"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAlignment="center"
                     android:layout_gravity="center"
@@ -56,7 +57,8 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textSize="20sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="20/10"/>
             </androidx.cardview.widget.CardView>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
