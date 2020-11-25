@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
@@ -40,6 +42,8 @@ class JogoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
+        val snapHelper : SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(view.rvDicas)
 
         view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
 
