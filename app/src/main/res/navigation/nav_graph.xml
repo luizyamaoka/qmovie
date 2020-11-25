@@ -49,7 +49,19 @@
         <action
             android:id="@+id/action_lancamentosFragment_to_configuracoesFragment"
             app:destination="@id/configuracoesFragment" />
+        <action
+            android:id="@+id/action_lancamentosFragment_to_lancamentosPopupFragment"
+            app:destination="@id/lancamentosPopupFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/lancamentosPopupFragment"
+        android:name="br.com.qmovie.LancamentosPopupFragment"
+        android:label="fragment_lancamentos_popup"
+        tools:layout="@layout/fragment_lancamentos_popup" >
+        <action
+            android:id="@+id/action_lancamentosPopupFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+    </dialog>
     <fragment
         android:id="@+id/configuracoesFragment"
         android:name="br.com.qmovie.ConfiguracoesFragment"

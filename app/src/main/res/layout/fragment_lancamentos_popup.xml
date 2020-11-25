@@ -1,0 +1,230 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLancamentosPopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/branco"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTituloPopup"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/cinza_titulo_dialog"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="TITULO DO FILME"
+                    android:textColor="@color/preto"
+                    android:textStyle="bold" />
+
+                <!-- INFOS DO LANCAMENTO-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivCapaFilme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/capa_exemplo" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvInfoDtLancamento"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight = "1"
+                            android:background="@color/branco"
+                            android:gravity="center"
+                            android:text="AQUI INFOS DO FILME"
+                            android:textColor="@color/preto" />
+
+                        <TextView
+                            android:id="@+id/tvInfoDiretor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight = "1"
+                            android:background="@color/branco"
+                            android:gravity="center"
+                            android:text="AQUI INFOS DO FILME"
+                            android:textColor="@color/preto" />
+
+                        <TextView
+                            android:id="@+id/tvInfoGenero"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight = "1"
+                            android:background="@color/branco"
+                            android:gravity="center"
+                            android:text="AQUI INFOS DO FILME"
+                            android:textColor="@color/preto" />
+
+                        <TextView
+                            android:id="@+id/tvInfoClassificacao"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight = "1"
+                            android:background="@color/branco"
+                            android:gravity="center"
+                            android:text="AQUI INFOS DO FILME"
+                            android:textColor="@color/preto" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <!-- SINOPSE DO LANCAMENTO -->
+                <TextView
+                    android:id="@+id/tvSinopse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/branco"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="SINOPSE"
+                    android:textColor="@color/preto"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSinopseDescricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/branco"
+                    android:gravity="center"
+                    android:text="A princesa Leia é mantida refém pelas forças imperiais comandadas por Darth Vader. Luke Skywalker e o capitão Han Solo precisam libertá-la e restaurar a liberdade e a justiça na galáxia."
+                    android:textColor="@color/preto"
+                    android:layout_marginBottom="15dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/btnFavoritarLancamentoPopup"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:clickable="true"
+                            android:src="@drawable/ic_btn_favoritar_lancamento_false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/rvFavoritar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="@string/favoritar"
+                            app:layout_constraintBottom_toBottomOf="@+id/btnFavoritarLancamentoPopup"
+                            app:layout_constraintEnd_toEndOf="@+id/btnFavoritarLancamentoPopup"
+                            app:layout_constraintStart_toStartOf="@+id/btnFavoritarLancamentoPopup"
+                            app:layout_constraintTop_toTopOf="@+id/btnFavoritarLancamentoPopup" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fbCompartilhar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:elevation="0dp"
+                            app:fabSize="normal"
+                            android:scaleType="fitCenter"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_compartilhar" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/btnLocalCinema"
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:clickable="true"
+                            android:src="@drawable/ic_btn_local_cinema" />
+
+                        <TextView
+                            android:id="@+id/rvCinema"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:text="@string/cinemas"
+                            app:layout_constraintBottom_toBottomOf="@+id/btnLocalCinema"
+                            app:layout_constraintEnd_toEndOf="@+id/btnLocalCinema"
+                            app:layout_constraintStart_toStartOf="@+id/btnLocalCinema"
+                            app:layout_constraintTop_toTopOf="@+id/btnLocalCinema" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/rvCompartilhar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/compartilhar"
+                    android:layout_marginBottom="10dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnFecharPopup"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/background_circulo"
+            android:text="x"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
