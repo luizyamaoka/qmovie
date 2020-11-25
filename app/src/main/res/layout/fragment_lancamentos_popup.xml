@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal" >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -144,6 +144,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:clickable="true"
                             android:src="@drawable/ic_btn_favoritar_lancamento_false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +171,10 @@
                             android:id="@+id/fbCompartilhar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
+                            app:elevation="0dp"
+                            app:fabSize="normal"
+                            android:scaleType="fitCenter"
+                            android:clickable="true"
                             app:srcCompat="@drawable/ic_compartilhar" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -185,6 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:clickable="true"
                             android:src="@drawable/ic_btn_local_cinema" />
 
                         <TextView
@@ -206,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/compartilhar"
-                    android:layout_marginBottom="15dp"/>
+                    android:layout_marginBottom="10dp"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
