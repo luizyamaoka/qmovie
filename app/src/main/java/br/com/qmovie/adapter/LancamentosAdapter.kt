@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.LancamentosFragment
@@ -24,6 +25,7 @@ class LancamentosAdapter(
         val tvTituloLancamento : TextView = view.tvTituloLancamento
         val tvDataLancamento : TextView = view.tvDataLancamento
         val btnFavoritarLancamento : ImageButton = view.btnFavoritarLancamento
+        val cvItemLancamentos : CardView = view.cvItemLancamentos
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LancamentoViewHolder {
@@ -52,7 +54,7 @@ class LancamentosAdapter(
             }
         }
 
-        holder.tvTituloLancamento.setOnClickListener {
+        holder.cvItemLancamentos.setOnClickListener {
             val bundle =  Bundle()
             bundle.putSerializable("lancamento", lancamento)
             findNavController(lancamentosFragment).navigate(
