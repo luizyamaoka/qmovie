@@ -10,25 +10,33 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import br.com.qmovie.activity.JogoActivity
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
+import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.extension.toTime
 import br.com.qmovie.viewmodel.JogoViewModel
+import br.com.qmovie.viewmodel.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
 class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
-
     private lateinit var dicas : ArrayList<Dica>
+    private lateinit var tipoJogo: TipoJogo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
-        viewModel.iniciarJogo(180000L)
-//        viewModel.getFilme(76341)
+
+        tipoJogo = (activity as JogoActivity).tipoJogo
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory { JogoViewModel(tipoJogo) }
+        ).get(JogoViewModel::class.java)
+//        viewModel.iniciarJogo(180000L)
         dicas = viewModel.getDicas()
+        viewModel.getResposta()
     }
 
     override fun onCreateView(
@@ -42,13 +50,13 @@ class JogoFragment : Fragment() {
 
         view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
 
-        defineAcoesBotoes(view)
-        observaMutableLiveData(view)
+        definirAcaoBotoes(view)
+        observarMutableLiveData(view)
 
         return view
     }
 
-    fun defineAcoesBotoes(view: View) {
+    fun definirAcaoBotoes(view: View) {
         // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
@@ -87,12 +95,12 @@ class JogoFragment : Fragment() {
         }
     }
 
-    private fun observaMutableLiveData(view: View) {
-        viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
+    private fun observarMutableLiveData(view: View) {
+        viewModel.respostaEscondida.observe(viewLifecycleOwner, Observer {
             view.tvDicaLetras.text = it
         })
 
-        viewModel._tempoRestante.observe(viewLifecycleOwner, Observer {
+        viewModel.tempoRestante.observe(viewLifecycleOwner, Observer {
             view.tvTempoRestante.text = it.toTime()
         })
 
@@ -102,3 +110,4 @@ class JogoFragment : Fragment() {
     }
 
 }
+
