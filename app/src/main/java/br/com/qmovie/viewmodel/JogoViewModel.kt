@@ -3,9 +3,15 @@ package br.com.qmovie.viewmodel
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import br.com.qmovie.BuildConfig
+import br.com.qmovie.movieService
+import kotlinx.coroutines.launch
+
 
 class JogoViewModel: ViewModel() {
 
+    private val API_KEY: String = BuildConfig.API_KEY
     private val MAX_DICAS_EXTRAS = 1
     private lateinit var countdownTimer : CountDownTimer
 
@@ -14,6 +20,8 @@ class JogoViewModel: ViewModel() {
     val nomeFilmeEscondido = MutableLiveData<String>("")
     val _tempoRestante = MutableLiveData<Long>(180000L)
     val tempoAcabou = MutableLiveData<Boolean>(false)
+
+    val filme = MutableLiveData<String>()
 
     fun usarDicaExtra() {
         if (temDicaExtraDisponivel())
@@ -72,6 +80,12 @@ class JogoViewModel: ViewModel() {
         if (_tempoRestante.value!! <= 0L) _tempoRestante.value = 0
 
         criaTimer(_tempoRestante.value!!)
+    }
+
+    fun getFilme(id: Int) {
+        viewModelScope.launch {
+            filme.value = movieService.getMovie(id, API_KEY).toString()
+        }
     }
 
 }
