@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.SnapHelper
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
+import br.com.qmovie.extension.toTime
 import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
@@ -95,7 +96,7 @@ class JogoFragment : Fragment() {
         })
 
         viewModel._tempoRestante.observe(viewLifecycleOwner, Observer {
-            view.tvTempoRestante.text = formataTempo(it).toString()
+            view.tvTempoRestante.text = it.toTime()
         })
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
             if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
@@ -106,16 +107,6 @@ class JogoFragment : Fragment() {
         viewModel.getFilme(76341)
 
         return view
-    }
-
-    private fun formataTempo(tempoRestante: Long) : String {
-        val minutos = (tempoRestante / 1000) / 60
-        val segundos = (tempoRestante / 1000) % 60
-
-        val segundos_fill_zero = if (segundos < 10) "0" else ""
-        val minutos_fill_zero = if (minutos < 10) "0" else ""
-
-        return "$minutos_fill_zero$minutos:$segundos_fill_zero$segundos"
     }
 
 }
