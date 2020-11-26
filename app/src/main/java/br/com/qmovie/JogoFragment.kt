@@ -22,18 +22,14 @@ class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
 
-    private var dicas = arrayListOf(
-        Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
-        Dica(2, TipoDica.TEXTO, "Miranda e Andy são os nomes dos protagonistas do filme", false),
-        Dica(3, TipoDica.TEXTO, "Lançado em 2006 Direção de David Frankel", false),
-        Dica(4, TipoDica.TEXTO, "Outra dica", false)
-    )
+    private lateinit var dicas : ArrayList<Dica>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
         viewModel.iniciaJogo(180000L)
 //        viewModel.getFilme(76341)
+        dicas = viewModel.getDicas()
     }
 
     override fun onCreateView(

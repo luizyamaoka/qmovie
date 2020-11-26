@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.qmovie.BuildConfig
+import br.com.qmovie.domain.Dica
+import br.com.qmovie.domain.TipoDica
 import br.com.qmovie.service.movieService
 import kotlinx.coroutines.launch
 
@@ -16,8 +18,9 @@ class JogoViewModel: ViewModel() {
     private val MAX_DICAS_EXTRAS = 1
     private lateinit var countdownTimer : CountDownTimer
 
-    val dicasExtrasUtilizadas = MutableLiveData<Int>(0)
+    var dicasExtrasUtilizadas = 0
     val nomeFilme : String = "O Diabo veste Prada"
+
     val nomeFilmeEscondido = MutableLiveData<String>("")
     val _tempoRestante = MutableLiveData<Long>(180000L)
     val tempoAcabou = MutableLiveData<Boolean>(false)
@@ -32,12 +35,12 @@ class JogoViewModel: ViewModel() {
 
     fun usarDicaExtra() {
         if (temDicaExtraDisponivel()) {
-            dicasExtrasUtilizadas.value = dicasExtrasUtilizadas.value!! + 1
+            dicasExtrasUtilizadas++
             abrirLetras(2, true)
         }
     }
 
-    fun temDicaExtraDisponivel() = dicasExtrasUtilizadas.value!! < MAX_DICAS_EXTRAS
+    fun temDicaExtraDisponivel() = dicasExtrasUtilizadas < MAX_DICAS_EXTRAS
 
     fun esconderNome() {
         var nomeEscondido = ""
@@ -67,7 +70,7 @@ class JogoViewModel: ViewModel() {
 
     fun validaResposta(resposta: String) = resposta.toLowerCase() == this.nomeFilme.toLowerCase()
 
-    fun criaTimer(tempoMillis: Long = 180000L) {
+    fun criaTimer(tempoMillis: Long) {
         countdownTimer = object : CountDownTimer(tempoMillis, 1000L) {
 
             override fun onFinish() {
@@ -100,5 +103,12 @@ class JogoViewModel: ViewModel() {
             }
         }
     }
+
+    fun getDicas() = arrayListOf(
+        Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
+        Dica(2, TipoDica.TEXTO, "Miranda e Andy são os nomes dos protagonistas do filme", false),
+        Dica(3, TipoDica.TEXTO, "Lançado em 2006 Direção de David Frankel", false),
+        Dica(4, TipoDica.TEXTO, "Outra dica", false)
+    )
 
 }
