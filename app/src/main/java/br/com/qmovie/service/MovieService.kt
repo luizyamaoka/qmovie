@@ -1,4 +1,4 @@
-package br.com.qmovie
+package br.com.qmovie.service
 
 import br.com.qmovie.domain.Filme
 import retrofit2.http.GET

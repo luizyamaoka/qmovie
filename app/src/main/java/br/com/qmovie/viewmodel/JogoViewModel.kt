@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.qmovie.BuildConfig
-import br.com.qmovie.movieService
+import br.com.qmovie.service.movieService
 import kotlinx.coroutines.launch
 
 
