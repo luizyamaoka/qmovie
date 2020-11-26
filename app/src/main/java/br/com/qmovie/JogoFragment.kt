@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
-import br.com.qmovie.domain.TipoDica
+import br.com.qmovie.extension.toTime
 import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
@@ -21,19 +21,14 @@ class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
 
-    private var dicas = arrayListOf(
-        Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
-        Dica(2, TipoDica.TEXTO, "Miranda e Andy são os nomes dos protagonistas do filme", false),
-        Dica(3, TipoDica.TEXTO, "Lançado em 2006 Direção de David Frankel", false),
-        Dica(4, TipoDica.TEXTO, "Outra dica", false)
-    )
+    private lateinit var dicas : ArrayList<Dica>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
-        viewModel.criaTimer()
-        viewModel.esconderNome()
-        viewModel.abrirLetras(1)
+        viewModel.iniciarJogo(180000L)
+//        viewModel.getFilme(76341)
+        dicas = viewModel.getDicas()
     }
 
     override fun onCreateView(
@@ -47,6 +42,13 @@ class JogoFragment : Fragment() {
 
         view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
 
+        defineAcoesBotoes(view)
+        observaMutableLiveData(view)
+
+        return view
+    }
+
+    fun defineAcoesBotoes(view: View) {
         // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
@@ -73,7 +75,7 @@ class JogoFragment : Fragment() {
 
         view.btnAdivinhar.setOnClickListener {
             val resposta = etResposta.text.toString()
-            when (viewModel.validaResposta(resposta)) {
+            when (viewModel.validarResposta(resposta)) {
                 true -> {
                     findNavController().navigate(R.id.action_jogoFragment_to_pontuacaoFragment)
                 }
@@ -83,39 +85,20 @@ class JogoFragment : Fragment() {
                 }
             }
         }
+    }
 
-        // observa variaveis do mutable live data
-        viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
-            if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
-                viewModel.abrirLetras(2, true)
-            }
-        })
+    private fun observaMutableLiveData(view: View) {
         viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
             view.tvDicaLetras.text = it
         })
 
         viewModel._tempoRestante.observe(viewLifecycleOwner, Observer {
-            view.tvTempoRestante.text = formataTempo(it).toString()
+            view.tvTempoRestante.text = it.toTime()
         })
+
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
             if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
         })
-        viewModel.filme.observe(viewLifecycleOwner, Observer {
-            view.tvDicaLetras.text = it
-        })
-        viewModel.getFilme(76341)
-
-        return view
-    }
-
-    private fun formataTempo(tempoRestante: Long) : String {
-        val minutos = (tempoRestante / 1000) / 60
-        val segundos = (tempoRestante / 1000) % 60
-
-        val segundos_fill_zero = if (segundos < 10) "0" else ""
-        val minutos_fill_zero = if (minutos < 10) "0" else ""
-
-        return "$minutos_fill_zero$minutos:$segundos_fill_zero$segundos"
     }
 
 }

@@ -39,7 +39,7 @@ class DicaAdapter(
     override fun getItemCount() = dicas.size
 
     override fun onBindViewHolder(holder: DicaViewHolder, position: Int) {
-        val dica = dicas.get(position)
+        val dica = dicas[position]
 
         holder.tvDicaNumero.text = "Dica #${position + 1}"
         holder.tvDicaConteudo.text = dica.conteudo
@@ -48,32 +48,35 @@ class DicaAdapter(
         if (position == 0) holder.btnDicaSetaEsquerda.visibility = View.INVISIBLE
         if (position == itemCount - 1) holder.btnDicaSetaDireita.visibility = View.INVISIBLE
         when (dica.esta_aberta) {
-            false -> {
-                holder.btnAbrirDica.visibility = View.VISIBLE
-                holder.tvInterrogacao.visibility = View.VISIBLE
-                holder.tvDicaConteudo.visibility = View.INVISIBLE
-                holder.ivDicaImagem.visibility = View.INVISIBLE
-            }
-            true -> {
-                holder.btnAbrirDica.visibility = View.INVISIBLE
-                holder.tvInterrogacao.visibility = View.INVISIBLE
-                when (dica.tipo) {
-                    TipoDica.IMAGEM -> {
-                        holder.tvDicaConteudo.visibility = View.INVISIBLE
-                        holder.ivDicaImagem.visibility = View.VISIBLE
-                    }
-                    TipoDica.TEXTO -> {
-                        holder.tvDicaConteudo.visibility = View.VISIBLE
-                        holder.ivDicaImagem.visibility = View.INVISIBLE
-                    }
-                }
-            }
+            false -> fecharDica(holder)
+            true -> abrirDica(holder, dica.tipo)
         }
 
         holder.btnAbrirDica.setOnClickListener {
-            dica.esta_aberta = true
+            viewModel.abrirDica(dica)
             notifyItemChanged(position)
-            viewModel.adicionaTempo(-10000L)
+        }
+    }
+
+    private fun fecharDica(holder: DicaViewHolder) {
+        holder.btnAbrirDica.visibility = View.VISIBLE
+        holder.tvInterrogacao.visibility = View.VISIBLE
+        holder.tvDicaConteudo.visibility = View.INVISIBLE
+        holder.ivDicaImagem.visibility = View.INVISIBLE
+    }
+
+    private fun abrirDica(holder: DicaViewHolder, tipoDica: TipoDica) {
+        holder.btnAbrirDica.visibility = View.INVISIBLE
+        holder.tvInterrogacao.visibility = View.INVISIBLE
+        when (tipoDica) {
+            TipoDica.IMAGEM -> {
+                holder.tvDicaConteudo.visibility = View.INVISIBLE
+                holder.ivDicaImagem.visibility = View.VISIBLE
+            }
+            TipoDica.TEXTO -> {
+                holder.tvDicaConteudo.visibility = View.VISIBLE
+                holder.ivDicaImagem.visibility = View.INVISIBLE
+            }
         }
     }
 }
