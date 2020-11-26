@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
-import br.com.qmovie.domain.TipoDica
 import br.com.qmovie.extension.toTime
 import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.fragment_jogo.*
@@ -27,7 +26,7 @@ class JogoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
-        viewModel.iniciaJogo(180000L)
+        viewModel.iniciarJogo(180000L)
 //        viewModel.getFilme(76341)
         dicas = viewModel.getDicas()
     }
@@ -76,7 +75,7 @@ class JogoFragment : Fragment() {
 
         view.btnAdivinhar.setOnClickListener {
             val resposta = etResposta.text.toString()
-            when (viewModel.validaResposta(resposta)) {
+            when (viewModel.validarResposta(resposta)) {
                 true -> {
                     findNavController().navigate(R.id.action_jogoFragment_to_pontuacaoFragment)
                 }
