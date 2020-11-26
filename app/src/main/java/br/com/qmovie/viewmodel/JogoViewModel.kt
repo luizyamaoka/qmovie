@@ -1,6 +1,7 @@
 package br.com.qmovie.viewmodel
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -84,7 +85,11 @@ class JogoViewModel: ViewModel() {
 
     fun getFilme(id: Int) {
         viewModelScope.launch {
-            filme.value = movieService.getMovie(id, API_KEY).toString()
+            try {
+                filme.value = movieService.getMovie(id, API_KEY).toString()
+            } catch (e: Exception) {
+                Log.e("JogoViewModel", e.toString())
+            }
         }
     }
 
