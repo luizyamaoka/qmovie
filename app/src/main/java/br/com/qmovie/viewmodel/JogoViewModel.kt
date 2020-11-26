@@ -40,6 +40,13 @@ class JogoViewModel: ViewModel() {
         }
     }
 
+    fun abrirDica(dica: Dica) {
+        if (!dica.esta_aberta) {
+            dica.esta_aberta = true
+            adicionaTempo(-10000L)
+        }
+    }
+
     fun temDicaExtraDisponivel() = dicasExtrasUtilizadas < MAX_DICAS_EXTRAS
 
     fun esconderNome() {

@@ -53,9 +53,8 @@ class DicaAdapter(
         }
 
         holder.btnAbrirDica.setOnClickListener {
-            dica.esta_aberta = true
+            viewModel.abrirDica(dica)
             notifyItemChanged(position)
-            viewModel.adicionaTempo(-10000L)
         }
     }
 
