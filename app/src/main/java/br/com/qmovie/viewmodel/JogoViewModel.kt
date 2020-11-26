@@ -24,9 +24,17 @@ class JogoViewModel: ViewModel() {
 
     val filme = MutableLiveData<String>()
 
+    fun iniciaJogo(tempoRestante: Long = 180000L) {
+        criaTimer(tempoRestante)
+        esconderNome()
+        abrirLetras(1)
+    }
+
     fun usarDicaExtra() {
-        if (temDicaExtraDisponivel())
+        if (temDicaExtraDisponivel()) {
             dicasExtrasUtilizadas.value = dicasExtrasUtilizadas.value!! + 1
+            abrirLetras(2, true)
+        }
     }
 
     fun temDicaExtraDisponivel() = dicasExtrasUtilizadas.value!! < MAX_DICAS_EXTRAS

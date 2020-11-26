@@ -32,9 +32,8 @@ class JogoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
-        viewModel.criaTimer()
-        viewModel.esconderNome()
-        viewModel.abrirLetras(1)
+        viewModel.iniciaJogo(180000L)
+//        viewModel.getFilme(76341)
     }
 
     override fun onCreateView(
@@ -48,6 +47,13 @@ class JogoFragment : Fragment() {
 
         view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
 
+        defineAcoesBotoes(view)
+        observaMutableLiveData(view)
+
+        return view
+    }
+
+    fun defineAcoesBotoes(view: View) {
         // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
@@ -84,13 +90,9 @@ class JogoFragment : Fragment() {
                 }
             }
         }
+    }
 
-        // observa variaveis do mutable live data
-        viewModel.dicasExtrasUtilizadas.observe(viewLifecycleOwner, Observer {
-            if (viewModel.dicasExtrasUtilizadas.value!! > 0) {
-                viewModel.abrirLetras(2, true)
-            }
-        })
+    private fun observaMutableLiveData(view: View) {
         viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
             view.tvDicaLetras.text = it
         })
@@ -98,15 +100,10 @@ class JogoFragment : Fragment() {
         viewModel._tempoRestante.observe(viewLifecycleOwner, Observer {
             view.tvTempoRestante.text = it.toTime()
         })
+
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
             if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
         })
-        viewModel.filme.observe(viewLifecycleOwner, Observer {
-            view.tvDicaLetras.text = it
-        })
-        viewModel.getFilme(76341)
-
-        return view
     }
 
 }
