@@ -100,6 +100,10 @@ class JogoFragment : Fragment() {
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
             if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
         })
+        viewModel.filme.observe(viewLifecycleOwner, Observer {
+            view.tvDicaLetras.text = it
+        })
+        viewModel.getFilme(76341)
 
         return view
     }
