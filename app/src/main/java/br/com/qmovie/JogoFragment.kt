@@ -10,25 +10,31 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import br.com.qmovie.activity.JogoActivity
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
+import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.extension.toTime
 import br.com.qmovie.viewmodel.JogoViewModel
+import br.com.qmovie.viewmodel.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
 class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
-
-    private lateinit var dicas : ArrayList<Dica>
+    private lateinit var tipoJogo: TipoJogo
+    private lateinit var adapter: DicaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+
+        tipoJogo = (activity as JogoActivity).tipoJogo
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory { JogoViewModel(tipoJogo) }
+        ).get(JogoViewModel::class.java)
         viewModel.iniciarJogo(180000L)
-//        viewModel.getFilme(76341)
-        dicas = viewModel.getDicas()
     }
 
     override fun onCreateView(
@@ -40,15 +46,16 @@ class JogoFragment : Fragment() {
         val snapHelper : SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(view.rvDicas)
 
-        view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
+        adapter = DicaAdapter(viewModel)
+        view.rvDicas.adapter = adapter
 
-        defineAcoesBotoes(view)
-        observaMutableLiveData(view)
+        definirAcaoBotoes(view)
+        observarMutableLiveData(view)
 
         return view
     }
 
-    fun defineAcoesBotoes(view: View) {
+    fun definirAcaoBotoes(view: View) {
         // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
@@ -77,7 +84,10 @@ class JogoFragment : Fragment() {
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
-                    findNavController().navigate(R.id.action_jogoFragment_to_pontuacaoFragment)
+                    findNavController().navigate(
+                        R.id.pontuacaoFragment,
+                        bundleOf("tipoJogo" to tipoJogo)
+                    )
                 }
                 false -> {
                     view.etResposta.text = null
@@ -87,18 +97,23 @@ class JogoFragment : Fragment() {
         }
     }
 
-    private fun observaMutableLiveData(view: View) {
-        viewModel.nomeFilmeEscondido.observe(viewLifecycleOwner, Observer {
+    private fun observarMutableLiveData(view: View) {
+        viewModel.respostaEscondida.observe(viewLifecycleOwner, Observer {
             view.tvDicaLetras.text = it
         })
 
-        viewModel._tempoRestante.observe(viewLifecycleOwner, Observer {
+        viewModel.tempoRestante.observe(viewLifecycleOwner, Observer {
             view.tvTempoRestante.text = it.toTime()
         })
 
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
             if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
         })
+
+        viewModel.dicas.observe(viewLifecycleOwner, Observer {
+            adapter.dicas = it
+        })
     }
 
 }
+

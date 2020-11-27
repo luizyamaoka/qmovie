@@ -1,11 +1,19 @@
 package br.com.qmovie.domain
 
-class Filme(
-    val id: Int,
-    val imdb_id: String,
-    val title: String) {
+import java.util.*
 
-    override fun toString(): String {
-        return "Filme(id=$id, imdb_id='$imdb_id', title='$title')"
-    }
-}
+data class Filme(
+    val id: Int,
+    val video: Boolean,
+    val vote_average: Double,
+    val popularity: Double,
+    val vote_count: Int,
+    val release_date: Date,
+    val adult: Boolean,
+    val backdrop_path: String,
+    val genre_ids: ArrayList<Int>,
+    val overview: String,
+    val original_language: String,
+    val original_title: String,
+    val poster_path: String,
+    val title: String)

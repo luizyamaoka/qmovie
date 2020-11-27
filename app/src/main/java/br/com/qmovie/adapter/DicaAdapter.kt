@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import br.com.qmovie.JogoFragment
 import br.com.qmovie.R
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoDica
@@ -15,9 +14,15 @@ import br.com.qmovie.viewmodel.JogoViewModel
 import kotlinx.android.synthetic.main.item_dica.view.*
 
 class DicaAdapter(
-    private val viewModel: JogoViewModel,
-    private val dicas: ArrayList<Dica>
+    private val viewModel: JogoViewModel
 ) : RecyclerView.Adapter<DicaAdapter.DicaViewHolder>() {
+
+    var dicas = arrayListOf<Dica>()
+    set(value) {
+        if (value == null) return
+        field = value
+        notifyDataSetChanged()
+    }
 
     class DicaViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
         val tvDicaNumero : TextView = view.tvDicaNumero
@@ -47,7 +52,7 @@ class DicaAdapter(
 
         if (position == 0) holder.btnDicaSetaEsquerda.visibility = View.INVISIBLE
         if (position == itemCount - 1) holder.btnDicaSetaDireita.visibility = View.INVISIBLE
-        when (dica.esta_aberta) {
+        when (dica.estaAberta) {
             false -> fecharDica(holder)
             true -> abrirDica(holder, dica.tipo)
         }
