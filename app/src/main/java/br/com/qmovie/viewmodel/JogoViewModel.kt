@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.qmovie.domain.Dica
+import br.com.qmovie.domain.Filme
 import br.com.qmovie.domain.TipoDica
 import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.service.movieService
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 
 class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
@@ -23,19 +25,7 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
     val respostaEscondida = MutableLiveData<String>()
     val tempoRestante = MutableLiveData<Long>()
     val tempoAcabou = MutableLiveData<Boolean>(false)
-
-    fun getDicas() = arrayListOf(
-        Dica(1, TipoDica.TEXTO, "Filme em que uma aspirante a jornalista se torna assistente de uma revista famosa...", false),
-        Dica(2, TipoDica.TEXTO, "Miranda e Andy são os nomes dos protagonistas do filme", false),
-        Dica(3, TipoDica.TEXTO, "Lançado em 2006 Direção de David Frankel", false),
-        Dica(4, TipoDica.TEXTO, "Outra dica", false)
-    )
-
-    fun iniciarJogo(tempo: Long = 180000L) {
-        criarTimer(tempo)
-        esconderNome()
-        abrirLetras(1)
-    }
+    val dicas = MutableLiveData<ArrayList<Dica>>()
 
     fun usarDicaExtra() {
         if (temDicaExtraDisponivel()) {
@@ -45,8 +35,8 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
     }
 
     fun abrirDica(dica: Dica) {
-        if (!dica.esta_aberta) {
-            dica.esta_aberta = true
+        if (!dica.estaAberta) {
+            dica.estaAberta = true
             adicionarTempo(-10000L)
         }
     }
@@ -98,24 +88,45 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
         criarTimer(tempoRestante.value!!)
     }
 
-    fun getResposta() {
+    fun iniciarJogo(tempo: Long = 180000L) {
         val pagina = (1 until 10).random()
 
         viewModelScope.launch {
             try {
                 when (tipoJogo) {
                     TipoJogo.FILME -> {
+                        Log.e("JogoViewModel", "Inicio dos servicos ${pagina}")
+
                         val resultados = movieService.getPopularMovies(page = pagina)
-                        resposta = resultados.results.random().title
-                        iniciarJogo()
-                        Log.i("JogoViewModel", resposta)
+                        val filme = resultados.results.random()
+                        resposta = filme.title
+                        getDicas(filme)
+
+                        Log.e("JogoViewModel", resposta)
                     }
                 }
+
+                criarTimer(tempo)
+                esconderNome()
+                abrirLetras(1)
 
             } catch (e: Exception) {
                 Log.e("JogoViewModel", e.toString())
             }
         }
     }
+
+    private fun getDicas(filme: Filme) {
+        val _dicas = arrayListOf(
+            Dica(TipoDica.TEXTO, "O nome original do filme é ${filme.original_title}"),
+            Dica(TipoDica.TEXTO, "O filme foi lançado no ano de ${SimpleDateFormat("YYYY").format(filme.release_date)}"),
+            Dica(TipoDica.TEXTO, filme.overview)
+        )
+        _dicas.shuffle()
+        dicas.value = _dicas
+
+        Log.e("JogoViewModel", dicas.value.toString())
+    }
+
 
 }

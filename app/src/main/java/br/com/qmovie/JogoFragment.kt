@@ -23,8 +23,8 @@ import kotlinx.android.synthetic.main.fragment_jogo.view.*
 class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
-    private lateinit var dicas : ArrayList<Dica>
     private lateinit var tipoJogo: TipoJogo
+    private lateinit var adapter: DicaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +34,7 @@ class JogoFragment : Fragment() {
             requireActivity(),
             viewModelFactory { JogoViewModel(tipoJogo) }
         ).get(JogoViewModel::class.java)
-//        viewModel.iniciarJogo(180000L)
-        dicas = viewModel.getDicas()
-        viewModel.getResposta()
+        viewModel.iniciarJogo(180000L)
     }
 
     override fun onCreateView(
@@ -48,7 +46,8 @@ class JogoFragment : Fragment() {
         val snapHelper : SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(view.rvDicas)
 
-        view.rvDicas.adapter = DicaAdapter(viewModel, dicas)
+        adapter = DicaAdapter(viewModel)
+        view.rvDicas.adapter = adapter
 
         definirAcaoBotoes(view)
         observarMutableLiveData(view)
@@ -85,7 +84,10 @@ class JogoFragment : Fragment() {
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
-                    findNavController().navigate(R.id.action_jogoFragment_to_pontuacaoFragment)
+                    findNavController().navigate(
+                        R.id.pontuacaoFragment,
+                        bundleOf("tipoJogo" to tipoJogo)
+                    )
                 }
                 false -> {
                     view.etResposta.text = null
@@ -106,6 +108,10 @@ class JogoFragment : Fragment() {
 
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
             if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
+        })
+
+        viewModel.dicas.observe(viewLifecycleOwner, Observer {
+            adapter.dicas = it
         })
     }
 
