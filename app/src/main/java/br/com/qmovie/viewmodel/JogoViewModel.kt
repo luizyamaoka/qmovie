@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.qmovie.domain.Dica
-import br.com.qmovie.domain.Filme
-import br.com.qmovie.domain.TipoDica
-import br.com.qmovie.domain.TipoJogo
+import br.com.qmovie.domain.*
 import br.com.qmovie.service.movieService
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -98,11 +95,19 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
                         Log.e("JogoViewModel", "Inicio dos servicos ${pagina}")
 
                         val resultados = movieService.getPopularMovies(page = pagina)
+                        Log.e("JogoViewModel", resultados.toString())
                         val filme = resultados.results.random()
+                        Log.e("JogoViewModel", filme.toString())
                         resposta = filme.title
-                        getDicas(filme)
-
                         Log.e("JogoViewModel", resposta)
+
+                        val credits = movieService.getCredits(id = filme.id)
+                        Log.e("JogoViewModel", credits.toString())
+
+                        getDicas(filme, credits)
+
+                        Log.e("JogoViewModel", "getdicas")
+
                     }
                 }
 
@@ -112,16 +117,31 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
 
             } catch (e: Exception) {
                 Log.e("JogoViewModel", e.toString())
+                Log.e("JogoViewModel", e.stackTrace.toString())
             }
         }
     }
 
-    private fun getDicas(filme: Filme) {
-        val _dicas = arrayListOf(
-            Dica(TipoDica.TEXTO, "O nome original do filme é ${filme.original_title}"),
-            Dica(TipoDica.TEXTO, "O filme foi lançado no ano de ${SimpleDateFormat("YYYY").format(filme.release_date)}"),
-            Dica(TipoDica.TEXTO, filme.overview)
-        )
+    private fun getDicas(filme: Filme, credits: CreditResult) {
+        val _dicas = arrayListOf<Dica>()
+
+        _dicas.add(Dica(TipoDica.TEXTO, "O filme foi lançado no ano de ${SimpleDateFormat("YYYY").format(filme.release_date)}"))
+        _dicas.add(Dica(TipoDica.TEXTO, filme.overview))
+
+        Log.e("JogoViewModel.getDicas", "titulo == original_title")
+        if (filme.title != filme.original_title)
+            _dicas.add(Dica(TipoDica.TEXTO, "O nome original do filme é ${filme.original_title}"))
+
+        Log.e("JogoViewModel.getDicas", "cast")
+        if (credits.cast?.size >= 2) {
+            _dicas.add(Dica(TipoDica.TEXTO, "${credits.cast[0].name} e ${credits.cast[1].name} atuam neste filme"))
+            _dicas.add(Dica(TipoDica.TEXTO, "${credits.cast[0].character} e ${credits.cast[1].character} são 2 personagens do filme"))
+        }
+
+        Log.e("JogoViewModel.getDicas", "diretor")
+        val diretor = credits.crew?.filter { it -> it.job == "Director" }?.first()
+        if (diretor != null) _dicas.add(Dica(TipoDica.TEXTO, "${diretor.name} dirigiu o filme"))
+
         _dicas.shuffle()
         dicas.value = _dicas
 
