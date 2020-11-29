@@ -34,12 +34,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvConfi"
         app:layout_constraintStart_toEndOf="@+id/tvConfi" />
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:id="@+id/cvConfiguracoes"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        app:cardBackgroundColor="@color/preto"
-        app:cardCornerRadius="35dp"
+        android:background="@drawable/bar_round"
+        android:backgroundTint="@color/preto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -49,13 +49,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginHorizontal="10dp">
+            android:padding="15dp">
 
             <!-- NOTIFICACOES -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
                 app:cardCornerRadius="100dp">
 
@@ -257,5 +257,5 @@
             </androidx.cardview.widget.CardView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

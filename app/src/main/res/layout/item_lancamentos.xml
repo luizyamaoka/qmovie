@@ -11,7 +11,7 @@
         android:id="@+id/cvItemLancamentos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="@color/cinza_botao"
+        app:cardBackgroundColor="@color/cinza_card"
         app:cardCornerRadius="100dp"
         android:gravity="center">
 
