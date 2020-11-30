@@ -48,5 +48,9 @@
     <string name="novidades_2">dades</string>
     <string name="favoritar">Favoritar</string>
     <string name="cinemas">Cinemas</string>
+    <string name="pergunta_filme">Qual é o nome do filme?</string>
+    <string name="pergunta_serie">Qual é o nome da série?</string>
+    <string name="pergunta_ator">Qual é o nome do(a) ator/atriz?</string>
+    <string name="loading">Carregando...</string>
 
 </resources>

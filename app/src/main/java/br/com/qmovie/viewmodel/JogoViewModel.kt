@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.qmovie.R
 import br.com.qmovie.domain.*
 import br.com.qmovie.service.MovieService
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class JogoViewModel(
     val tempoRestante = MutableLiveData<Long>()
     val tempoAcabou = MutableLiveData<Boolean>(false)
     val dicas = MutableLiveData<ArrayList<Dica>>()
+    val perguntaResourceId = MutableLiveData<Int>()
 
     fun usarDicaExtra() {
         if (temDicaExtraDisponivel()) {
@@ -95,12 +97,21 @@ class JogoViewModel(
             try {
                 when (tipoJogo) {
                     TipoJogo.FILME -> {
+                        perguntaResourceId.value = R.string.pergunta_filme
                         val resultados = movieService.getPopularMovies(page = pagina)
                         val filme = resultados.results.random()
                         resposta = filme.title
                         Log.i("JogoViewModel", "Resposta: $resposta")
                         val credits = movieService.getCredits(id = filme.id)
                         getDicas(filme, credits)
+                    }
+                    TipoJogo.SERIE -> {
+                        perguntaResourceId.value = R.string.pergunta_serie
+                        // TODO: Logica de buscar series e criar dicas
+                    }
+                    TipoJogo.ATOR -> {
+                        perguntaResourceId.value = R.string.pergunta_ator
+                        // TODO: Logica de buscar ator/atriz e criar dicas
                     }
                 }
 
