@@ -15,6 +15,7 @@ import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.extension.toTime
+import br.com.qmovie.service.movieService
 import br.com.qmovie.viewmodel.JogoViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_jogo.*
@@ -32,7 +33,7 @@ class JogoFragment : Fragment() {
         tipoJogo = (activity as JogoActivity).tipoJogo
         viewModel = ViewModelProvider(
             requireActivity(),
-            viewModelFactory { JogoViewModel(tipoJogo) }
+            viewModelFactory { JogoViewModel(tipoJogo, movieService) }
         ).get(JogoViewModel::class.java)
         viewModel.iniciarJogo(180000L)
     }
