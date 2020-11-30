@@ -6,12 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.qmovie.domain.*
-import br.com.qmovie.service.movieService
+import br.com.qmovie.service.MovieService
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 
 
-class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
+class JogoViewModel(
+    val tipoJogo: TipoJogo,
+    val movieService: MovieService
+): ViewModel() {
 
     private val MAX_DICAS_EXTRAS = 1
     private lateinit var countdownTimer : CountDownTimer
@@ -92,22 +95,12 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
             try {
                 when (tipoJogo) {
                     TipoJogo.FILME -> {
-                        Log.e("JogoViewModel", "Inicio dos servicos ${pagina}")
-
                         val resultados = movieService.getPopularMovies(page = pagina)
-                        Log.e("JogoViewModel", resultados.toString())
                         val filme = resultados.results.random()
-                        Log.e("JogoViewModel", filme.toString())
                         resposta = filme.title
-                        Log.e("JogoViewModel", resposta)
-
+                        Log.i("JogoViewModel", "Resposta: $resposta")
                         val credits = movieService.getCredits(id = filme.id)
-                        Log.e("JogoViewModel", credits.toString())
-
                         getDicas(filme, credits)
-
-                        Log.e("JogoViewModel", "getdicas")
-
                     }
                 }
 
@@ -128,24 +121,19 @@ class JogoViewModel(val tipoJogo: TipoJogo): ViewModel() {
         _dicas.add(Dica(TipoDica.TEXTO, "O filme foi lançado no ano de ${SimpleDateFormat("YYYY").format(filme.release_date)}"))
         _dicas.add(Dica(TipoDica.TEXTO, filme.overview))
 
-        Log.e("JogoViewModel.getDicas", "titulo == original_title")
         if (filme.title != filme.original_title)
             _dicas.add(Dica(TipoDica.TEXTO, "O nome original do filme é ${filme.original_title}"))
 
-        Log.e("JogoViewModel.getDicas", "cast")
         if (credits.cast?.size >= 2) {
             _dicas.add(Dica(TipoDica.TEXTO, "${credits.cast[0].name} e ${credits.cast[1].name} atuam neste filme"))
             _dicas.add(Dica(TipoDica.TEXTO, "${credits.cast[0].character} e ${credits.cast[1].character} são 2 personagens do filme"))
         }
 
-        Log.e("JogoViewModel.getDicas", "diretor")
         val diretor = credits.crew?.filter { it -> it.job == "Director" }?.first()
         if (diretor != null) _dicas.add(Dica(TipoDica.TEXTO, "${diretor.name} dirigiu o filme"))
 
         _dicas.shuffle()
         dicas.value = _dicas
-
-        Log.e("JogoViewModel", dicas.value.toString())
     }
 
 
