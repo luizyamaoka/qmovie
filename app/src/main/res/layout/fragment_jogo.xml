@@ -33,7 +33,7 @@
             android:id="@+id/tvPergunta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Qual é o nome do filme?"
+            android:text="@string/loading"
             android:background="@color/amarelo"
             android:gravity="center"
             android:padding="20dp"
@@ -52,7 +52,7 @@
             android:id="@+id/tvDicaLetras"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dica: * D**** ***** *****"
+            android:text="@string/loading"
             android:textColor="@color/preto"
             android:gravity="center"
             android:layout_marginTop="50dp" />

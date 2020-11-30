@@ -114,6 +114,10 @@ class JogoFragment : Fragment() {
         viewModel.dicas.observe(viewLifecycleOwner, Observer {
             adapter.dicas = it
         })
+
+        viewModel.perguntaResourceId.observe(viewLifecycleOwner, Observer {
+            tvPergunta.text = getString(it)
+        })
     }
 
 }
