@@ -1,5 +1,6 @@
 package br.com.qmovie.domain
 
+import java.io.Serializable
 import java.util.*
 
 data class Filme(
@@ -16,4 +17,4 @@ data class Filme(
     val original_language: String,
     val original_title: String,
     val poster_path: String,
-    val title: String)
+    val title: String) : Serializable

@@ -20,6 +20,7 @@
             android:background="@color/branco"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +50,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="7dp">
 
                     <ImageView
                         android:id="@+id/ivCapaFilme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="200dp"
                         android:layout_margin="10dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/capa_exemplo" />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -127,9 +130,10 @@
                     android:layout_height="wrap_content"
                     android:background="@color/branco"
                     android:gravity="center"
+                    android:paddingHorizontal="3dp"
                     android:text="A princesa Leia é mantida refém pelas forças imperiais comandadas por Darth Vader. Luke Skywalker e o capitão Han Solo precisam libertá-la e restaurar a liberdade e a justiça na galáxia."
                     android:textColor="@color/preto"
-                    android:layout_marginBottom="15dp"/>
+                    android:paddingBottom="15dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
