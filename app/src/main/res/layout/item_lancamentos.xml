@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardBackgroundColor="@color/cinza_card"
-        app:cardCornerRadius="100dp"
+        app:cardCornerRadius="20dp"
         android:gravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout

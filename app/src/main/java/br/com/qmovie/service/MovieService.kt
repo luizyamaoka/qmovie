@@ -4,6 +4,7 @@ import br.com.qmovie.BuildConfig
 import br.com.qmovie.domain.CreditResult
 import br.com.qmovie.domain.Filme
 import br.com.qmovie.domain.SearchResult
+import com.google.gson.JsonObject
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -37,4 +38,11 @@ interface MovieService {
         @Path("id") id: Int,
         @Query("api_key") api_key: String = BuildConfig.API_KEY
     ) : CreditResult
+
+    @GET("movie/upcoming")
+    suspend fun getUpcoming(
+        @Query("api_key") api_key: String = BuildConfig.API_KEY,
+        @Query("language") language: String = "pt-BR",
+        @Query("region") region: String = "br"
+    ) : SearchResult<Filme>
 }
