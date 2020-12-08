@@ -57,7 +57,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -169,7 +169,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -206,7 +206,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:cardBackgroundColor="@color/cinza_card"
-                app:cardCornerRadius="100dp">
+                app:cardCornerRadius="20dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
