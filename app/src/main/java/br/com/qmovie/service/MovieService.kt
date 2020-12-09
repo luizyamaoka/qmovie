@@ -1,10 +1,10 @@
 package br.com.qmovie.service
 
 import br.com.qmovie.BuildConfig
+import br.com.qmovie.domain.Ator
 import br.com.qmovie.domain.CreditResult
 import br.com.qmovie.domain.Filme
 import br.com.qmovie.domain.SearchResult
-import com.google.gson.JsonObject
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -45,4 +45,18 @@ interface MovieService {
         @Query("language") language: String = "pt-BR",
         @Query("region") region: String = "br"
     ) : SearchResult<Filme>
+
+    @GET("person/popular")
+    suspend fun getPopularActors(
+        @Query("api_key") api_key: String = BuildConfig.API_KEY,
+        @Query("language") language: String = "pt-BR",
+        @Query("page") page: Int = 1
+    ) : SearchResult<Ator>
+
+    @GET("person/{person_id}")
+    suspend fun getActor(
+        @Path("person_id") person_id: Int,
+        @Query("api_key") api_key: String = BuildConfig.API_KEY,
+        @Query("language") language: String = "pt-BR"
+    ) : Ator
 }
