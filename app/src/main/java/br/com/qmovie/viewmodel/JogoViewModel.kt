@@ -111,7 +111,20 @@ class JogoViewModel(
                     }
                     TipoJogo.ATOR -> {
                         perguntaResourceId.value = R.string.pergunta_ator
-                        // TODO: Logica de buscar ator/atriz e criar dicas
+
+                        val atoresEmAlta = movieService.getPopularActors(page = pagina)
+                        var atorSorteado = atoresEmAlta.results.random()
+                        var atorDetalhado = movieService.getActor(atorSorteado.id)
+
+                        while (atorDetalhado.known_for_department != "Acting") {
+                            atorSorteado = atoresEmAlta.results.random()
+                            atorDetalhado = movieService.getActor(atorSorteado.id)
+                        }
+
+                        resposta = atorDetalhado.name
+                        Log.i("JogoViewModel", "Resposta: $resposta (ID = ${atorDetalhado.id})")
+
+                        getDicasAtor(atorDetalhado, atorSorteado.known_for[0])
                     }
                 }
 
@@ -142,6 +155,50 @@ class JogoViewModel(
 
         val diretor = credits.crew?.filter { it -> it.job == "Director" }?.first()
         if (diretor != null) _dicas.add(Dica(TipoDica.TEXTO, "${diretor.name} dirigiu o filme"))
+
+        _dicas.shuffle()
+        dicas.value = _dicas
+    }
+
+    private fun getDicasAtor(ator: Ator, filme: Filme) {
+        val _dicas = arrayListOf<Dica>()
+
+        _dicas.add(Dica(TipoDica.TEXTO, "Atuou em \"${filme.title}\""))
+
+        if (ator.gender != 0) {
+            if (ator.gender == 1) {
+                _dicas.add(Dica(TipoDica.TEXTO, "Gênero Feminino"))
+            } else {
+                _dicas.add(Dica(TipoDica.TEXTO, "Gênero Masculino"))
+            }
+        }
+
+        if (ator.birthday != null) {
+            _dicas.add(
+                Dica(
+                    TipoDica.TEXTO,
+                    "Nasceu na data de ${SimpleDateFormat("dd/MM/YYYY").format(ator.birthday)}"
+                )
+            )
+        }
+
+        if (ator.deathday != null) {
+            _dicas.add(
+                Dica(
+                    TipoDica.TEXTO,
+                    "Faleceu na data de ${SimpleDateFormat("dd/MM/YYYY").format(ator.deathday)}"
+                )
+            )
+        }
+
+        if (ator.place_of_birth != null) {
+            _dicas.add(
+                Dica(
+                    TipoDica.TEXTO,
+                    "Natural de ${ator.place_of_birth}"
+                )
+            )
+        }
 
         _dicas.shuffle()
         dicas.value = _dicas
