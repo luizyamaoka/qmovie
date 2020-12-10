@@ -1,10 +1,7 @@
 package br.com.qmovie.service
 
 import br.com.qmovie.BuildConfig
-import br.com.qmovie.domain.Ator
-import br.com.qmovie.domain.CreditResult
-import br.com.qmovie.domain.Filme
-import br.com.qmovie.domain.SearchResult
+import br.com.qmovie.domain.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -59,4 +56,11 @@ interface MovieService {
         @Query("api_key") api_key: String = BuildConfig.API_KEY,
         @Query("language") language: String = "pt-BR"
     ) : Ator
+
+    @GET("tv/popular")
+    suspend fun getPopularTv(
+        @Query("api_key") api_key: String = BuildConfig.API_KEY,
+        @Query("language") language: String = "pt-BR",
+        @Query("page") page: Int = 1
+    ) : SearchResult<Serie>
 }
