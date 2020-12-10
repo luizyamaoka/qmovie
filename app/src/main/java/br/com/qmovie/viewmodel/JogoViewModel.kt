@@ -107,7 +107,11 @@ class JogoViewModel(
                     }
                     TipoJogo.SERIE -> {
                         perguntaResourceId.value = R.string.pergunta_serie
-                        // TODO: Logica de buscar series e criar dicas
+                        val tvPopular = movieService.getPopularTv(page = pagina)
+                        val serieSorteada = tvPopular.results.random()
+                        resposta = serieSorteada.name
+                        Log.i("JogoViewModel", "Resposta: $resposta")
+                        getDicasSerie(serieSorteada)
                     }
                     TipoJogo.ATOR -> {
                         perguntaResourceId.value = R.string.pergunta_ator
@@ -142,7 +146,7 @@ class JogoViewModel(
     private fun getDicas(filme: Filme, credits: CreditResult) {
         val _dicas = arrayListOf<Dica>()
 
-        _dicas.add(Dica(TipoDica.TEXTO, "O filme foi lançado no ano de ${SimpleDateFormat("YYYY").format(filme.release_date)}"))
+        _dicas.add(Dica(TipoDica.TEXTO, "O filme foi lançado no ano de ${SimpleDateFormat("yyyy").format(filme.release_date)}"))
         _dicas.add(Dica(TipoDica.TEXTO, filme.overview))
 
         if (filme.title != filme.original_title)
@@ -177,7 +181,7 @@ class JogoViewModel(
             _dicas.add(
                 Dica(
                     TipoDica.TEXTO,
-                    "Nasceu na data de ${SimpleDateFormat("dd/MM/YYYY").format(ator.birthday)}"
+                    "Nasceu na data de ${SimpleDateFormat("dd/MM/yyyy").format(ator.birthday)}"
                 )
             )
         }
@@ -186,7 +190,7 @@ class JogoViewModel(
             _dicas.add(
                 Dica(
                     TipoDica.TEXTO,
-                    "Faleceu na data de ${SimpleDateFormat("dd/MM/YYYY").format(ator.deathday)}"
+                    "Faleceu na data de ${SimpleDateFormat("dd/MM/yyyy").format(ator.deathday)}"
                 )
             )
         }
@@ -199,6 +203,19 @@ class JogoViewModel(
                 )
             )
         }
+
+        _dicas.shuffle()
+        dicas.value = _dicas
+    }
+
+    private fun getDicasSerie(serie: Serie) {
+        val _dicas = arrayListOf<Dica>()
+
+        _dicas.add(Dica(TipoDica.TEXTO, "A série foi lançada em ${SimpleDateFormat("dd/MM/yyyy").format(serie.first_air_date)}"))
+        _dicas.add(Dica(TipoDica.TEXTO, serie.overview))
+        _dicas.add(Dica(TipoDica.TEXTO, "O país de origem da série é ${serie.origin_country[0]}" ))
+        if (serie.name != serie.original_name)
+            _dicas.add(Dica(TipoDica.TEXTO, "O nome original da serie é ${serie.original_name}"))
 
         _dicas.shuffle()
         dicas.value = _dicas
