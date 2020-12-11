@@ -13,7 +13,8 @@ import java.text.SimpleDateFormat
 
 
 class JogoViewModel(
-    val tipoJogo: TipoJogo,
+//    val tipoJogo: TipoJogo,
+    val jogo: Jogo,
     val movieService: MovieService
 ): ViewModel() {
 
@@ -33,6 +34,7 @@ class JogoViewModel(
         if (temDicaExtraDisponivel()) {
             dicasExtrasUtilizadas++
             abrirLetras(2, true)
+            jogo.dicasUtilizadas++
         }
     }
 
@@ -40,6 +42,7 @@ class JogoViewModel(
         if (!dica.estaAberta) {
             dica.estaAberta = true
             adicionarTempo(-10000L)
+            jogo.dicasUtilizadas++
         }
     }
 
@@ -90,12 +93,12 @@ class JogoViewModel(
         criarTimer(tempoRestante.value!!)
     }
 
-    fun iniciarJogo(tempo: Long = 180000L) {
+    fun iniciarJogo() {
         val pagina = (1 until 10).random()
 
         viewModelScope.launch {
             try {
-                when (tipoJogo) {
+                when (jogo.tipoJogo) {
                     TipoJogo.FILME -> {
                         perguntaResourceId.value = R.string.pergunta_filme
                         val resultados = movieService.getPopularMovies(page = pagina)
@@ -132,7 +135,13 @@ class JogoViewModel(
                     }
                 }
 
-                criarTimer(tempo)
+                if (jogo.respostasAcertadas.size > 0) {
+                    jogo.incrementarTempoPorAcerto()
+                    jogo.tempoGanhoPeloAcerto = 0L
+                }
+                jogo.tempoAnterior = jogo.tempoRestante
+                jogo.dicasUtilizadas = 0
+                criarTimer(jogo.tempoRestante)
                 esconderNome()
                 abrirLetras(1)
 
@@ -221,5 +230,10 @@ class JogoViewModel(
         dicas.value = _dicas
     }
 
+    fun getJogoAtualizado(acertou: Boolean) : Jogo{
+        jogo.tempoRestante = tempoRestante.value!!
+        if (acertou) jogo.respostasAcertadas.add(resposta)
+        return jogo
+    }
 
 }

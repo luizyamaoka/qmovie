@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.SnapHelper
 import br.com.qmovie.activity.JogoActivity
 import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.domain.Dica
+import br.com.qmovie.domain.Jogo
 import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.extension.toTime
 import br.com.qmovie.service.movieService
@@ -24,18 +25,20 @@ import kotlinx.android.synthetic.main.fragment_jogo.view.*
 class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
-    private lateinit var tipoJogo: TipoJogo
+//    private lateinit var tipoJogo: TipoJogo
+    private lateinit var jogo: Jogo
     private lateinit var adapter: DicaAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        tipoJogo = (activity as JogoActivity).tipoJogo
+//        tipoJogo = (activity as JogoActivity).tipoJogo
+        jogo = (activity as JogoActivity).jogo!!
         viewModel = ViewModelProvider(
             requireActivity(),
-            viewModelFactory { JogoViewModel(tipoJogo, movieService) }
+            viewModelFactory { JogoViewModel(jogo, movieService) }
         ).get(JogoViewModel::class.java)
-        viewModel.iniciarJogo(180000L)
+        viewModel.iniciarJogo()
     }
 
     override fun onCreateView(
@@ -59,7 +62,9 @@ class JogoFragment : Fragment() {
     fun definirAcaoBotoes(view: View) {
         // Adiciona eventos de cliques nos botoes
         view.toolbar.setNavigationOnClickListener {
-            val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
+            val bundle = bundleOf(
+                "tipoMensagem" to "CONFIRMACAO_DESISTIR",
+                "jogo" to jogo)
             findNavController().navigate(
                 R.id.action_jogoFragment_to_confirmationMessageFragment,
                 bundle)
@@ -69,7 +74,9 @@ class JogoFragment : Fragment() {
                 R.id.btnAbrirDicaExtra -> {
                     when (viewModel.temDicaExtraDisponivel()) {
                         true -> {
-                            val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
+                            val bundle = bundleOf(
+                                "tipoMensagem" to "CONFIRMACAO_DICA_EXTRA",
+                                "jogo" to jogo)
                             findNavController().navigate(
                                 R.id.action_jogoFragment_to_confirmationMessageFragment,
                                 bundle)
@@ -85,9 +92,11 @@ class JogoFragment : Fragment() {
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
+                    jogo.ganharTempoPeloAcerto()
                     findNavController().navigate(
                         R.id.pontuacaoFragment,
-                        bundleOf("tipoJogo" to tipoJogo)
+//                        bundleOf("tipoJogo" to tipoJogo)
+                        bundleOf("jogo" to viewModel.getJogoAtualizado(true))
                     )
                 }
                 false -> {
@@ -108,7 +117,9 @@ class JogoFragment : Fragment() {
         })
 
         viewModel.tempoAcabou.observe(viewLifecycleOwner, Observer {
-            if (it == true) findNavController().navigate(R.id.action_jogoFragment_to_gameOverFragment)
+            if (it == true) findNavController().navigate(
+                R.id.action_jogoFragment_to_gameOverFragment,
+                bundleOf("jogo" to viewModel.getJogoAtualizado(false)))
         })
 
         viewModel.dicas.observe(viewLifecycleOwner, Observer {
