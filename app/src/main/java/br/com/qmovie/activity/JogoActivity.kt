@@ -17,7 +17,9 @@ class JogoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        intent.putExtra("points",0)
         setContentView(R.layout.activity_jogo)
         tipoJogo = intent.getSerializableExtra("tipoJogo") as TipoJogo
+
     }
 }

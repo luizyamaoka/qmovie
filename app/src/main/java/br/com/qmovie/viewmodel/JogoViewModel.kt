@@ -28,6 +28,7 @@ class JogoViewModel(
     val tempoAcabou = MutableLiveData<Boolean>(false)
     val dicas = MutableLiveData<ArrayList<Dica>>()
     val perguntaResourceId = MutableLiveData<Int>()
+    var totalPoints = 0
 
     fun usarDicaExtra() {
         if (temDicaExtraDisponivel()) {
@@ -221,5 +222,11 @@ class JogoViewModel(
         dicas.value = _dicas
     }
 
+    fun addPoints(point : Int, _totalPoints : Int){
+        totalPoints = point + _totalPoints
+    }
 
+    fun getPoints(): Int {
+        return(totalPoints * 1000)
+    }
 }

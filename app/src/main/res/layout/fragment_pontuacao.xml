@@ -215,6 +215,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.733" />
 
+
             <TextView
                 android:id="@+id/tvPonto"
                 android:layout_width="wrap_content"
@@ -224,11 +225,10 @@
                 android:textSize="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.689"
+                app:layout_constraintHorizontal_bias="0.743"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.733" />
-
+                app:layout_constraintVertical_bias="0.732" />
 
             <Button
                 android:id="@+id/btnProximaPergunta"

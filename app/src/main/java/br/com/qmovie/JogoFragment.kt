@@ -1,6 +1,8 @@
 package br.com.qmovie
 
+import android.R.attr.defaultValue
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -12,7 +14,6 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import br.com.qmovie.activity.JogoActivity
 import br.com.qmovie.adapter.DicaAdapter
-import br.com.qmovie.domain.Dica
 import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.extension.toTime
 import br.com.qmovie.service.movieService
@@ -21,16 +22,18 @@ import br.com.qmovie.viewmodel.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
 
+
 class JogoFragment : Fragment() {
 
     private lateinit var viewModel : JogoViewModel
     private lateinit var tipoJogo: TipoJogo
     private lateinit var adapter: DicaAdapter
+    var points = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         tipoJogo = (activity as JogoActivity).tipoJogo
+        Log.i("Jogo View","CREATE")
         viewModel = ViewModelProvider(
             requireActivity(),
             viewModelFactory { JogoViewModel(tipoJogo, movieService) }
@@ -43,9 +46,16 @@ class JogoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        Log.i("Jogo View","CREATE VIEW")
         val view = inflater.inflate(R.layout.fragment_jogo, container, false)
         val snapHelper : SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(view.rvDicas)
+        val bundle = this.arguments
+        Log.i("Bundle",bundle.toString())
+        if (bundle != null) {
+            points = bundle.getInt("points", defaultValue)
+            Log.i("Points no IF",points.toString())
+        }
 
         adapter = DicaAdapter(viewModel)
         view.rvDicas.adapter = adapter
@@ -62,7 +72,8 @@ class JogoFragment : Fragment() {
             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DESISTIR")
             findNavController().navigate(
                 R.id.action_jogoFragment_to_confirmationMessageFragment,
-                bundle)
+                bundle
+            )
         }
         view.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -72,9 +83,14 @@ class JogoFragment : Fragment() {
                             val bundle = bundleOf("tipoMensagem" to "CONFIRMACAO_DICA_EXTRA")
                             findNavController().navigate(
                                 R.id.action_jogoFragment_to_confirmationMessageFragment,
-                                bundle)
+                                bundle
+                            )
                         }
-                        false -> Toast.makeText(context, "Não há mais dicas extras disponíveis", Toast.LENGTH_SHORT).show()
+                        false -> Toast.makeText(
+                            context,
+                            "Não há mais dicas extras disponíveis",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -85,9 +101,11 @@ class JogoFragment : Fragment() {
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
+                    viewModel.addPoints(1, points)
+                    val finalPoint = viewModel.getPoints()
                     findNavController().navigate(
                         R.id.pontuacaoFragment,
-                        bundleOf("tipoJogo" to tipoJogo)
+                        bundleOf("tipoJogo" to tipoJogo, "points" to finalPoint)
                     )
                 }
                 false -> {
