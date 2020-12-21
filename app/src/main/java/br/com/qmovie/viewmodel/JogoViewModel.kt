@@ -13,12 +13,12 @@ import java.text.SimpleDateFormat
 
 
 class JogoViewModel(
-//    val tipoJogo: TipoJogo,
     val jogo: Jogo,
     val movieService: MovieService
 ): ViewModel() {
 
     private val MAX_DICAS_EXTRAS = 1
+    private val CHAR_ESCONDIDO = '*'
     private lateinit var countdownTimer : CountDownTimer
 
     var dicasExtrasUtilizadas = 0
@@ -54,8 +54,10 @@ class JogoViewModel(
         var nomeEscondido = ""
 
         resposta.forEach {
-            if (it == ' ') nomeEscondido += it
-            else nomeEscondido += "*"
+            nomeEscondido += when (it) {
+                ' ' -> it
+                else -> CHAR_ESCONDIDO
+            }
         }
         respostaEscondida.value = nomeEscondido
     }
@@ -73,7 +75,7 @@ class JogoViewModel(
         var nomeArray = respostaEscondida.value!!.toMutableList()
         while (quantidade < quantidadeDesejada) {
             var position = (0 until nomeArray.size).random()
-            if (nomeArray[position] == '*') {
+            if (nomeArray[position] == CHAR_ESCONDIDO) {
                 nomeArray[position] = resposta[position]
                 quantidade++
             }
