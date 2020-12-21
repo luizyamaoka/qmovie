@@ -38,6 +38,14 @@ class GameOverFragment : Fragment() {
             startActivity(intent)
         }
 
+        view.btnCompatilhar.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.type="text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, "Fiz ${jogo.getPontuacaoFinal()} pontos no qMovie");
+            startActivity(intent)
+        }
+
         view.tvResultadoPontos.text = jogo.getPontuacaoFinal().toString()
 
         return view

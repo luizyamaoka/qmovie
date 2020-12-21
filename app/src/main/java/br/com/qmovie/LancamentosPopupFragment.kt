@@ -1,6 +1,7 @@
 package br.com.qmovie
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -49,6 +50,14 @@ class LancamentosPopupFragment() : DialogFragment() {
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         view.btnFecharPopup.setOnClickListener { this.dismiss() }
+
+        view.fbCompartilhar.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.type="text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, "${lancamento.title} vai ser lancado no dia ${SimpleDateFormat("dd/MM/YY").format(lancamento.release_date)}");
+            startActivity(intent)
+        }
 
         return view
     }
