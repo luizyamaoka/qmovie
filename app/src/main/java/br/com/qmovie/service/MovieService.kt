@@ -27,6 +27,7 @@ interface MovieService {
     suspend fun getPopularMovies(
         @Query("api_key") api_key: String = BuildConfig.API_KEY,
         @Query("language") language: String = "pt-BR",
+        @Query("region") region: String = "BR",
         @Query("page") page: Int = 1
     ) : SearchResult<Filme>
 
