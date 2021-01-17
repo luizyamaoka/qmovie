@@ -85,16 +85,21 @@ class UserViewModel(
             val credential = GoogleAuthProvider.getCredential(account.idToken!!, null)
             auth.signInWithCredential(credential)
                 .addOnCompleteListener(activity) { task ->
-                    if (task.isSuccessful) {
-                        Log.d(TAG, "signInWithCredential:success")
-                        getCurrentUser()
-                    } else {
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    when (task.isSuccessful) {
+                        true -> {
+                            Log.d(TAG, "signInWithCredential:success")
+                            getCurrentUser()
+                        }
+                        else -> Log.w(TAG, "signInWithCredential:failure", task.exception)
                     }
                 }
         } catch (e: ApiException) {
             Log.w(TAG, "Google sign in failed", e)
         }
+    }
+
+    fun logout() {
+        auth.signOut()
     }
 
 
