@@ -31,14 +31,10 @@ class LoginActivity : AppCompatActivity() {
             ).get(UserViewModel::class.java)
 
             btnLogin.setOnClickListener(){
-//                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                startActivity(intent)
-
                 viewModel.signIn(
                     etLogin.text.toString(),
                     etSenha.text.toString())
             }
-
 
             tvRegister.setOnClickListener(){
                 val intent = Intent(this@LoginActivity, CadastroActivity::class.java)
@@ -70,5 +66,7 @@ class LoginActivity : AppCompatActivity() {
             viewModel.error.observe(this, Observer {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             })
+
+            viewModel.getCurrentUser()
     }
 }

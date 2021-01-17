@@ -32,9 +32,6 @@ class CadastroActivity : AppCompatActivity() {
         ).get(UserViewModel::class.java)
 
         btnLogin.setOnClickListener(){
-//            val intent = Intent(this@CadastroActivity, MainActivity::class.java)
-//            startActivity(intent)
-
             val nome = etNome.text.toString()
             val sobrenome = etSobreNome.text.toString()
 
@@ -70,6 +67,8 @@ class CadastroActivity : AppCompatActivity() {
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+
+        viewModel.getCurrentUser()
     }
 
     override fun onSupportNavigateUp(): Boolean {
