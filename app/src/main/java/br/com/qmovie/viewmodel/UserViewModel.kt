@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -100,6 +101,22 @@ class UserViewModel(
 
     fun logout() {
         auth.signOut()
+    }
+
+    fun handleFacebookAccessToken(token: AccessToken) {
+        Log.d(TAG, "handleFacebookAccessToken:$token")
+
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(activity) { task ->
+                when (task.isSuccessful) {
+                     true -> {
+                        Log.d(TAG, "signInWithCredential:success")
+                        getCurrentUser()
+                    }
+                    false -> Log.w(TAG, "signInWithCredential:failure", task.exception)
+                }
+            }
     }
 
 

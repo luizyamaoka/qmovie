@@ -54,4 +54,7 @@
     <string name="pergunta_ator">Qual é o nome do(a) ator/atriz?</string>
     <string name="loading">Carregando...</string>
 
+    <string name="facebook_app_id">227022002306224</string>
+    <string name="fb_login_protocol_scheme">fb227022002306224</string>
+
 </resources>
