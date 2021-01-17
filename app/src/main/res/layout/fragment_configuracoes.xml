@@ -200,7 +200,7 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
-            <!-- EXCLUIR CONTA -->
+            <!-- LOGOUT -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -215,9 +215,10 @@
                     android:gravity="center">
 
                     <Button
+                        android:id="@+id/btnLogout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/excluir_conta"
+                        android:text="@string/sair"
                         android:textColor="@color/amarelo"
                         android:textStyle="bold"
                         android:textAllCaps="false"

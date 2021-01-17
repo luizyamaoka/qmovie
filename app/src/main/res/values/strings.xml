@@ -42,6 +42,7 @@
     <string name="volume">Volume</string>
     <string name="vibracao">Vibração</string>
     <string name="excluir_conta">Excluir Conta</string>
+    <string name="sair">Sair</string>
     <string name="contato">Contato</string>
 
     <string name="novidades_1">Novi</string>
@@ -52,5 +53,8 @@
     <string name="pergunta_serie">Qual é o nome da série?</string>
     <string name="pergunta_ator">Qual é o nome do(a) ator/atriz?</string>
     <string name="loading">Carregando...</string>
+
+    <string name="facebook_app_id">227022002306224</string>
+    <string name="fb_login_protocol_scheme">fb227022002306224</string>
 
 </resources>
