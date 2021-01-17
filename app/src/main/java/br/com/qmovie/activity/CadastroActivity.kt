@@ -9,15 +9,26 @@ import androidx.lifecycle.ViewModelProvider
 import br.com.qmovie.R
 import br.com.qmovie.viewmodel.UserViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_cadastro.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.btnLogin
 import kotlinx.android.synthetic.main.login_redes.*
 
 class CadastroActivity : AppCompatActivity() {
 
     private lateinit var viewModel : UserViewModel
+
+    private val signInIntent by lazy {
+        GoogleSignIn.getClient(this,
+            GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()).signInIntent
+    }
+
+    private val RC_SIGN_IN = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +54,7 @@ class CadastroActivity : AppCompatActivity() {
         }
 
         ibGoogle.setOnClickListener(){
-            //iremos fazer o login pelo google
+            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
         ibOutlook.setOnClickListener(){
@@ -74,5 +85,12 @@ class CadastroActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            viewModel.firebaseAuthWithGoogle(data)
+        }
     }
 }

@@ -3,16 +3,14 @@ package br.com.qmovie.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.com.qmovie.R
-import br.com.qmovie.service.movieService
-import br.com.qmovie.viewmodel.JogoViewModel
 import br.com.qmovie.viewmodel.UserViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.login_redes.*
@@ -21,52 +19,70 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var viewModel : UserViewModel
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_login)
+    private val signInIntent by lazy {
+        GoogleSignIn.getClient(this,
+            GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()).signInIntent
+    }
 
-            viewModel = ViewModelProvider(
-                this,
-                viewModelFactory { UserViewModel(this, FirebaseAuth.getInstance()) }
-            ).get(UserViewModel::class.java)
+    private val RC_SIGN_IN = 1
 
-            btnLogin.setOnClickListener(){
-                viewModel.signIn(
-                    etLogin.text.toString(),
-                    etSenha.text.toString())
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
 
-            tvRegister.setOnClickListener(){
-                val intent = Intent(this@LoginActivity, CadastroActivity::class.java)
-                startActivity(intent)
-            }
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory { UserViewModel(this, FirebaseAuth.getInstance()) }
+        ).get(UserViewModel::class.java)
 
-            ibGoogle.setOnClickListener(){
-                //iremos fazer o login pelo google
-            }
+        btnLogin.setOnClickListener(){
+            viewModel.signIn(
+                etLogin.text.toString(),
+                etSenha.text.toString())
+        }
 
-            ibOutlook.setOnClickListener(){
-                //iremos fazer login pelo Outlook
-            }
+        tvRegister.setOnClickListener(){
+            val intent = Intent(this, CadastroActivity::class.java)
+            startActivity(intent)
+        }
 
-            ibFacebook.setOnClickListener(){
-                //iremos fazer o login pelo Facebook
-            }
+        ibGoogle.setOnClickListener(){
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
 
-            ibApple.setOnClickListener(){
-                //iremos fazer o login pela Apple
-            }
+        ibOutlook.setOnClickListener(){
+            //iremos fazer login pelo Outlook
+        }
 
-            viewModel.user.observe(this, Observer {
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                intent.putExtra("user", it)
-                startActivity(intent)
-            })
+        ibFacebook.setOnClickListener(){
+            //iremos fazer o login pelo Facebook
+        }
 
-            viewModel.error.observe(this, Observer {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            })
+        ibApple.setOnClickListener(){
+            //iremos fazer o login pela Apple
+        }
 
-            viewModel.getCurrentUser()
+        viewModel.user.observe(this, Observer {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("user", it)
+            startActivity(intent)
+        })
+
+        viewModel.error.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.getCurrentUser()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            viewModel.firebaseAuthWithGoogle(data)
+        }
     }
 }
