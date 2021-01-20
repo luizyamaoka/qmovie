@@ -22,35 +22,11 @@
             android:layout_marginRight="30dp"/>
 
         <ImageButton
-            android:id="@+id/ibOutlook"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/preto"
-            android:src="@drawable/outlook"
-            android:layout_marginRight="30dp"/>
-
-<!--        <com.facebook.login.widget.LoginButton-->
-<!--            android:id="@+id/login_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:layout_marginBottom="30dp">-->
-<!--        </com.facebook.login.widget.LoginButton>-->
-
-        <ImageButton
             android:id="@+id/ibFacebook"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/preto"
-            android:src="@drawable/face"
-            android:layout_marginRight="30dp"/>
+            android:src="@drawable/face" />
 
-        <ImageButton
-            android:id="@+id/ibApple"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/preto"
-            android:src="@drawable/apple" />
     </LinearLayout>
 </LinearLayout>
