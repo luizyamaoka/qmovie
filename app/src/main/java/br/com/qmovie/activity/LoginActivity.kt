@@ -69,17 +69,8 @@ class LoginActivity : AppCompatActivity() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        ibOutlook.setOnClickListener(){
-            //iremos fazer login pelo Outlook
-        }
-
         ibFacebook.setOnClickListener(){
-            //iremos fazer o login pelo Facebook
             Fblogin()
-        }
-
-        ibApple.setOnClickListener(){
-            //iremos fazer o login pela Apple
         }
 
         viewModel.user.observe(this, Observer {
