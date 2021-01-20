@@ -17,6 +17,7 @@ import br.com.qmovie.service.RepositoryImplementation
 import br.com.qmovie.service.movieService
 import br.com.qmovie.viewmodel.LancamentoViewModel
 import kotlinx.android.synthetic.main.fragment_lancamentos.view.*
+import kotlinx.android.synthetic.main.item_lancamentos.*
 
 class LancamentosFragment : Fragment() {
 
@@ -31,7 +32,7 @@ class LancamentosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        initDB()
+       initDB()
 
         repo = RepositoryImplementation(db.lancamentoDAO())
 
@@ -44,7 +45,7 @@ class LancamentosFragment : Fragment() {
         }
 
         // Inflate the layout for this fragment
-        lancamentoAdapter = LancamentosAdapter(this)
+        lancamentoAdapter = LancamentosAdapter(this,viewModel)
 
         val view = inflater.inflate(R.layout.fragment_lancamentos, container, false)
         view.rvLancamentos.adapter = lancamentoAdapter
@@ -52,6 +53,7 @@ class LancamentosFragment : Fragment() {
             lancamentoAdapter.addUpcoming(it)
         }
         viewModel.getUpcoming()
+
         return view
     }
 

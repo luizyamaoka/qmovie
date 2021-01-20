@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import br.com.qmovie.dao.LancamentoDAO
+import br.com.qmovie.domain.Filme
 import br.com.qmovie.domain.Lancamento
+import br.com.qmovie.extension.Converters
 
-@Database(entities = [Lancamento::class], version = 1)
+@Database(entities = [Filme::class], version = 1, exportSchema = false)
+@TypeConverters(value = [Converters::class])
 abstract class AppDB: RoomDatabase(){
 
     abstract fun lancamentoDAO() : LancamentoDAO

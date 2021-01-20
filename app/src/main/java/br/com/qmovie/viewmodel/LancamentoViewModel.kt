@@ -4,21 +4,16 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.qmovie.R
 import br.com.qmovie.domain.Filme
-import br.com.qmovie.domain.Lancamento
-import br.com.qmovie.domain.SearchResult
 import br.com.qmovie.service.DatabaseRepository
 import br.com.qmovie.service.MovieService
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LancamentoViewModel (val movieService: MovieService, val repoDB: DatabaseRepository) : ViewModel() {
 
     val listUpcoming = MutableLiveData<ArrayList<Filme>>()
-    var listLancamento = MutableLiveData<ArrayList<Lancamento>>()
+    val listFavoritos = MutableLiveData<List<Filme>>()
 
     fun getUpcoming(){
         viewModelScope.launch(Dispatchers.Main){
@@ -33,13 +28,22 @@ class LancamentoViewModel (val movieService: MovieService, val repoDB: DatabaseR
         }
     }
 
-    fun getLancamentoDB(){
-        listLancamento = listUpcoming.value.forEach {
-            convertFilmetoLancamento(it)
+    fun addFav(filme : Filme){
+        viewModelScope.launch {
+            listFavoritos.value = repoDB.addLancamentoTask(filme)
         }
     }
 
-    fun convertFilmetoLancamento(filme : Filme) : Lancamento {
-        return Lancamento(filme.id,filme.title,filme.release_date,filme.overview)
+    fun delFav(id : Int){
+        viewModelScope.launch {
+           repoDB.delFavTask(id)
+        }
     }
+
+//    fun findFav(id: Int){
+//        viewModelScope.launch {
+//            repoDB.findFavTask(id)
+//        }
+//    }
+
 }

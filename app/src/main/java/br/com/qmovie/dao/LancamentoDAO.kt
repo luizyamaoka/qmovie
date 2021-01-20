@@ -3,29 +3,23 @@ package br.com.qmovie.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.RoomWarnings
+import br.com.qmovie.domain.Filme
 import br.com.qmovie.domain.Lancamento
 
 @Dao
 interface LancamentoDAO {
 
     @Insert
-    suspend fun addLancamento(lancamento: Lancamento)
+    suspend fun addLancamento(filme: Filme)
 
-    @Query("SELECT * FROM lancamento")
-    suspend fun getAllLancamento(): List<Lancamento>
+    @Query("SELECT * FROM favorito")
+    suspend fun getAllLancamento(): List<Filme>
 
-    @Query("SELECT * FROM lancamento WHERE favorito = 'TRUE'")
-    suspend fun getFavLancamento(): List<Lancamento>
-
-    @Query("DELETE FROM lancamento WHERE id=:id")
+    @Query("DELETE FROM favorito WHERE id=:id")
     suspend fun delFav(id: Int)
 
-    @Query("UPDATE lancamento SET favorito = 'FALSE' WHERE ID = :id")
-    suspend fun setFavFalse(id: Int)
-
-    @Query("UPDATE lancamento SET favorito = 'TRUE' WHERE ID = :id")
-    suspend fun setFavTrue(id: Int)
-
-    //TODO: DELETAR FAVORITO, ATUALIZAR DADOS DO FILME
+//    @Query("SELECT * FROM favorito WHERE id=:id")
+//    suspend fun findFav(id: Int)
 
 }

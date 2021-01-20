@@ -1,6 +1,7 @@
 package br.com.qmovie.adapter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.item_lancamentos.view.*
 import java.text.SimpleDateFormat
 
 
-class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment) : RecyclerView.Adapter<LancamentosAdapter.LancamentoViewHolder>() {
+class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment, val viewModel: LancamentoViewModel) : RecyclerView.Adapter<LancamentosAdapter.LancamentoViewHolder>() {
 
      private val lancamentos = arrayListOf<Filme>()
 
@@ -54,6 +55,20 @@ class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment) 
 //            }
 //        }
 
+        holder.btnFavoritarLancamento.setOnClickListener {
+//            val response = viewModel.findFav(lancamentos[position].id).toString()
+//
+//            if (response.isNullOrEmpty()){
+//                viewModel.addFav(lancamentos[position])
+//                Log.i("Filme add no DB1",lancamentos[position].toString())
+//            } else {
+//                viewModel.delFav(lancamentos[position].id)
+//                Log.i("Filme del no DB",lancamentos[position].toString())
+//            }
+            viewModel.delFav(lancamentos[position].id)
+            viewModel.addFav(lancamentos[position])
+        }
+
         holder.cvItemLancamentos.setOnClickListener {
             val bundle =  Bundle()
             bundle.putSerializable("lancamento", lancamento)
@@ -61,6 +76,7 @@ class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment) 
                 R.id.action_lancamentosFragment_to_lancamentosPopupFragment, bundle)
         }
     }
+
     fun addUpcoming(list : ArrayList<Filme>){
         lancamentos.addAll(list)
         notifyDataSetChanged()

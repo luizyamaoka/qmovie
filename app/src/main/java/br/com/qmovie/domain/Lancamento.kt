@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = "lancamento")
+
 class Lancamento(
-    @PrimaryKey
     var id: Int,
     var titulo : String,
     var dtLancamento : Date,
