@@ -1,15 +1,16 @@
 package br.com.qmovie.domain
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
+@Entity(tableName = "lancamento")
 class Lancamento(
-    val id: Int,
+    @PrimaryKey
+    var id: Int,
     var titulo : String,
     var dtLancamento : Date,
-    var diretor: String,
-    var genero: String,
-    var classificacao: String,
     var sinopse: String,
     var favorito: Boolean = false
 ) : Serializable

@@ -6,40 +6,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.qmovie.adapter.LancamentosAdapter
-import br.com.qmovie.domain.Lancamento
+import br.com.qmovie.database.AppDB
+import br.com.qmovie.service.DatabaseRepository
+import br.com.qmovie.service.RepositoryImplementation
 import br.com.qmovie.service.movieService
 import br.com.qmovie.viewmodel.LancamentoViewModel
-import kotlinx.android.synthetic.main.fragment_jogo.view.*
-import kotlinx.android.synthetic.main.fragment_lancamentos.*
 import kotlinx.android.synthetic.main.fragment_lancamentos.view.*
-import java.util.*
 
 class LancamentosFragment : Fragment() {
 
-    lateinit var _context : Context
-    lateinit var lancamentoAdapter : LancamentosAdapter
+    private lateinit var db: AppDB
+    private lateinit var repo : DatabaseRepository
+    private lateinit var _context : Context
+    private lateinit var lancamentoAdapter : LancamentosAdapter
 
-    val viewModel by viewModels<LancamentoViewModel>{
-        object : ViewModelProvider.Factory{
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return LancamentoViewModel(movieService) as T
-            }
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        initDB()
+
+        repo = RepositoryImplementation(db.lancamentoDAO())
+
+        val viewModel by viewModels<LancamentoViewModel>{
+            object : ViewModelProvider.Factory{
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                    return LancamentoViewModel(movieService, repo) as T
+                }
+            }
+        }
+
         // Inflate the layout for this fragment
         lancamentoAdapter = LancamentosAdapter(this)
 
@@ -55,5 +58,9 @@ class LancamentosFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         _context = context
+    }
+
+    fun initDB(){
+        db = AppDB.invoke(activity)!!
     }
 }
