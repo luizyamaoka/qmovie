@@ -1,6 +1,7 @@
 package br.com.qmovie.adapter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,10 @@ import kotlinx.android.synthetic.main.item_lancamentos.view.*
 import java.text.SimpleDateFormat
 
 
-class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment) : RecyclerView.Adapter<LancamentosAdapter.LancamentoViewHolder>() {
+class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment, val viewModel: LancamentoViewModel) : RecyclerView.Adapter<LancamentosAdapter.LancamentoViewHolder>() {
 
-     private val lancamentos = arrayListOf<Filme>()
+     private var lancamentos = arrayListOf<Filme>()
+     private var lancamentosDB = arrayListOf<Filme>()
 
     class LancamentoViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
         val tvTituloLancamento : TextView = view.tvTituloLancamento
@@ -41,18 +43,18 @@ class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment) 
         holder.tvTituloLancamento.text = lancamento.title
         holder.tvDataLancamento.text = SimpleDateFormat("dd/MM/YY").format(lancamento.release_date)
 
-//        holder.btnFavoritarLancamento.setOnClickListener {
-//            when (lancamento.favorito) {
-//                true -> {
-//                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
-//                    lancamento.favorito = !lancamento.favorito
-//                }
-//                else -> {
-//                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
-//                    lancamento.favorito = !lancamento.favorito
-//                }
-//            }
-//        }
+        holder.btnFavoritarLancamento.setOnClickListener {
+            when (lancamento.fav) {
+                true -> {
+                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
+                    lancamento.fav = !lancamento.fav
+                }
+                else -> {
+                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
+                    lancamento.fav = !lancamento.fav
+                }
+            }
+        }
 
         holder.cvItemLancamentos.setOnClickListener {
             val bundle =  Bundle()
@@ -61,8 +63,22 @@ class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment) 
                 R.id.action_lancamentosFragment_to_lancamentosPopupFragment, bundle)
         }
     }
-    fun addUpcoming(list : ArrayList<Filme>){
+    fun addUpcoming(list : List<Filme>){
         lancamentos.addAll(list)
         notifyDataSetChanged()
+    }
+    suspend fun addMovieDB(list : List<Filme>){
+        Log.i("Chegando para add",lancamentos.toString())
+        list.forEach {
+            viewModel.addMovieDatabase(it)
+            Log.i("Add no DB:",lancamentos.toString())
+        }
+        getMovieDB()
+        notifyDataSetChanged()
+    }
+
+    fun getMovieDB(){
+        //lancamentos.addAll(viewModel.getAllMoviesDB())
+        Log.i("Retorno do DB:",lancamentos.toString())
     }
 }
