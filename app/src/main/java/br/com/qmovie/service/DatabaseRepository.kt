@@ -25,7 +25,6 @@ class RepositoryImplementation(val filmeDAO: FilmeDAO): DatabaseRepository{
         return filmeDAO.getAllMovie()
     }
 
-
     override suspend fun delFavTask(id: Int): List<Filme> {
         filmeDAO.delFav(id)
         return filmeDAO.getAllMovie()

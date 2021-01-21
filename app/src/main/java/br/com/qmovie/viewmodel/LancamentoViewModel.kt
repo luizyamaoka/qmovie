@@ -19,6 +19,7 @@ class LancamentoViewModel (val movieService: MovieService, val repoDB: DatabaseR
 
     val listUpcoming = MutableLiveData<ArrayList<Filme>>()
     val listMovies = MutableLiveData<List<Filme>>()
+    val TAG = "LancamentoViewModel"
 
 
     fun getUpcoming(){
@@ -49,8 +50,31 @@ class LancamentoViewModel (val movieService: MovieService, val repoDB: DatabaseR
         }
     }
 
-    suspend fun getFavMoviesDB(): List<Filme> {
+    suspend fun getFavMovieDB(): List<Filme> {
         return repoDB.getAllFavTask()
+    }
+
+
+    fun setFavTrue(id: Int) {
+        viewModelScope.launch(Dispatchers.Main) {
+            try {
+                Log.i(TAG, "setFavTrue")
+                repoDB.addFavTask(id)
+            } catch (e: Exception) {
+                Log.e("LancamentoViewHolder", e.toString())
+            }
+        }
+    }
+
+    fun setFavFalse(id: Int){
+        viewModelScope.launch(Dispatchers.Main) {
+            try {
+                Log.i(TAG, "setFavFalse")
+                repoDB.delFavTask(id)
+            } catch (e: Exception) {
+                Log.e("LancamentoViewHolder", e.toString())
+            }
+        }
     }
 
 }

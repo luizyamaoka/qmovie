@@ -14,13 +14,12 @@ interface FilmeDAO {
     @Query("SELECT * FROM filme")
     suspend fun getAllMovie() : List<Filme>
 
-    @Query("UPDATE filme SET fav='FALSE' WHERE id=:id")
+    @Query("UPDATE filme SET fav=0 WHERE id=:id")
     suspend fun delFav(id: Int)
 
-    @Query("UPDATE filme SET fav=0 WHERE id=:id")
+    @Query("UPDATE filme SET fav=1 WHERE id=:id")
     suspend fun addFav(id: Int)
 
     @Query("SELECT * FROM filme WHERE fav=1")
     suspend fun getAllFav() : List<Filme>
-
 }

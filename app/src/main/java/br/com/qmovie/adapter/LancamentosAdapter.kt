@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat
 class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment, val viewModel: LancamentoViewModel) : RecyclerView.Adapter<LancamentosAdapter.LancamentoViewHolder>() {
 
      private var lancamentos = arrayListOf<Filme>()
-     private var lancamentosDB = arrayListOf<Filme>()
 
     class LancamentoViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
         val tvTituloLancamento : TextView = view.tvTituloLancamento
@@ -39,20 +38,25 @@ class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment, 
     override fun getItemCount() = lancamentos.size
 
     override fun onBindViewHolder(holder: LancamentoViewHolder, position: Int) {
-        val lancamento = lancamentos.get(position)
+        val lancamento = lancamentos[position]
         holder.tvTituloLancamento.text = lancamento.title
         holder.tvDataLancamento.text = SimpleDateFormat("dd/MM/YY").format(lancamento.release_date)
 
+        if (!lancamento.fav){
+            holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
+        } else {
+            holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
+        }
+
         holder.btnFavoritarLancamento.setOnClickListener {
-            when (lancamento.fav) {
-                true -> {
-                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
-                    lancamento.fav = !lancamento.fav
-                }
-                else -> {
-                    holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
-                    lancamento.fav = !lancamento.fav
-                }
+            if (lancamento.fav) {
+                holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
+                lancamento.fav = !lancamento.fav
+                viewModel.setFavFalse(lancamento.id)
+            } else {
+                holder.btnFavoritarLancamento.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
+                lancamento.fav = !lancamento.fav
+                viewModel.setFavTrue(lancamento.id)
             }
         }
 
