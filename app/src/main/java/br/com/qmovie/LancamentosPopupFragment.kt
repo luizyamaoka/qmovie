@@ -5,14 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import br.com.qmovie.domain.Filme
-import br.com.qmovie.domain.Lancamento
+import br.com.qmovie.viewmodel.LancamentoViewModel
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_lancamentos_popup.*
 import kotlinx.android.synthetic.main.fragment_lancamentos_popup.view.*
 import java.text.SimpleDateFormat
 
@@ -31,11 +31,21 @@ class LancamentosPopupFragment() : DialogFragment() {
 
         val poster = "https://image.tmdb.org/t/p/w780${lancamento.poster_path}"
 
+        if (!lancamento.fav){
+            view.btnFavoritarLancamentoPopup.setImageResource(R.drawable.ic_btn_favoritar_lancamento_false)
+        } else {
+            view.btnFavoritarLancamentoPopup.setImageResource(R.drawable.ic_btn_favoritar_lancamento_true)
+        }
+
         view.tvTituloPopup.setText("${lancamento.title}")
         view.tvInfoDtLancamento.setText("Data de Lancamento: ${SimpleDateFormat("dd/MM/YY").format(lancamento.release_date)}")
-//        view.tvInfoDiretor.setText("Diretor: ${lancamento.}")
-//        view.tvInfoGenero.setText("Gênero: ${lancamento.genero}")
-//        view.tvInfoClassificacao.setText("Classificação: ${lancamento.classificacao}")
+        view.tvInfoDiretor.setText("Título Original: ${lancamento.original_title}")
+        view.tvInfoGenero.setText("Língua Original: ${lancamento.original_language}")
+        if(lancamento.adult) {
+            view.tvInfoClassificacao.setText("Para maiores: Sim}")
+        } else{
+            view.tvInfoClassificacao.setText("Para maiores: Não")
+        }
         view.tvSinopseDescricao.setText("${lancamento.overview}")
 
         if (lancamento.poster_path.isNullOrEmpty()) {
