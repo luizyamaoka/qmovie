@@ -67,18 +67,5 @@ class LancamentosAdapter(private val lancamentosFragment : LancamentosFragment, 
         lancamentos.addAll(list)
         notifyDataSetChanged()
     }
-    suspend fun addMovieDB(list : List<Filme>){
-        Log.i("Chegando para add",lancamentos.toString())
-        list.forEach {
-            viewModel.addMovieDatabase(it)
-            Log.i("Add no DB:",lancamentos.toString())
-        }
-        getMovieDB()
-        notifyDataSetChanged()
-    }
 
-    fun getMovieDB(){
-        //lancamentos.addAll(viewModel.getAllMoviesDB())
-        Log.i("Retorno do DB:",lancamentos.toString())
-    }
 }

@@ -35,6 +35,7 @@ class LancamentosFragment : Fragment() {
     lateinit var lancamentoAdapter : LancamentosAdapter
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,13 +60,18 @@ class LancamentosFragment : Fragment() {
         view.rvLancamentos.adapter = lancamentoAdapter
         if (db.doesDatabaseExist(_context,"qmovie.db")){
             Log.i("DB EXISTENTE",db.doesDatabaseExist(_context,"qmovie.db").toString())
-        } else {
-            viewModel.listUpcoming.observe(viewLifecycleOwner) {
+            viewModel.listMovies.observe(viewLifecycleOwner) {
                 Log.i("Observe", viewModel.listUpcoming.value.toString())
                 lancamentoAdapter.addUpcoming(it)
             }
+        } else {
             viewModel.getUpcoming()
+            viewModel.listMovies.observe(viewLifecycleOwner) {
+                Log.i("Observe", viewModel.listUpcoming.value.toString())
+                lancamentoAdapter.addUpcoming(it)
+            }
         }
+        viewModel.getAllMoviesDB()
         return view
     }
 

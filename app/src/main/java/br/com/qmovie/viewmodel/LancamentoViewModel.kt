@@ -25,12 +25,12 @@ class LancamentoViewModel (val movieService: MovieService, val repoDB: DatabaseR
         viewModelScope.launch(Dispatchers.Main){
             try {
                 val response = movieService.getUpcoming()
-                listUpcoming.value = response.results
+                listMovies.value = response.results
                 response.results.forEach {
-                    addMovieDatabase(it)
+                    repoDB.addMovieTask(it)
                 }
                 //listMovies.value = getAllMoviesDB()
-                Log.i("Resultado lançamnetos",listUpcoming.value.toString())
+                Log.i("Resultado API : ",listUpcoming.value.toString())
             } catch (e: Exception){
                 Log.e("LancamentoViewHolder",e.toString())
             }
@@ -38,17 +38,19 @@ class LancamentoViewModel (val movieService: MovieService, val repoDB: DatabaseR
         }
     }
 
-    suspend fun getAllMoviesDB(): List<Filme> {
-        Log.i("getAllMoviesDB",listMovies.value.toString())
-        return repoDB.getAllMovieTask()
+    fun getAllMoviesDB() {
+        viewModelScope.launch(Dispatchers.Main) {
+            try {
+                val response = repoDB.getAllMovieTask()
+                listMovies.value = response
+            } catch (e: Exception) {
+                Log.e("LancamentoViewHolder", e.toString())
+            }
+        }
     }
 
     suspend fun getFavMoviesDB(): List<Filme> {
         return repoDB.getAllFavTask()
-    }
-
-    suspend fun addMovieDatabase(filme: Filme){
-        repoDB.addMovieTask(filme)
     }
 
 }
