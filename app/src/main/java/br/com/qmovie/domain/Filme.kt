@@ -1,20 +1,26 @@
 package br.com.qmovie.domain
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
+@Entity(tableName = "filme")
 data class Filme(
-    val id: Int,
-    val video: Boolean,
-    val vote_average: Double,
-    val popularity: Double,
-    val vote_count: Int,
-    val release_date: Date,
-    val adult: Boolean,
-    val backdrop_path: String,
-    val genre_ids: ArrayList<Int>,
-    val overview: String,
-    val original_language: String,
-    val original_title: String,
-    val poster_path: String,
-    val title: String) : Serializable
+    @PrimaryKey(autoGenerate = true)
+    val PK: Int,
+    var id: Int,
+    var video: Boolean? ,
+    var vote_average: Double? ,
+    var popularity: Double? ,
+    var vote_count: Int?,
+    var release_date: Date,
+    var adult: Boolean = false,
+    var backdrop_path: String? ,
+    //var genre_ids: ArrayList<Int>,
+    var overview: String ,
+    var original_language: String? ,
+    var original_title: String?,
+    var poster_path: String?,
+    var title: String ,
+    var fav: Boolean = false) : Serializable
