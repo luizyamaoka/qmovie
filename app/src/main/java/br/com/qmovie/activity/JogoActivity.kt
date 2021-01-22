@@ -1,21 +1,20 @@
 package br.com.qmovie.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import br.com.qmovie.R
 import br.com.qmovie.domain.Jogo
 import br.com.qmovie.domain.TipoJogo
-import br.com.qmovie.service.movieService
-import br.com.qmovie.viewmodel.JogoViewModel
+import com.facebook.CallbackManager
+import com.facebook.login.LoginManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class JogoActivity : AppCompatActivity() {
 
-//    lateinit var tipoJogo: TipoJogo
     var jogo: Jogo? = null
+    private var user : FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,5 +32,15 @@ class JogoActivity : AppCompatActivity() {
             )
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        user = FirebaseAuth.getInstance().currentUser
+
+        if (user == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

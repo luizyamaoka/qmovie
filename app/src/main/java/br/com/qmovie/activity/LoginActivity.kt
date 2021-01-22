@@ -13,16 +13,13 @@ import br.com.qmovie.viewmodel.viewModelFactory
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
-import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.login_redes.*
-import org.json.JSONException
 
 
 class LoginActivity : AppCompatActivity() {
@@ -42,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 1
 
     private lateinit var callbackManager : CallbackManager
+    private lateinit var loginManager: LoginManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
         ).get(UserViewModel::class.java)
 
         callbackManager = CallbackManager.Factory.create()
+        loginManager = LoginManager.getInstance()
 
         btnLogin.setOnClickListener(){
             viewModel.signIn(
@@ -75,14 +74,16 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.user.observe(this, Observer {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("user", it)
             startActivity(intent)
         })
 
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+    }
 
+    override fun onResume() {
+        super.onResume()
         viewModel.getCurrentUser()
     }
 
@@ -98,8 +99,8 @@ class LoginActivity : AppCompatActivity() {
         Log.i(TAG, "fblogin")
 
         // Set permissions
-        LoginManager.getInstance().logInWithReadPermissions(this, setOf("public_profile", "email"))
-        LoginManager.getInstance().registerCallback(callbackManager,
+        loginManager.logInWithReadPermissions(this, setOf("public_profile", "email"))
+        loginManager.registerCallback(callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
                     Log.d(TAG, "On success")
