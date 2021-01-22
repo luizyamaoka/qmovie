@@ -1,12 +1,18 @@
 package br.com.qmovie.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import br.com.qmovie.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.menubar.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var user : FirebaseUser? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,5 +43,15 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.configuracoesFragment)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        user = FirebaseAuth.getInstance().currentUser
+
+        if (user == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
