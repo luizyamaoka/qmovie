@@ -2,7 +2,6 @@ package br.com.qmovie
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import br.com.qmovie.activity.JogoActivity
 import br.com.qmovie.domain.Jogo
-import br.com.qmovie.domain.TipoJogo
 import br.com.qmovie.extension.toTime
 import kotlinx.android.synthetic.main.fragment_pontuacao.view.*
 
