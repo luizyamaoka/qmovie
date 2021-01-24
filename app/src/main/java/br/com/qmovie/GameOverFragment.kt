@@ -6,17 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import br.com.qmovie.activity.MainActivity
 import br.com.qmovie.domain.Jogo
+import br.com.qmovie.viewmodel.RankingViewModel
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_game_over.view.*
 
 class GameOverFragment : Fragment() {
 
     private lateinit var jogo : Jogo
+    private lateinit var rankingViewModel : RankingViewModel
+    private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         jogo = arguments?.getSerializable("jogo") as Jogo
+
+        rankingViewModel = ViewModelProvider(requireActivity()).get(RankingViewModel::class.java)
+
+        rankingViewModel.saveRanking(auth.currentUser!!, jogo.getPontuacaoFinal())
     }
 
     override fun onCreateView(

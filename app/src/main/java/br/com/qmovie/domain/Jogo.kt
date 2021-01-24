@@ -9,7 +9,7 @@ class Jogo (
     var respostasAcertadas : ArrayList<String>
 ) : Serializable {
 
-    private val PONTUACAO_POR_RODADA : Int = 1000
+    private val PONTUACAO_POR_RODADA : Long = 1000L
     private val TEMPO_INCREMENTAL_POR_ACERTO : Long = 60000L
 
     var dicasUtilizadas: Int = 0

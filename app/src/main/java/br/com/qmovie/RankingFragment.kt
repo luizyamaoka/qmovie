@@ -1,40 +1,28 @@
 package br.com.qmovie
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.qmovie.adapter.DicaAdapter
 import br.com.qmovie.adapter.RankingAdapter
-import br.com.qmovie.viewmodel.JogoViewModel
+import br.com.qmovie.domain.Ranking
 import br.com.qmovie.viewmodel.RankingViewModel
-import kotlinx.android.synthetic.main.fragment_jogo.view.*
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_ranking.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RankingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RankingFragment : Fragment() {
 
-//    private val viewModel : RankingViewModel by viewModels()
     private lateinit var viewModel : RankingViewModel
+    private lateinit var rankingAdapter: RankingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(RankingViewModel::class.java)
+        rankingAdapter = RankingAdapter(viewModel)
     }
 
     override fun onCreateView(
@@ -43,27 +31,58 @@ class RankingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_ranking, container, false)
-        val listRanking = viewModel.getRanking()
 
-        view.rvRanking.adapter = RankingAdapter(viewModel, listRanking)
+        view.rvRanking.adapter = rankingAdapter
+
+        viewModel.ranking.observe(requireActivity(), Observer {
+
+            Log.d("Ranking", it.toString())
+
+            if (it.size >= 1) {
+                view.tvNameR1.text = it[0].nome
+                view.tvPontosR1.text = "${it[0].pontos} pontos"
+                if (it[0].photoUrl != "") {
+                    Glide.with(view.imR1.context).asBitmap()
+                        .load(it[0].photoUrl)
+                        .into(view.imR1)
+                } else {
+                    view.imR1.setImageResource(R.drawable.ic_launcher_foreground)
+                }
+            }
+
+            if (it.size >= 2) {
+                view.tvNameR2.text = it[1].nome
+                view.tvPontosR2.text = "${it[1].pontos} pontos"
+                if (it[1].photoUrl != "") {
+                    Glide.with(view.imR2.context).asBitmap()
+                        .load(it[1].photoUrl)
+                        .into(view.imR2)
+                } else {
+                    view.imR2.setImageResource(R.drawable.ic_launcher_foreground)
+                }
+            }
+
+            if (it.size >= 3) {
+                view.tvNameR3.text = it[2].nome
+                view.tvPontosR3.text = "${it[2].pontos} pontos"
+                if (it[2].photoUrl != "") {
+                    Glide.with(view.imR3.context).asBitmap()
+                        .load(it[2].photoUrl)
+                        .into(view.imR3)
+                } else {
+                    view.imR3.setImageResource(R.drawable.ic_launcher_foreground)
+                }
+            }
+
+            if (it.size >= 4) {
+                rankingAdapter.setRanking(ArrayList(it.subList(3, it.size)))
+            }
+        })
+
+        viewModel.getRanking()
 
         return view
 
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RankingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() = RankingFragment()
-
-
-    }
 }

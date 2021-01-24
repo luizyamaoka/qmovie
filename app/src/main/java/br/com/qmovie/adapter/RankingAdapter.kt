@@ -1,6 +1,5 @@
 package br.com.qmovie.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.R
 import br.com.qmovie.domain.Ranking
 import br.com.qmovie.viewmodel.RankingViewModel
-import kotlinx.android.synthetic.main.card_ranking.view.*
+import com.bumptech.glide.Glide
 
-class RankingAdapter (private val viewModel : RankingViewModel, private val listRanking : ArrayList<Ranking>) : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
+class RankingAdapter (private val viewModel : RankingViewModel) : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
+
+    var listRanking = arrayListOf<Ranking>()
+
     class RankingViewHolder (itemView : View) : RecyclerView.ViewHolder(itemView)  {
         var tvPosicao : TextView = itemView.findViewById(R.id.tvPosicao)
         var imPosicao : ImageView = itemView.findViewById(R.id.imPosicao)
@@ -27,11 +29,24 @@ class RankingAdapter (private val viewModel : RankingViewModel, private val list
 
     override fun onBindViewHolder(holder: RankingViewHolder, position: Int) {
         var ranking : Ranking = listRanking.get(position)
-        holder.tvPosicao.text = ranking.id.toString()
-        holder.imPosicao.setImageResource(ranking.foto)
+        holder.tvPosicao.text = "${position + 3}"
+
         holder.tvNomePosicao.text = ranking.nome
-        holder.tvPontosPosicao.text = ranking.pontos.toString()
+        holder.tvPontosPosicao.text = "${ranking.pontos} pontos"
+        if (ranking.photoUrl != "") {
+            Glide.with(holder.imPosicao.context).asBitmap()
+                .load(ranking.photoUrl)
+                .into(holder.imPosicao)
+        } else {
+            holder.imPosicao.setImageResource(R.drawable.ic_launcher_foreground)
+        }
+
     }
 
     override fun getItemCount() = listRanking.size
+
+    fun setRanking(ranking : ArrayList<Ranking>) {
+        listRanking = ranking
+        notifyDataSetChanged()
+    }
 }
