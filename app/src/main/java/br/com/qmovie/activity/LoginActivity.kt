@@ -20,6 +20,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.login_redes.*
+import android.content.pm.PackageManager
+import android.util.Base64
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class LoginActivity : AppCompatActivity() {
@@ -99,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
         Log.i(TAG, "fblogin")
 
         // Set permissions
-        loginManager.logInWithReadPermissions(this, setOf("public_profile", "email"))
+        loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"))
         loginManager.registerCallback(callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
