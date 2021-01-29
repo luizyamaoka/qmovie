@@ -89,6 +89,7 @@ class CadastroActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             viewModel.firebaseAuthWithGoogle(data)
@@ -104,7 +105,7 @@ class CadastroActivity : AppCompatActivity() {
         Log.i(TAG, "fblogin")
 
         // Set permissions
-        loginManager.logInWithReadPermissions(this, setOf("public_profile", "email"))
+        loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"))
         loginManager.registerCallback(callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
