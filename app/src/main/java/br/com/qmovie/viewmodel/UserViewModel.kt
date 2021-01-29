@@ -28,53 +28,71 @@ class UserViewModel(
     }
 
     fun signUp(email: String, password: String, name: String) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity) { task ->
-                when (task.isSuccessful) {
-                    true -> {
-                        Log.d("UserViewModel", "createUserWithEmail:success")
-                        val profileUpdates =
-                            UserProfileChangeRequest.Builder()
-                                .setDisplayName(name)
-                                .build()
+        when {
+            email == "" -> error.value = "Formato invalido do email"
+            password == "" -> error.value = "Senha nao pode ser vazia"
+            name == " " -> error.value = "Preencha o nome"
+            else -> {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity) { task ->
+                        when (task.isSuccessful) {
+                            true -> {
+                                Log.d("UserViewModel", "createUserWithEmail:success")
+                                val profileUpdates =
+                                    UserProfileChangeRequest.Builder()
+                                        .setDisplayName(name)
+                                        .build()
 
-                        auth.currentUser!!.updateProfile(profileUpdates)
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    Log.d("UserViewModel", "User profile updated.")
-                                    getCurrentUser()
+                                auth.currentUser!!.updateProfile(profileUpdates)
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            Log.d("UserViewModel", "User profile updated.")
+                                            getCurrentUser()
+                                        }
+                                    }
+                            }
+                            else -> {
+                                Log.w("UserViewModel", "createUserWithEmail:failure", task.exception)
+                                when (task.exception) {
+                                    is FirebaseAuthUserCollisionException -> error.value =
+                                        "Email ja cadastrado"
+                                    is FirebaseAuthWeakPasswordException -> error.value =
+                                        "Senha muito fraca"
+                                    is FirebaseAuthInvalidCredentialsException -> error.value =
+                                        "Formato invalido do email"
                                 }
                             }
-                    }
-                    else -> {
-                        Log.w("UserViewModel", "createUserWithEmail:failure", task.exception)
-                        when (task.exception) {
-                            is FirebaseAuthUserCollisionException -> error.value = "Email ja cadastrado"
-                            is FirebaseAuthWeakPasswordException -> error.value = "Senha muito fraca"
-                            is FirebaseAuthInvalidCredentialsException -> error.value = "Formato invalido do email"
                         }
                     }
-                }
             }
+        }
     }
 
     fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity) { task ->
-                when (task.isSuccessful) {
-                    true -> {
-                        Log.d("UserViewModel", "signinUserWithEmail:success")
-                        getCurrentUser()
-                    }
-                    else -> {
-                        Log.w("UserViewModel", "signinUserWithEmail:failure", task.exception)
-                        when (task.exception) {
-                            is FirebaseAuthInvalidCredentialsException -> error.value = "Formato invalido do email"
-                            is FirebaseAuthInvalidUserException ->  error.value = "Usuario nao encontrado"
+        when {
+            email == "" -> error.value = "Formato invalido do email"
+            password == "" -> error.value = "Senha vazia"
+            else -> {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity) { task ->
+                        when (task.isSuccessful) {
+                            true -> {
+                                Log.d("UserViewModel", "signinUserWithEmail:success")
+                                getCurrentUser()
+                            }
+                            else -> {
+                                Log.w("UserViewModel", "signinUserWithEmail:failure", task.exception)
+                                when (task.exception) {
+                                    is FirebaseAuthInvalidCredentialsException -> error.value =
+                                        "Formato invalido do email"
+                                    is FirebaseAuthInvalidUserException -> error.value =
+                                        "Usuario nao encontrado"
+                                }
+                            }
                         }
                     }
-                }
             }
+        }
     }
 
     fun firebaseAuthWithGoogle(data: Intent?) {
