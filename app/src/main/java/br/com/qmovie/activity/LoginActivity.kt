@@ -64,6 +64,10 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        tvEsqSenha.setOnClickListener {
+            viewModel.resetPassword(etLogin.text.toString())
+        }
+
         ibGoogle.setOnClickListener(){
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }

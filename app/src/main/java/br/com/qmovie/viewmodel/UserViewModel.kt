@@ -137,5 +137,20 @@ class UserViewModel(
             }
     }
 
+    fun resetPassword(email: String) {
+        when {
+            email == "" -> error.value = "Preencha o seu email"
+            else -> {
+                auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d(TAG, "Email sent")
+                            error.value = "Enviamos um email com instrucoes para resetar sua senha"
+                        }
+                    }
+            }
+        }
+    }
+
 
 }
