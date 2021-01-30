@@ -62,7 +62,6 @@
                             app:layout_constraintEnd_toEndOf="@id/tvR2"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/circle_rank"
                             android:scaleType="centerCrop"/>
 
                         <TextView
@@ -84,7 +83,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Ana Clara"
+                            android:text=""
                             android:textSize="17dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/imR2"
@@ -96,7 +95,7 @@
                             android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="300 pontos"
+                            android:text=""
                             android:textSize="15dp"
                             android:padding="2dp"
                             android:textColor="@color/branco"
@@ -117,7 +116,6 @@
                             app:layout_constraintEnd_toEndOf="@id/tvR1"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/circle_rank"
                             android:scaleType="centerCrop"/>
 
                         <TextView
@@ -139,7 +137,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Matheus"
+                            android:text=""
                             android:textSize="17dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +149,7 @@
                             android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="300 pontos"
+                            android:text=""
                             android:textSize="15dp"
                             android:padding="2dp"
                             android:textColor="@color/branco"
@@ -172,7 +170,6 @@
                             app:layout_constraintEnd_toEndOf="@id/tvR3"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/circle_rank"
                             android:scaleType="centerCrop"/>
 
                         <TextView
@@ -194,7 +191,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Laura"
+                            android:text=""
                             android:textSize="17dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/imR3" />
@@ -205,7 +202,7 @@
                             android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="300 pontos"
+                            android:text=""
                             android:textSize="15dp"
                             android:padding="2dp"
                             android:textColor="@color/branco"
