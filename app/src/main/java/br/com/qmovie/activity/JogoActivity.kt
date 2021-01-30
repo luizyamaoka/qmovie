@@ -6,8 +6,6 @@ import android.os.Bundle
 import br.com.qmovie.R
 import br.com.qmovie.domain.Jogo
 import br.com.qmovie.domain.TipoJogo
-import com.facebook.CallbackManager
-import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 

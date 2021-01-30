@@ -1,6 +1,5 @@
 package br.com.qmovie.service
 
-import androidx.room.Query
 import br.com.qmovie.dao.FilmeDAO
 import br.com.qmovie.domain.Filme
 

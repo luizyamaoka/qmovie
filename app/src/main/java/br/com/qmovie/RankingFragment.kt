@@ -23,7 +23,7 @@ class RankingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(RankingViewModel::class.java)
-        rankingAdapter = RankingAdapter(viewModel)
+        rankingAdapter = RankingAdapter()
     }
 
     override fun onCreateView(
