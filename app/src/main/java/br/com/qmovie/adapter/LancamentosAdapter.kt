@@ -1,7 +1,6 @@
 package br.com.qmovie.adapter
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.LancamentosFragment
 import br.com.qmovie.R
 import br.com.qmovie.domain.Filme
-import br.com.qmovie.domain.Lancamento
 import br.com.qmovie.viewmodel.LancamentoViewModel
 import kotlinx.android.synthetic.main.item_lancamentos.view.*
 import java.text.SimpleDateFormat

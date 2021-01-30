@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.R
 import br.com.qmovie.domain.Ranking
 import br.com.qmovie.extension.toPoints
-import br.com.qmovie.viewmodel.RankingViewModel
 import com.bumptech.glide.Glide
 
-class RankingAdapter (private val viewModel : RankingViewModel) : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
+class RankingAdapter : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>() {
 
     var listRanking = arrayListOf<Ranking>()
 
