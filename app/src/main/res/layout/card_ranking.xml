@@ -14,7 +14,8 @@
         android:text="4"
         android:textSize="18dp"
         android:textColor="@color/branco"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginRight="5dp"/>
 
     <ImageView
         android:id="@+id/imPosicao"
@@ -30,13 +31,6 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-<!--        <ImageView-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:layout_marginRight="15dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/linha_posicao"/>-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_gravity="center"
             android:id="@+id/clOutraPosicoes"
@@ -47,13 +41,14 @@
 
             <TextView
                 android:id="@+id/tvNomePosicao"
-                app:layout_constraintStart_toStartOf="@id/clOutraPosicoes"
-                app:layout_constraintTop_toTopOf="@id/clOutraPosicoes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Marcos"
                 android:textColor="@color/amarelo"
-                android:textSize="25dp"/>
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/clOutraPosicoes"
+                app:layout_constraintTop_toTopOf="@id/clOutraPosicoes" />
 
             <TextView
                 android:id="@+id/tvPontosPosicao"

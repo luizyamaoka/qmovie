@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.qmovie.R
 import br.com.qmovie.domain.Ranking
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,6 +21,7 @@ class RankingViewModel : ViewModel() {
 
         viewModelScope.launch {
             db.collection("ranking")
+                .whereGreaterThan("pontos", 0)
                 .orderBy("pontos", Query.Direction.DESCENDING)
                 .limit(40)
                 .get()
@@ -31,7 +31,6 @@ class RankingViewModel : ViewModel() {
                         for (document in task.result!!) {
                             val ranking = Ranking(
                                 1,
-                                R.drawable.ic_launcher_foreground,
                                 document.data["nome"] as String,
                                 document.data["pontos"] as Long,
                                 document.data["foto"] as String)
@@ -48,7 +47,6 @@ class RankingViewModel : ViewModel() {
     fun saveRanking(user: FirebaseUser, pontos: Long) {
         viewModelScope.launch {
             val ranking = Ranking(1,
-                R.drawable.ic_launcher_foreground,
                 user.displayName.toString(),
                 pontos,
                 user.photoUrl.toString()
