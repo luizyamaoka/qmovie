@@ -9,21 +9,16 @@ import br.com.qmovie.R
 
 class SplashActivity : AppCompatActivity() {
 
-    private val splashTimeOut = 6000
-
+    private val splashTimeOut = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        //Remover a action Bar:
-        supportActionBar?.hide()
-
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }, splashTimeOut.toLong())
     }
-
 
 }
