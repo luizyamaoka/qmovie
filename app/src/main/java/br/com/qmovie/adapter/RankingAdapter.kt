@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.qmovie.R
 import br.com.qmovie.domain.Ranking
+import br.com.qmovie.extension.toPoints
 import br.com.qmovie.viewmodel.RankingViewModel
 import com.bumptech.glide.Glide
 
@@ -32,13 +33,13 @@ class RankingAdapter (private val viewModel : RankingViewModel) : RecyclerView.A
         holder.tvPosicao.text = "${position + 3}"
 
         holder.tvNomePosicao.text = ranking.nome
-        holder.tvPontosPosicao.text = "${ranking.pontos} pontos"
-        if (ranking.photoUrl != "") {
+        holder.tvPontosPosicao.text = ranking.pontos.toPoints()
+        if (ranking.photoUrl != "null") {
             Glide.with(holder.imPosicao.context).asBitmap()
                 .load(ranking.photoUrl)
                 .into(holder.imPosicao)
         } else {
-            holder.imPosicao.setImageResource(R.drawable.ic_launcher_foreground)
+            holder.imPosicao.setImageResource(R.drawable.circle_rank)
         }
 
     }

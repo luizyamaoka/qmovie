@@ -1,8 +1,8 @@
 package br.com.qmovie.domain
 
-class Ranking (val id : Int, var foto : Int, var nome : String, var pontos: Long, var photoUrl : String = "") {
+class Ranking (val id : Int, var nome : String, var pontos: Long, var photoUrl : String = "") {
     override fun toString(): String {
-        return "Ranking(id=$id, foto=$foto, nome='$nome', pontos=$pontos)"
+        return "Ranking(id=$id, foto=$photoUrl, nome='$nome', pontos=$pontos)"
     }
 
     fun toHashMap() : MutableMap<String, Any> {
