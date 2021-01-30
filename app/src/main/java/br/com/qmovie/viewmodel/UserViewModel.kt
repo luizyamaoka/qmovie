@@ -5,16 +5,20 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.*
 
 
 class UserViewModel(
     private val activity: Activity,
-    private val auth: FirebaseAuth) : ViewModel() {
+    private val auth: FirebaseAuth
+) : ViewModel() {
 
     val user = MutableLiveData<FirebaseUser>()
     val error = MutableLiveData<String>()
@@ -121,20 +125,36 @@ class UserViewModel(
         auth.signOut()
     }
 
-    fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
+    fun loginWithFacebook(callbackManager: CallbackManager, loginManager: LoginManager) {
+        Log.i(TAG, "fblogin")
 
-        val credential = FacebookAuthProvider.getCredential(token.token)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(activity) { task ->
-                when (task.isSuccessful) {
-                     true -> {
-                        Log.d(TAG, "signInWithCredential:success")
-                        getCurrentUser()
-                    }
-                    false -> Log.w(TAG, "signInWithCredential:failure", task.exception)
+        // Set permissions
+        loginManager.logInWithReadPermissions(activity, listOf("email", "public_profile"))
+        loginManager.registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    Log.d(TAG, "On success")
+                    val credential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
+                    auth.signInWithCredential(credential)
+                        .addOnCompleteListener(activity) { task ->
+                            when (task.isSuccessful) {
+                                true -> {
+                                    Log.d(TAG, "signInWithCredential:success")
+                                    getCurrentUser()
+                                }
+                                false -> Log.w(TAG, "signInWithCredential:failure", task.exception)
+                            }
+                        }
                 }
-            }
+
+                override fun onCancel() {
+                    Log.d(TAG, "On cancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d(TAG, error.toString())
+                }
+            })
     }
 
     fun resetPassword(email: String) {

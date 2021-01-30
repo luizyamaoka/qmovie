@@ -2,7 +2,6 @@ package br.com.qmovie.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -11,10 +10,7 @@ import br.com.qmovie.R
 import br.com.qmovie.viewmodel.UserViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
 import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -45,21 +41,21 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        callbackManager = CallbackManager.Factory.create()
+        loginManager = LoginManager.getInstance()
+
         viewModel = ViewModelProvider(
             this,
             viewModelFactory { UserViewModel(this, FirebaseAuth.getInstance()) }
         ).get(UserViewModel::class.java)
 
-        callbackManager = CallbackManager.Factory.create()
-        loginManager = LoginManager.getInstance()
-
-        btnLogin.setOnClickListener(){
+        btnLogin.setOnClickListener {
             viewModel.signIn(
                 etLogin.text.toString(),
                 etSenha.text.toString())
         }
 
-        tvRegister.setOnClickListener(){
+        tvRegister.setOnClickListener {
             val intent = Intent(this, CadastroActivity::class.java)
             startActivity(intent)
         }
@@ -68,12 +64,12 @@ class LoginActivity : AppCompatActivity() {
             viewModel.resetPassword(etLogin.text.toString())
         }
 
-        ibGoogle.setOnClickListener(){
+        ibGoogle.setOnClickListener {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        ibFacebook.setOnClickListener(){
-            Fblogin()
+        ibFacebook.setOnClickListener {
+            viewModel.loginWithFacebook(callbackManager, loginManager)
         }
 
         viewModel.user.observe(this, Observer {
@@ -98,28 +94,5 @@ class LoginActivity : AppCompatActivity() {
             viewModel.firebaseAuthWithGoogle(data)
         }
     }
-
-    private fun Fblogin() {
-        Log.i(TAG, "fblogin")
-
-        // Set permissions
-        loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"))
-        loginManager.registerCallback(callbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onSuccess(loginResult: LoginResult) {
-                    Log.d(TAG, "On success")
-                    viewModel.handleFacebookAccessToken(loginResult.accessToken)
-                }
-
-                override fun onCancel() {
-                    Log.d(TAG, "On cancel")
-                }
-
-                override fun onError(error: FacebookException) {
-                    Log.d(TAG, error.toString())
-                }
-            })
-    }
-
 
 }

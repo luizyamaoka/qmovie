@@ -3,7 +3,6 @@ package br.com.qmovie.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,10 +10,7 @@ import br.com.qmovie.R
 import br.com.qmovie.viewmodel.UserViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
 import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -54,7 +50,7 @@ class CadastroActivity : AppCompatActivity() {
             viewModelFactory { UserViewModel(this, FirebaseAuth.getInstance()) }
         ).get(UserViewModel::class.java)
 
-        btnLogin.setOnClickListener(){
+        btnLogin.setOnClickListener {
             val nome = etNome.text.toString()
             val sobrenome = etSobreNome.text.toString()
 
@@ -65,12 +61,12 @@ class CadastroActivity : AppCompatActivity() {
             )
         }
 
-        ibGoogle.setOnClickListener(){
+        ibGoogle.setOnClickListener {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        ibFacebook.setOnClickListener(){
-            Fblogin()
+        ibFacebook.setOnClickListener {
+            viewModel.loginWithFacebook(callbackManager, loginManager)
         }
 
         viewModel.user.observe(this, Observer {
@@ -99,27 +95,5 @@ class CadastroActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.getCurrentUser()
-    }
-
-    private fun Fblogin() {
-        Log.i(TAG, "fblogin")
-
-        // Set permissions
-        loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"))
-        loginManager.registerCallback(callbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onSuccess(loginResult: LoginResult) {
-                    Log.d(TAG, "On success")
-                    viewModel.handleFacebookAccessToken(loginResult.accessToken)
-                }
-
-                override fun onCancel() {
-                    Log.d(TAG, "On cancel")
-                }
-
-                override fun onError(error: FacebookException) {
-                    Log.d(TAG, error.toString())
-                }
-            })
     }
 }
