@@ -1,5 +1,6 @@
 package br.com.qmovie
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -28,6 +29,13 @@ class JogoFragment : Fragment() {
 //    private lateinit var tipoJogo: TipoJogo
     private lateinit var jogo: Jogo
     private lateinit var adapter: DicaAdapter
+    private val bgTrack = R.raw.bg_track
+    private val wrong = R.raw.wrong
+    private val correct = R.raw.correct
+    private lateinit var mediaPlayer : MediaPlayer
+    private lateinit var correctSong: MediaPlayer
+    private  var wrongSong: MediaPlayer = MediaPlayer.create(context, correct)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +47,9 @@ class JogoFragment : Fragment() {
             viewModelFactory { JogoViewModel(jogo, movieService) }
         ).get(JogoViewModel::class.java)
         viewModel.iniciarJogo()
+        mediaPlayer = MediaPlayer.create(context, bgTrack)
+        mediaPlayer?.isLooping
+        mediaPlayer?.start()
     }
 
     override fun onCreateView(
@@ -89,21 +100,28 @@ class JogoFragment : Fragment() {
         }
 
         view.btnAdivinhar.setOnClickListener {
+            mediaPlayer?.pause()
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
                     jogo.ganharTempoPeloAcerto()
+                    correctSong = MediaPlayer.create(context, correct)
+                    correctSong?.start()
                     findNavController().navigate(
                         R.id.pontuacaoFragment,
 //                        bundleOf("tipoJogo" to tipoJogo)
                         bundleOf("jogo" to viewModel.getJogoAtualizado(true))
                     )
+                    correctSong?.stop()
                 }
                 false -> {
                     view.etResposta.text = null
+                    wrongSong?.start()
                     Toast.makeText(context, "Resposta incorreta", Toast.LENGTH_SHORT).show()
+                    wrongSong?.stop()
                 }
             }
+            mediaPlayer?.start()
         }
     }
 
@@ -129,6 +147,13 @@ class JogoFragment : Fragment() {
         viewModel.perguntaResourceId.observe(viewLifecycleOwner, Observer {
             tvPergunta.text = getString(it)
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        wrongSong?.release()
+        correctSong?.release()
+        mediaPlayer?.release()
     }
 
 }
