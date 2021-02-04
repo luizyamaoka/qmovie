@@ -49,12 +49,12 @@ class JogoFragment : Fragment() {
             viewModelFactory { JogoViewModel(jogo, movieService) }
         ).get(JogoViewModel::class.java)
         viewModel.iniciarJogo()
-        mediaPlayer = MediaPlayer.create(context, bgTrack)
         soundPool = SoundPool(6, AudioManager.STREAM_MUSIC, 0)
         soundPool!!.load(context, wrong, 1)
         soundPool!!.load(context, correct, 1)
+        mediaPlayer? = MediaPlayer.create(context, bgTrack)
+        mediaPlayer?.setLooping(true)
         mediaPlayer?.start()
-        mediaPlayer?.isLooping
     }
 
     override fun onCreateView(
@@ -151,6 +151,7 @@ class JogoFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        soundPool?.release()
         mediaPlayer?.release()
     }
 
