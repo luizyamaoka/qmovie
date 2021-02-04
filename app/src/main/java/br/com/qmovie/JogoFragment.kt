@@ -1,6 +1,8 @@
 package br.com.qmovie
 
+import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -33,9 +35,9 @@ class JogoFragment : Fragment() {
     private val wrong = R.raw.wrong
     private val correct = R.raw.correct
     private lateinit var mediaPlayer : MediaPlayer
-    private lateinit var correctSong: MediaPlayer
-    private  var wrongSong: MediaPlayer = MediaPlayer.create(context, correct)
-
+    private var soundPool: SoundPool? = null
+    private val soundWrong = 1
+    private val soundCorrect = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +50,11 @@ class JogoFragment : Fragment() {
         ).get(JogoViewModel::class.java)
         viewModel.iniciarJogo()
         mediaPlayer = MediaPlayer.create(context, bgTrack)
-        mediaPlayer?.isLooping
+        soundPool = SoundPool(6, AudioManager.STREAM_MUSIC, 0)
+        soundPool!!.load(context, wrong, 1)
+        soundPool!!.load(context, correct, 1)
         mediaPlayer?.start()
+        mediaPlayer?.isLooping
     }
 
     override fun onCreateView(
@@ -100,28 +105,23 @@ class JogoFragment : Fragment() {
         }
 
         view.btnAdivinhar.setOnClickListener {
-            mediaPlayer?.pause()
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
+                    soundPool?.play(soundCorrect,1F,1F,0,0,1F)
                     jogo.ganharTempoPeloAcerto()
-                    correctSong = MediaPlayer.create(context, correct)
-                    correctSong?.start()
                     findNavController().navigate(
                         R.id.pontuacaoFragment,
 //                        bundleOf("tipoJogo" to tipoJogo)
                         bundleOf("jogo" to viewModel.getJogoAtualizado(true))
                     )
-                    correctSong?.stop()
                 }
                 false -> {
                     view.etResposta.text = null
-                    wrongSong?.start()
                     Toast.makeText(context, "Resposta incorreta", Toast.LENGTH_SHORT).show()
-                    wrongSong?.stop()
+                    soundPool?.play(soundWrong,1F,1F,0,0,1F)
                 }
             }
-            mediaPlayer?.start()
         }
     }
 
@@ -151,8 +151,6 @@ class JogoFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        wrongSong?.release()
-        correctSong?.release()
         mediaPlayer?.release()
     }
 
