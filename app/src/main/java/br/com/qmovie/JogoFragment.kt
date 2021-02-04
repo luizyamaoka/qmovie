@@ -1,5 +1,8 @@
 package br.com.qmovie
 
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -28,6 +31,13 @@ class JogoFragment : Fragment() {
 //    private lateinit var tipoJogo: TipoJogo
     private lateinit var jogo: Jogo
     private lateinit var adapter: DicaAdapter
+    private val bgTrack = R.raw.bg_track
+    private val wrong = R.raw.wrong
+    private val correct = R.raw.correct
+    private lateinit var mediaPlayer : MediaPlayer
+    private var soundPool: SoundPool? = null
+    private val soundWrong = 1
+    private val soundCorrect = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +49,12 @@ class JogoFragment : Fragment() {
             viewModelFactory { JogoViewModel(jogo, movieService) }
         ).get(JogoViewModel::class.java)
         viewModel.iniciarJogo()
+        soundPool = SoundPool(6, AudioManager.STREAM_MUSIC, 0)
+        soundPool!!.load(context, wrong, 1)
+        soundPool!!.load(context, correct, 1)
+        mediaPlayer? = MediaPlayer.create(context, bgTrack)
+        mediaPlayer?.setLooping(true)
+        mediaPlayer?.start()
     }
 
     override fun onCreateView(
@@ -92,6 +108,7 @@ class JogoFragment : Fragment() {
             val resposta = etResposta.text.toString()
             when (viewModel.validarResposta(resposta)) {
                 true -> {
+                    soundPool?.play(soundCorrect,1F,1F,0,0,1F)
                     jogo.ganharTempoPeloAcerto()
                     findNavController().navigate(
                         R.id.pontuacaoFragment,
@@ -102,6 +119,7 @@ class JogoFragment : Fragment() {
                 false -> {
                     view.etResposta.text = null
                     Toast.makeText(context, "Resposta incorreta", Toast.LENGTH_SHORT).show()
+                    soundPool?.play(soundWrong,1F,1F,0,0,1F)
                 }
             }
         }
@@ -129,6 +147,12 @@ class JogoFragment : Fragment() {
         viewModel.perguntaResourceId.observe(viewLifecycleOwner, Observer {
             tvPergunta.text = getString(it)
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        soundPool?.release()
+        mediaPlayer?.release()
     }
 
 }
