@@ -52,7 +52,7 @@ class JogoFragment : Fragment() {
         soundPool = SoundPool(6, AudioManager.STREAM_MUSIC, 0)
         soundPool!!.load(context, wrong, 1)
         soundPool!!.load(context, correct, 1)
-        mediaPlayer? = MediaPlayer.create(context, bgTrack)
+        mediaPlayer = MediaPlayer.create(context, bgTrack)
         mediaPlayer?.setLooping(true)
         mediaPlayer?.start()
     }
