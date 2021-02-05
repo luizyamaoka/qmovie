@@ -38,9 +38,13 @@
             app:defaultValue="false"/>
     </PreferenceCategory>
 
-    <Preference
-        android:layout="@layout/custom_preference1"/>
-    <Preference
-        android:layout="@layout/custom_preference2"/>
+    <PreferenceCategory>
+        <Preference
+            android:key="@string/contato"
+            android:layout="@layout/custom_preference1"/>
+        <Preference
+            android:key="@string/sair"
+            android:layout="@layout/custom_preference2"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>
