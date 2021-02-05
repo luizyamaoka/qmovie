@@ -4,21 +4,22 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import br.com.qmovie.domain.Filme
-import br.com.qmovie.viewmodel.LancamentoViewModel
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_lancamentos_popup.*
 import kotlinx.android.synthetic.main.fragment_lancamentos_popup.view.*
 import java.text.SimpleDateFormat
 
 class LancamentosPopupFragment() : DialogFragment() {
 
     lateinit var _context : Context
+    val gmmIntentUri = Uri.parse("geo:0,0?q=cinema")
+    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +70,12 @@ class LancamentosPopupFragment() : DialogFragment() {
             startActivity(intent)
         }
 
+        view.btnLocalCinema.setOnClickListener {
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+
+        }
+
         return view
     }
 
@@ -76,4 +83,5 @@ class LancamentosPopupFragment() : DialogFragment() {
         super.onAttach(context)
         _context = context
     }
+
 }
