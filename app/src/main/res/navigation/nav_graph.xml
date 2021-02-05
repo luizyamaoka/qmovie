@@ -77,4 +77,9 @@
             android:id="@+id/action_configuracoesFragment_to_novoJogoFragment"
             app:destination="@id/novoJogoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/noConnectionFragment"
+        android:name="br.com.qmovie.NoConnectionFragment"
+        android:label="fragment_no_connection"
+        tools:layout="@layout/fragment_no_connection" />
 </navigation>

@@ -28,7 +28,6 @@
     <string name="cansei">Cansei</string>
 
 
-
     <string name="play">Vamos jogar !</string>
     <string name="filme">| Filme</string>
     <string name="serie">| Série</string>
@@ -56,5 +55,8 @@
 
     <string name="facebook_app_id">227022002306224</string>
     <string name="fb_login_protocol_scheme">fb227022002306224</string>
+    <string name="connection">Sem Internet</string>
+    <string name="alert_connection">Por favor, verifique sua internet e tente novamente.</string>
+    <string name="ops">Ooops!</string>
 
 </resources>
