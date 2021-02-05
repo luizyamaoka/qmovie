@@ -24,6 +24,7 @@ import br.com.qmovie.viewmodel.JogoViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_jogo.*
 import kotlinx.android.synthetic.main.fragment_jogo.view.*
+import java.lang.Thread.sleep
 
 class JogoFragment : Fragment() {
 
@@ -110,6 +111,7 @@ class JogoFragment : Fragment() {
                 true -> {
                     soundPool?.play(soundCorrect,1F,1F,0,0,1F)
                     jogo.ganharTempoPeloAcerto()
+                    sleep(500)
                     findNavController().navigate(
                         R.id.pontuacaoFragment,
 //                        bundleOf("tipoJogo" to tipoJogo)
