@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/preto</item>
         <item name="colorPrimaryDark">@color/amarelo</item>
         <item name="colorAccent">@color/amarelo</item>
+        <item name="android:textColor">@color/branco</item>
     </style>
 
 </resources>
