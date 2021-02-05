@@ -162,6 +162,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
+                            android:textColor="@color/preto"
                             android:text="@string/favoritar"
                             app:layout_constraintBottom_toBottomOf="@+id/btnFavoritarLancamentoPopup"
                             app:layout_constraintEnd_toEndOf="@+id/btnFavoritarLancamentoPopup"
@@ -208,6 +209,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="50dp"
+                            android:textColor="@color/preto"
                             android:text="@string/cinemas"
                             app:layout_constraintBottom_toBottomOf="@+id/btnLocalCinema"
                             app:layout_constraintEnd_toEndOf="@+id/btnLocalCinema"
@@ -222,6 +224,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/compartilhar"
+                    android:textColor="@color/preto"
                     android:layout_marginBottom="10dp"/>
 
             </LinearLayout>

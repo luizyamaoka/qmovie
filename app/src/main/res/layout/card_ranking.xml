@@ -59,6 +59,7 @@
                 android:background="@drawable/background_botao_amarelo"
                 android:paddingHorizontal="10dp"
                 android:text="200 pontos"
+                android:textColor="@color/preto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/clOutraPosicoes"
                 app:layout_constraintTop_toTopOf="parent" />
