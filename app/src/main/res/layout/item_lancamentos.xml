@@ -37,7 +37,7 @@
                 android:id="@+id/tvTituloLancamento"
                 app:layout_constraintStart_toEndOf="@id/btnFavoritarLancamento"
                 app:layout_constraintEnd_toStartOf="@id/tvDataLancamento"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textColor="@color/amarelo"
                 android:textStyle="bold"
