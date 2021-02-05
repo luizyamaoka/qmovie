@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/notificacoes">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="notificacao"
+            app:title="@string/notificacoes"
+            app:defaultValue="true"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/sons">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="sons"
+            app:title="@string/sons"
+            app:defaultValue="true"/>
+
+        <SeekBarPreference
+            app:iconSpaceReserved="false"
+            android:key="volume"
+            android:title="@string/volume"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/vibracao">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="vibracao"
+            app:title="@string/vibracao"
+            app:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <Preference
+        android:layout="@layout/custom_preference1"/>
+    <Preference
+        android:layout="@layout/custom_preference2"/>
+
+</PreferenceScreen>
