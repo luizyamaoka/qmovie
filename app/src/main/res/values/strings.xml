@@ -58,5 +58,6 @@
     <string name="connection">Sem Internet</string>
     <string name="alert_connection">Por favor, verifique sua internet e tente novamente.</string>
     <string name="ops">Ooops!</string>
+    <string name="contato_text">Aplicativo desenvolvido por Guilherme Nogueira, Luiz Yamaoka e Vitor Gabriel. Para entrar em contato utilze o email contato@qmovie.com.br</string>
 
 </resources>

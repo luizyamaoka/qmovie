@@ -8,14 +8,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import br.com.qmovie.activity.LoginActivity
 import br.com.qmovie.activity.MainActivity
 import br.com.qmovie.viewmodel.UserViewModel
 import br.com.qmovie.viewmodel.viewModelFactory
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.custom_preference2.btnLogout
 
 
 class ConfiguracoesFragment : PreferenceFragmentCompat() {
@@ -54,5 +56,23 @@ class ConfiguracoesFragment : PreferenceFragmentCompat() {
         val view: View? = super.onCreateView(inflater, container, savedInstanceState)
         view!!.setBackgroundColor(Color.rgb(25, 26, 29))
         return view
+    }
+
+    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
+        when (preference!!.key) {
+            requireContext().getString(R.string.sair) -> {
+                viewModel.logout()
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            requireContext().getString(R.string.contato) -> {
+                (activity as MainActivity).navController.navigate(R.id.contatoFragment)
+                return true
+            }
+            else -> {
+                return false
+            }
+        }
     }
 }

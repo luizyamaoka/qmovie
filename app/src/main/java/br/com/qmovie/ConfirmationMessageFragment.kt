@@ -28,12 +28,12 @@ class ConfirmationMessageFragment : DialogFragment() {
         val view = inflater.inflate(R.layout.fragment_confirmation_message, container, false)
         
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
         tipoMensagem = arguments?.getString("tipoMensagem")!!
-        jogo = arguments?.getSerializable("jogo") as Jogo
 
         when (tipoMensagem) {
             "CONFIRMACAO_DICA_EXTRA" -> {
+                viewModel = ViewModelProvider(requireActivity()).get(JogoViewModel::class.java)
+
                 view.tvConfirmacaoTitulo.text = getString(R.string.dialog_confirmacao_dica_extra_titulo)
                 view.tvConfirmacaoMensagem.text = getString(R.string.dialog_confirmacao_dica_extra_mensagem)
                 view.btnConfirmacao.setOnClickListener {
@@ -45,17 +45,16 @@ class ConfirmationMessageFragment : DialogFragment() {
                 view.tvConfirmacaoTitulo.text = getString(R.string.dialog_confirmacao_desistir_titulo)
                 view.tvConfirmacaoMensagem.text = getString(R.string.dialog_confirmacao_desistir_mensagem)
                 view.btnConfirmacao.setOnClickListener {
+                    jogo = arguments?.getSerializable("jogo") as Jogo
                     findNavController().navigate(
                         R.id.action_confirmationMessageFragment_to_gameOverFragment,
                         bundleOf("jogo" to jogo))
                 }
             }
+
         }
 
         view.btnFecharConfirmacao.setOnClickListener { this.dismiss() }
-
-
-
 
         return view
     }
