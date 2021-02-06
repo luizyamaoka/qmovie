@@ -76,10 +76,30 @@
         <action
             android:id="@+id/action_configuracoesFragment_to_novoJogoFragment"
             app:destination="@id/novoJogoFragment" />
+        <action
+            android:id="@+id/action_configuracoesFragment_to_contatoFragment"
+            app:destination="@id/contatoFragment" />
     </fragment>
     <fragment
         android:id="@+id/noConnectionFragment"
         android:name="br.com.qmovie.NoConnectionFragment"
         android:label="fragment_no_connection"
         tools:layout="@layout/fragment_no_connection" />
+    <fragment
+        android:id="@+id/contatoFragment"
+        android:name="br.com.qmovie.ContatoFragment"
+        android:label="ContatoFragment" >
+        <action
+            android:id="@+id/action_contatoFragment_to_configuracoesFragment"
+            app:destination="@id/configuracoesFragment" />
+        <action
+            android:id="@+id/action_contatoFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_contatoFragment_to_lancamentosFragment"
+            app:destination="@id/lancamentosFragment" />
+        <action
+            android:id="@+id/action_contatoFragment_to_novoJogoFragment"
+            app:destination="@id/novoJogoFragment" />
+    </fragment>
 </navigation>

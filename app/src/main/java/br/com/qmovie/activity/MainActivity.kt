@@ -6,7 +6,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import br.com.qmovie.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -16,12 +19,13 @@ class MainActivity : AppCompatActivity() {
 
     private var user : FirebaseUser? = null
     var isConnected : Boolean = true
+    lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
         isOnline()
         when (intent.getStringExtra("destinationFragment")) {
@@ -79,4 +83,5 @@ class MainActivity : AppCompatActivity() {
         val activeNetwork : NetworkInfo? = connectivityManager.activeNetworkInfo
         isConnected  = activeNetwork?.isConnectedOrConnecting == true
     }
+
 }

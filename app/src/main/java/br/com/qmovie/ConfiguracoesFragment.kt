@@ -8,8 +8,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import br.com.qmovie.activity.LoginActivity
@@ -66,7 +67,7 @@ class ConfiguracoesFragment : PreferenceFragmentCompat() {
                 return true
             }
             requireContext().getString(R.string.contato) -> {
-                Toast.makeText(activity, "Aplicativo desenvolvido por Guilherme Nogueira, Luiz Yamaoka e Vitor Gabriel. Para entrar em contato utilze o email contato@qmovie.com.br", Toast.LENGTH_SHORT).show()
+                (activity as MainActivity).navController.navigate(R.id.contatoFragment)
                 return true
             }
             else -> {
